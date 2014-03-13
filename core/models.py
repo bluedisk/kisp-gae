@@ -86,7 +86,7 @@ class Event(models.Model):
 	
 	def event_day_display(self):
 		WEEKDAY_KOR = u"월화수목금토일-------"
-		return "%s년 %s월 %s일 (%s)"%(self.event_day.year, self.event_day.month, self.event_day.day, WEEKDAY_KOR[self.event_day.weekday()])
+		return u"%s년 %s월 %s일 (%s)"%(self.event_day.year, self.event_day.month, self.event_day.day, WEEKDAY_KOR[self.event_day.weekday()])
 
 	title = models.CharField(u'행사명',max_length=255)
 	short_title = models.CharField(u'짧은 행사명',max_length=30)

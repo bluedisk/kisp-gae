@@ -71,7 +71,7 @@
 		</div>
 
 		<div class="page-header">
-			<h4>패트롤 정보</h4>
+			<h4>패트롤 정보(옵션)</h4>
 		</div>
 		<div class="row">
 			<div class="col-sm-4 form-group{% if form.htype.errors %} has-error{% endif %}">
@@ -102,7 +102,7 @@
 		</div>
 
 		<div class="page-header">
-			<h4>기타 정보</h4>
+			<h4>기타 정보(옵션)</h4>
 		</div>
 		<div class="row">
 			<div class="col-sm-3 form-group{% if form.carpool.errors %} has-error{% endif %}">
@@ -145,7 +145,7 @@
 			{% if form.captcha %}	
 			<div class="col-sm-5 form-group{% if form.captcha.errors %} has-error{% endif %}">
 				<label for="captcha">
-					자동 등록 방지
+					자동 등록 방지 - 그대로 입력해주세요 (* 필수사항)
 				</label>
 				{{ form.captcha }}
 				<span class="help-block">{{ form.captcha.errors }}</span>

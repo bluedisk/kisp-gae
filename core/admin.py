@@ -6,6 +6,7 @@ from django.forms import ModelForm
 from django.http import HttpResponseRedirect
 
 from core.models import Event, EventCompany, Series, Course, Entry, Agent, Page, SMSLog, ReservedSMS, Skill
+from core.models import ContactGroup, ContactItem
 
 from django.contrib.auth.models import User
 from django.contrib.auth.admin import UserAdmin
@@ -91,3 +92,6 @@ admin.site.register(Page, PageAdmin)
 admin.site.register(SMSLog, SMSLogAdmin)
 admin.site.register(ReservedSMS)
 admin.site.register(Skill)
+
+admin.site.register(ContactGroup)
+admin.site.register(ContactItem)

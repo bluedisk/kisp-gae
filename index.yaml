@@ -49,6 +49,11 @@ indexes:
   - name: __key__
     direction: desc
 
+- kind: core_contactgroup
+  properties:
+  - name: __key__
+    direction: desc
+
 - kind: core_course
   properties:
   - name: distance

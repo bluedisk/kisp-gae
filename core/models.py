@@ -83,6 +83,11 @@ class Event(models.Model):
 
 		return self.location
 
+	
+	def event_day_display(self):
+		WEEKDAY_KOR = u"월화수목금토일-------"
+		return "%s년 %s월 %s일 (%s)"%(self.event_day.year, self.event_day.month, self.event_day.day, WEEKDAY_KOR[self.event_day.weekday()])
+
 	title = models.CharField(u'행사명',max_length=255)
 	short_title = models.CharField(u'짧은 행사명',max_length=30)
 
@@ -287,3 +292,27 @@ class ReservedSMS(models.Model):
 
 	timestamp = models.DateTimeField(u'예약시간')
 
+class ContactGroup(models.Model):
+    class Meta:
+        verbose_name = _('ContactGroup')
+        verbose_name_plural = _('ContactGroups')
+
+    def __unicode__(self):
+        return self.name
+
+    name = models.CharField(u'그룹명', max_length=255)
+
+    
+class ContactItem(models.Model):
+    class Meta:
+        verbose_name = _('ContactItem')
+        verbose_name_plural = _('ContactItems')
+
+    def __unicode__(self):
+        return self.name
+    
+    group = models.ForeignKey(ContactGroup, verbose_name=u'그룹')
+    name = models.CharField(u'이름', max_length=255)
+    cell = models.CharField(u'휴대폰', max_length=255)
+    etc1 = models.CharField(u'기타1', max_length=255)
+    etc2 = models.CharField(u'기타1=2', max_length=255)

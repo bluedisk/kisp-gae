@@ -31,7 +31,7 @@
                 <dl>
                     <dt>코스</dt><dd>{{ event.course_list }}</dd>
                     <dt>장소</dt><dd>{{event.location}}</dd>
-                    <dt>대회일자</dt><dd>{{event.event_day}}</dd>
+                    <dt>대회일자</dt><dd>{{event.event_day_display}}</dd>
                     <dt>집합시간</dt><dd>{{event.assemble_time}}</dd>
                 </dl>
                 <a class="btn btn-warning" href="{% url 'event' event.pk %}" role="button">자세히보기 <span class="glyphicon glyphicon-chevron-right"></span></a></p>

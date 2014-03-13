@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% block content %}
+<!-- Main jumbotron for a primary marketing message or call to action -->
+<div class="jumbotron" id="logobox">
+    <div class="container clearfix" style="padding-top:50px">
+        
+        <div class="col-md-2">
+            <img src="/static/image/kisp-logo-black.png"style="margin-top:20px; width:135px;">
+        </div>
+        <div class="col-md-10">
+            <h1>KISP-OZ 입니다.</h1>
+            <p>KISP-OZ 신청 시스템을 소개합니다. 기존의 댓글을 이용한 신청에서 문제가 되던 '개인정보 유출', '신청 불명확성', '마일리지 관리' 문제를 해결한 새로운 방식 입니다.</p>
+            
+        </div>
+
+        <div class="container">
+            <a href="{% url 'aboutoz' %}" class="btn btn-primary btn-lg" style="margin-top:25px; margin-left:5px;" role="button">자세히 보기 <span class="glyphicon glyphicon-chevron-right"></span></a>
+        </div>
+    </div>
+</div>
+
+
+<div class="container">
+    <!-- Example row of columns -->
+    <div class="row">
+          
+            {% for event in events %}
+            <div class="col-md-4">
+                <h3>{{event.short_title}}</h3>
+                <p>{{event.title}}</p>
+                <dl>
+                    <dt>코스</dt><dd>{{ event.course_list }}</dd>
+                    <dt>장소</dt><dd>{{event.location}}</dd>
+                    <dt>대회일자</dt><dd>{{event.event_day}}</dd>
+                    <dt>집합시간</dt><dd>{{event.assemble_time}}</dd>
+                </dl>
+                <a class="btn btn-warning" href="{% url 'event' event.pk %}" role="button">자세히보기 <span class="glyphicon glyphicon-chevron-right"></span></a></p>
+            </div>
+            {% endfor %}
+      
+        </div>
+    </div>
+{% endblock %}
+
+{% block head_extra %}
+<style>
+    #navigation {
+        opacity:0.9;
+    }
+    body {
+       padding-top:0px; 
+    }
+ </style>
+{% endblock %}
+
+{% block script %}
+<script>
+$(window).on('scroll', function(){
+    $('#logobox').css('background-position','0px '+(-650+$(this).scrollTop())+'px')
+});
+
+</script>
+{% endblock %}

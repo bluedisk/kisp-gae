@@ -1,0 +1,29 @@
+{% extends "base_inside_form.html" %}
+
+{% block error %}
+{% if form.errors %}
+<div class="alert alert-danger">
+	<button type="button" class="close" data-dismiss="alert">
+		&times;
+	</button>
+	<strong>변경 실패!</strong> 다시 시도해 주세요.
+</div>
+{% endif %}
+{% endblock %}
+
+{% block form %}
+
+<form class="form-signin" method="post">
+	{% csrf_token %}
+
+	<h2 class="form-signin-heading">비밀번호 변경</h2>
+
+	{% include "form_fields.html" %}
+
+	<button class="btn btn-large btn-danger" type="submit">
+		변경하기
+	</button>
+	<input type="hidden" name="next" value="{{ next }}" />
+</form>
+
+{% endblock %}

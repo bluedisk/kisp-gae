@@ -1,0 +1,1 @@
+from kispapp.settings import *

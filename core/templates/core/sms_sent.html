@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+	<div class="page-header">
+		<h3>문자 전송 내역 <small>{{ entry.event.title }}</small></h3>
+	</div>
+
+	<b>{{event.series.title}}</b>
+	<dl class="dl-horizontal">
+		<dt>장소:</dt> <dd>{{entry.event.location}}</dd>
+		<dt>집합시간:</dt> <dd>{{entry.event.assemble_time}}</dd>
+		<dt>출발시간:</dt> <dd>{{entry.event.race_time}}</dd>
+	</dl>
+	<HR>
+	<div class=" clearfix">
+		<dl class="col-sm-6 dl-horizontal">
+			<dt>대원명</dt><dd>{{ entry.name }}</dd>
+		</dl>
+		<dl class="col-sm-6 dl-horizontal">
+			<dt>카풀</dt><dd>{{ entry.get_carpool_display }}</dd>
+			<dt>지역</dt><dd>{{ entry.location }}</dd>
+		</dl>
+	</div>
+	<HR>
+
+	<div class="form-group">
+		<dl class="dl-horizontal">
+			<dt>발신자<dt><dd>{{ sms.caller }}</dd>
+			<dt>수신자<dt><dd>{{ sms.callee }}</dd>
+		</dt>		
+		<dl class="dl">
+			<dt>내용</dt><dd><pre>{{ sms.msg }}</pre></dd>
+		</dt>
+	</div>
+
+	<HR>
+	<div class="col-sm-12">
+		<a href="{% url 'event' entry.event.id %}" class='btn btn-success btn-block btn-lg'>
+			확인
+		</a>
+	</div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+	<div class="page-header">
+		<h3>문자 전송 하기 <small></small></h3>
+	</div>
+
+	<code> 아직 구현중... 동작 안함... </code>
+
+	<form rule="form" method="post">
+	{% csrf_token %}
+	<div class="container">
+		<h3>문자 보내기</h3><BR>
+
+		<div class="row">
+			<b>받는 사람 목록</b><BR>
+			{% for entry in entries %}
+				<span class="col-sm-4">{{ entry.name }} ({{entry.cell}}) <i class="fa fa-comment"></i></a></span>
+			{% empty %}
+				<code>대상자가 없습니다.</code>
+			{% endfor %}
+
+		</div>
+		<BR>
+		<div class="row">
+			<div class="form-group{% if form.caller.errors %} has-error{% endif %}">
+				<label for="caller">보낸 사람 번호</label>
+				<input type="text" class="form-control" name="caller" id="caller" placeholder="반드시 본인 휴대폰 번호를 입력해주세요." value="{{ form.caller.value|default_if_none:'' }}">
+				<span class="help-block">{{ form.caller.errors }}</span>
+			</div>
+			<div class="form-group{% if form.msg.errors %} has-error{% endif %}">
+				<label for="msg">보낼 메시지</label>
+				<input type="text" class="form-control" name="msg" id="msg" maxlength='80' placeholder="80Byte 이내로 입력해주세요. 전송한 모든 내용은 저장됩니다." value="{{ form.msg.value|default_if_none:'' }}">
+				<span class="help-block">{{ form.msg.errors }}</span>
+			</div>
+		</div>
+	</div>
+	<div class="container">
+		<div class="col-sm-7">
+			<button class="btn btn-danger" type="submit">문자 전송</button>
+		</div>
+	</div>
+	</form>
+	<HR>
+
+</div>
+
+{% endblock %}

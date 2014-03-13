@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+
+{% block head_extra %}
+<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+	<div class="page-header">
+		<h3>행사 정보 <small>{{ event.title }}</small>
+{% if user.is_staff %}
+  <a href="{% url 'admin:core_event_change' event.pk %}" class="btn btn-sm btn-default pull-right">
+    <span class="glyphicon glyphicon-pencil"></span> 수정하기
+  </a> 
+  <a href="{% url 'admin:core_entry_changelist' %}?event__id__exact={{ event.pk}}" class="btn btn-sm btn-default pull-right" style="margin-right:5px">
+    <span class="glyphicon glyphicon-list"></span> 참가자 세부보기
+  </a>  
+  <a href="{% url 'send_sms_by_event' event.pk %}" class="btn btn-sm btn-default pull-right" style="margin-right:5px">
+    <i class="fa fa-comment"></i> 문자 발송
+  </a>
+  {% endif %}
+		</h3>
+	</div>
+	<div id="description" class="well">
+		<p class="lead">{{ event.year_title|safe }}</p>
+		<blockquote>{{ event.title }}</blockquote>
+
+		<div class="row">
+			<div class="col-sm-6">
+				<dl class="dl-horizontal">
+					<dt>참가자수</dt> <dd>{{event.participants}}</dd>
+					<dt>요청인원</dt> <dd>{{event.requested}} 명(신청 {{event.entry_count}} 명)</dd>
+				</dl>
+				<dl class="dl-horizontal">
+					<dt>장소</dt> <dd>{{event.location_tag|safe}}</dd>
+					
+				</dl>
+				<dl class="dl-horizontal">
+					<dt>대회일자</dt> <dd class="text-success"><strong>{{event.event_day}}</strong></dd>
+					<dt>집합시간</dt> <dd class="text-success"><strong>{{event.assemble_time}}</strong></dd>
+					<dt>출발시간</dt> <dd>{{event.race_time}}</dd>
+				</dl>
+				<dl class="dl-horizontal">
+					<dt>모집 시작</dt> <dd>{{event.regist_start}}</dd>
+					<dt>모집 마감</dt> <dd>{{event.regist_end}}</dd>
+					<dt></dt> <dd class="{{regist_hint_class}}"><small>{{regist_hint}}</small></dd>
+				</dl>
+			</div>
+			<div class="col-sm-5">
+				{% if event.course_map %}
+				<a href="{{ event.course_map.url }}" class="thumbnail" target="_new">
+					<div style="height:300px; background-size:contain; background:url('{{ event.course_map.url }}') no-repeat;background-position:center">
+					</div>
+  				</a>
+  				{% else %}
+  					<div class="thumbnail" style="height:300px; padding:55px; background-size:contain;  text-align:center; background:gray no-repeat;background-position:center">
+  						<h3>No Map</h3>
+					</div>
+  				{% endif %}
+			</div>
+		</div>
+		<dl class="dl-horizontal">
+			<dt>패트롤 참가자</dt>
+			<dd>
+				{% for entry in entries %}
+				<span class="col-sm-4"><a href="{% url 'entry_view' entry.entry %}">{{ entry.display }} <i class="fa fa-comment"></i></a></span>
+				{% empty %}
+				<code>아직 신청자가 없습니다.</code>
+				{% endfor %}
+			</dd>
+			{% if carpools.servers %}
+			<br/>
+			<dt>카플 가능</dt>
+			<dd>
+				{% for carpool in carpools.servers %}
+				<span class="col-sm-4"><a href="{% url 'entry_view' carpool.entry %}">{{ carpool.display }} <i class="fa fa-comment"></i></a></span>
+				{% endfor %}
+			</dd>
+			{% endif %}
+			{% if carpools.needs %}
+			<br/>
+			<dt>카풀 신청</dt>
+			<dd>
+				{% for carpool in carpools.needs %}
+				<span class="col-sm-4"><a href="{% url 'entry_view' carpool.entry %}">{{ carpool.display }} <i class="fa fa-comment"></i></a></span>
+				{% endfor %}
+			</dd>
+			{% endif %}
+
+		</dl>
+
+	</div>
+	<div class="row">
+		<div class="col-sm-12">
+			{% if user.is_authenticated %}
+				{% if not entry %}
+				<a href="{% url 'agent_entry_add' event.pk %}" class="btn btn-primary btn-lg btn-block{% if not event.is_registable %} disabled{% endif %}">신청하기</a>
+				{% else %}
+				<a href="{% url 'agent_entry_edit' event.pk %}" class="btn btn-warning btn-lg btn-block{% if not entry or not event.is_registable%} disabled{% endif %}">수정하기</a> 
+				{% endif %}
+			{% else %}
+				{% if not entry %}
+				<a href="{% url 'entry_add' event.pk %}" class="btn btn-primary btn-lg btn-block{% if not event.is_registable %} disabled{% endif %}">신청하기</a> 
+				{% else %}
+				<a href="{% url 'entry_edit' entry.pk %}" class="btn btn-warning btn-lg btn-block{% if not entry or not event.is_registable%} disabled{% endif %}">수정하기</a> 
+				{% endif %}
+
+			{% endif %}
+		</div>			
+	</div>
+</div>
+{% endblock %}

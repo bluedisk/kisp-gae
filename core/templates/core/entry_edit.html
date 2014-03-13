@@ -1,0 +1,162 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class='container'>
+	<div class="page-header">
+		<h3>"{{ event.year_title|safe }}" 패트롤 {% if form.instance %}수정{% else %}신청{%endif%} <small>인라인 패트롤 자원봉사 신청하기</small></h3>
+	</div>
+
+	<form class="form" rule="form" method="post">
+		{% csrf_token %}
+
+		<div class="page-header">
+			<h4>기본정보</h4>
+		</div>
+		<div class="row">
+			<div class="col-sm-8">
+				<div class="row">
+					<div class="col-sm-4 form-group{% if form.name.errors %} has-error{% endif %}">
+						<label for="name">
+							대원 이름
+						</label>
+						<input type="text" class="form-control" name="name" value="{{ form.name.value|default_if_none:'' }}" placeholder="이름">
+						<span class="help-block">{{ form.name.errors }}</span>
+					</div>
+
+					<div class="col-sm-4 form-group{% if form.cell.errors %} has-error{% endif %}">
+						<label for="cell">
+							휴대폰 번호
+						</label>
+						<input type="text" class="form-control" name="cell" value="{{ form.cell.value|default_if_none:'010-' }}" placeholder="휴대폰">
+						<span class="help-block">{{ form.cell.errors }}</span>
+					</div>
+
+					<div class="col-sm-4 form-group{% if form.regnum.errors %} has-error{% endif %}">
+						<label for="regnum">
+							주민번호
+						</label>
+						<input type="text" class="form-control" name="regnum" value="{{ form.regnum.value|default_if_none:'' }}" placeholder="주민번호">
+						<span class="help-block">{{ form.regnum.errors }}</span>
+					</div>
+				</div>
+				<div class="row">
+
+					<div class="col-sm-4 form-group{% if form.mileage.errors %} has-error{% endif %}">
+						<label for="mileage">
+							마일리지
+						</label>
+						<input type="text" name="mileage" class="form-control" value="{{ form.mileage.value|default_if_none:'' }}" placeholder="알고 있는 경우만">
+						<span class="help-block">{{ form.mileage.errors }}</span>
+					</div>
+					<div class="col-sm-3 form-group{% if form.tsize.errors %} has-error{% endif %}">
+						<label for="">
+							티셔츠 사이즈
+						</label>
+						<select class="form-control" id="tsize" name="tsize">
+							{% for value, text in form.tsize.field.choices %}
+							<option value="{{ value }}"{% if value == form.tsize.value %} selected{% endif %}>{{ text }}</option>
+							{% endfor %}
+						</select>
+						<span class="help-block">{{ form.tsize.errors }}</span>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-4 form-group{% if form.skill.errors %} has-error{% endif %}">
+				<label for="skill">
+					가능 스킬
+				</label>
+				{{ form.skill }}
+				<span class="help-block">{{ form.skilll.errors }}</span>
+			</div>
+		</div>
+
+		<div class="page-header">
+			<h4>패트롤 정보</h4>
+		</div>
+		<div class="row">
+			<div class="col-sm-4 form-group{% if form.htype.errors %} has-error{% endif %}">
+				<label for="htype">
+					희망 패트롤 타입
+				</label>
+				<select class="form-control" id="htype" name="htype">
+					{% for value, text in form.htype.field.choices %}
+					<option value="{{ value }}"{% if value == form.htype.value %} selected{% endif %}>{{ text }}</option>
+					{% endfor %}
+				</select>
+				<span class="help-block">{{ form.htype.errors }}</span>
+			</div>
+
+			<div class="col-sm-4 form-group{% if form.hdist.errors %} has-error{% endif %}">
+				<label for="hdist">
+					희망 거리
+				</label>
+				<select class="form-control" id="hdist" name="hdist">
+					{% for value, text in form.hdist.field.choices %}
+					<option value="{{ value }}"{% if value == form.hdist.value %} selected{% endif %}>{{ text }}</option>
+					{% endfor %}
+				</select>
+				<span class="help-block">{{ form.hdist.errors }}</span>
+			</div>
+
+
+		</div>
+
+		<div class="page-header">
+			<h4>기타 정보</h4>
+		</div>
+		<div class="row">
+			<div class="col-sm-3 form-group{% if form.carpool.errors %} has-error{% endif %}">
+				<label for="carpool">
+					카풀 여부
+				</label>
+				<select class="form-control" id="carpool" name="carpool">
+					{% for value, text in form.carpool.field.choices %}
+					<option value="{{ value }}"{% if value == form.carpool.value %} selected{% endif %}>{{ text }}</option>
+					{% endfor %}
+				</select>
+				<span class="help-block">{{ form.carpool.errors }}</span>
+			</div>
+			<div class="col-sm-3 form-group{% if form.location.errors %} has-error{% endif %}">
+				<label for="location">
+					지역
+				</label>
+				<input type="text" name="location" class="form-control" value="{{ form.location.value|default_if_none:'' }}" placeholder="Ex: 서울, 일산, 분당">
+				<span class="help-block">{{ form.location.errors }}</span>
+			</div>
+
+			
+
+			
+			
+		</div>
+
+		<div class="row">
+			<div class="col-sm-7 form-group{% if form.etc.errors %} has-error{% endif %}">
+				<label for="etc">
+					그 외 요청사항
+				</label>
+				{% spaceless %}
+				<textarea name="etc" id="etc" class="form-control" rows="6">
+					{{ form.etc.value|default_if_none:'' }}
+				</textarea>
+				{% endspaceless %}
+				<span class="help-block">{{ form.etc.errors }}</span>
+			</div>	
+			{% if form.captcha %}	
+			<div class="col-sm-5 form-group{% if form.captcha.errors %} has-error{% endif %}">
+				<label for="captcha">
+					자동 등록 방지
+				</label>
+				{{ form.captcha }}
+				<span class="help-block">{{ form.captcha.errors }}</span>
+			</div>
+			{% endif %}
+		</div>
+
+		<div class="">
+			<input class="btn btn-primary btn-lg btn-block" type="submit" value="신청하기">
+		</div>
+	</form>
+</div>
+
+{% endblock %}

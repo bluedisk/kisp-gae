@@ -1,0 +1,25 @@
+{% extends "base_form.html" %}
+
+
+{% block error_msg %}
+	<strong>로그인 실패!</strong> 다시 시도해 주세요.
+	비밀번호를 잃어버린 경우 <a class="btn btn-info btn-sm" href="{% url 'reset_pw' %}">비밀번호 변경</a>을 해주세요.
+{% endblock %}
+
+{% block form %}
+
+	<form class="form-signin" method="post" action="">
+		{% csrf_token %}
+		<input type="hidden" name="next" value="{{ next|default_if_none:'/' }}" />
+		<h2 class="form-signin-heading">로그인해주세요.</h2>
+
+		{% include "form_fields.html" %}
+
+		<button class="btn btn-large btn-primary" type="submit">
+			로그인하기
+		</button>
+	</form>
+
+<!-- /container -->
+
+{% endblock %}

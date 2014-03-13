@@ -1,0 +1,35 @@
+{% extends "base_outside.html" %}
+
+{% block content %}
+
+
+<div class='container well well-lg'>
+가입에 성공했습니다. 로그인해 주세요.
+</div>
+
+<div class="container" id="login_body">
+	{% if form.errors %}
+	<div class="alert alert-danger">
+		<button type="button" class="close" data-dismiss="alert">
+			&times;
+		</button>
+		<strong>로그인에 실패했습니다!</strong> 에러가 표시된 항목을 다시 확인 후 시도해주세요.
+	</div>
+	{% endif %}
+
+	<form class="form-signin" method="post" action="">
+		{% csrf_token %}
+		<input type="hidden" name="next" value="{{ next }}" />
+
+		<h2 class="form-signin-heading">로그인</h2>
+		{% include "form_fields.html" %}
+
+		<button class="btn btn-lg btn-primary" type="submit">
+			가입하기
+		</button>
+	</form>
+
+</div>
+
+
+{% endblock %}

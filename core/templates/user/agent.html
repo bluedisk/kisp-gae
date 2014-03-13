@@ -1,0 +1,30 @@
+{% extends "base_form.html" %}
+
+
+{% block error_msg %}
+<strong>정보 변경에 실패했습니다!</strong> 에러가 표시된 항목을 다시 확인 후 시도해주세요.
+{% endblock %}
+
+
+{% block form %}
+{% if saved %}
+<div class="alert alert-success alert-dismissable">
+  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+  <strong>저장 완료!</strong> 정상적으로 저장되었습니다. 
+</div>
+{% endif %}
+	<form class="form-signin form-agent" method="post" action="">
+		{% csrf_token %}
+		<input type="hidden" name="next" value="{{ next }}" />
+
+		<h2 class="form-signin-heading">세부 정보</h2>
+		{% include "form_fields.html" %}
+
+		<button class="btn btn-lg btn-primary" type="submit">
+			저장하기
+		</button>
+	</form>
+
+<!-- /container -->
+
+{% endblock %}

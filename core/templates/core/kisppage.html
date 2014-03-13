@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+<BR>
+<div class="container">
+
+	<div class="head-pager">
+		{% spaceless %}
+
+		<h3>{{page.title}} <small>{{page.subtitle}}</small> 
+		{% if user.is_staff %}
+		<a href="{% url 'admin:core_page_change' page.pk %}" class="btn btn-sm btn-default pull-right">
+			<span class="glyphicon glyphicon-pencil"></span> 수정하기
+		</a>
+		{% endif %}
+		</h3>
+
+		{% endspaceless %}
+
+	</div>
+	<hr>
+	<div class="container">
+		{{ page.content|safe }}
+	</div>
+
+</div>
+
+
+{% endblock %}

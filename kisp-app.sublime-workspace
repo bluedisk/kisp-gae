@@ -1,0 +1,1461 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"loca",
+				"location"
+			],
+			[
+				"time",
+				"datetime  (class)"
+			],
+			[
+				"regi",
+				"regist_start  (variable)"
+			],
+			[
+				"Agent",
+				"AgentForm"
+			],
+			[
+				"in",
+				"instance"
+			],
+			[
+				"req",
+				"request"
+			],
+			[
+				"ver",
+				"verbose_name"
+			],
+			[
+				"En",
+				"EntryForm"
+			],
+			[
+				"Enty",
+				"EntryForm"
+			],
+			[
+				"Entry",
+				"EntryForm"
+			],
+			[
+				"Model",
+				"Model	Model"
+			],
+			[
+				"clea",
+				"clean_username  (function)"
+			],
+			[
+				"a",
+				"authenticate"
+			],
+			[
+				"Mode",
+				"Model	Model"
+			],
+			[
+				"model",
+				"models"
+			],
+			[
+				"auto",
+				"auto_now_add"
+			],
+			[
+				"Image",
+				"ImageField"
+			],
+			[
+				"cl",
+				"cleaned_data"
+			],
+			[
+				"fo",
+				"forms	(imported, instance)"
+			],
+			[
+				"back",
+				"background-color"
+			],
+			[
+				"font",
+				"font-weight"
+			],
+			[
+				"bac",
+				"background-color"
+			],
+			[
+				"mem",
+				"member-name"
+			],
+			[
+				"background-",
+				"background-position"
+			],
+			[
+				"cou",
+				"course	(attribute, instance)"
+			],
+			[
+				"django",
+				"djangotoolbox"
+			],
+			[
+				"Multi",
+				"MultipleChoiceField  (class)"
+			],
+			[
+				"Sel",
+				"SelectMultiple  (class)"
+			],
+			[
+				"E",
+				"EventCompany  (class)"
+			],
+			[
+				"Event",
+				"EventCompany	(global, class)"
+			],
+			[
+				"For",
+				"ForeignKey"
+			],
+			[
+				"va",
+				"verbose_name"
+			],
+			[
+				"start",
+				"startswith"
+			],
+			[
+				"getS",
+				"getSoupDummy(ver, book, chap)	(global, function)"
+			],
+			[
+				"is",
+				"makedirs  (function)"
+			],
+			[
+				"__",
+				"__name__	(builtin, instance)"
+			],
+			[
+				"buffer",
+				"buffer_need"
+			],
+			[
+				"sto",
+				"storbinary(cmd, fp, blocksize, callback)	(attribute, function)"
+			],
+			[
+				"st",
+				"strip	(builtin, function)"
+			],
+			[
+				"dir",
+				"directory"
+			],
+			[
+				"de",
+				"depender"
+			],
+			[
+				"mTeam",
+				"mTeamName"
+			],
+			[
+				"TEAM",
+				"TEAM_B_UNIT_COUNT"
+			],
+			[
+				"mT",
+				"mTeamB"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "core/views.py",
+			"settings":
+			{
+				"buffer_size": 8780,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "core/templates/core/event.html",
+			"settings":
+			{
+				"buffer_size": 4149,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "core/models.py",
+			"settings":
+			{
+				"buffer_size": 7462,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "core/templates/core/event_list.html",
+			"settings":
+			{
+				"buffer_size": 1465,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "core/templates/core/contact.html",
+			"settings":
+			{
+				"buffer_size": 2907,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "Packages/Python/Python.sublime-build",
+	"command_palette":
+	{
+		"height": 392.0,
+		"selected_items":
+		[
+			[
+				"Pac",
+				"Package Control: List Packages"
+			],
+			[
+				"Pack",
+				"Package Control: Install Package"
+			],
+			[
+				"exp",
+				"Bluedisk: Extract Expected Reference List"
+			],
+			[
+				"",
+				"Bluedisk: Extract Expected Reference List"
+			],
+			[
+				"ble",
+				"Bluedisk: Extract Reference List"
+			],
+			[
+				"blu",
+				"Bluedisk: Extract Reference List"
+			],
+			[
+				"blue",
+				"Bluedisk: Extract Reference List"
+			],
+			[
+				"pack",
+				"Preferences: Browse Packages"
+			],
+			[
+				"brow",
+				"Preferences: Browse Packages"
+			],
+			[
+				"pacage control",
+				"Package Control: Install Package"
+			],
+			[
+				"p",
+				"Preferences: Browse Packages"
+			],
+			[
+				"bro",
+				"Preferences: Browse Packages"
+			],
+			[
+				"browse",
+				"Preferences: Browse Packages"
+			],
+			[
+				"packge",
+				"Preferences: Browse Packages"
+			],
+			[
+				"set Syntax: c",
+				"Set Syntax: C"
+			],
+			[
+				"Set Syntax: Py",
+				"Set Syntax: Python"
+			],
+			[
+				"Package Control: ",
+				"Package Control: Disable Package"
+			],
+			[
+				"Rope: O",
+				"Rope: Organize Imports"
+			],
+			[
+				"Rope",
+				"Rope: Organize Imports"
+			],
+			[
+				"Rop",
+				"Rope: New Project"
+			],
+			[
+				"Package",
+				"Package Control: Install Package"
+			],
+			[
+				"a",
+				"About"
+			]
+		],
+		"width": 602.0
+	},
+	"console":
+	{
+		"height": 125.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/Users/bluedisk/Workspace/kisp-app/core/static/css/auth.css",
+		"/Users/bluedisk/Workspace/kisp-app/core/templates/core/event.html",
+		"/Users/bluedisk/Workspace/kisp-app/core/admin.py",
+		"/Users/bluedisk/Workspace/kisp-app/core/templates/user/agent.html",
+		"/Users/bluedisk/Workspace/kisp-app/core/views.py",
+		"/Users/bluedisk/Workspace/kisp-app/core/templates/form_fields.html",
+		"/Users/bluedisk/Workspace/kisp-app/core/models.py",
+		"/Users/bluedisk/Workspace/kisp-app/core/templates/user/login.html",
+		"/Users/bluedisk/Workspace/kisp-app/core/fields.py",
+		"/Users/bluedisk/Workspace/kisp-app/core/templates/core/entry_edit.html",
+		"/Users/bluedisk/Workspace/kisp-app/core/templates/base.html",
+		"/Users/bluedisk/Workspace/kisp-app/core/templates/core/entry_view.html",
+		"/Users/bluedisk/Workspace/kisp-app/kispapp/settings.py",
+		"/Users/bluedisk/Workspace/kisp-app/core/forms.py",
+		"/Users/bluedisk/Workspace/kisp-app/django/conf/global_settings.py",
+		"/Users/bluedisk/Workspace/kisp-app/index.yaml",
+		"/Users/bluedisk/Workspace/kisp-app/static/css/auth.css",
+		"/Users/bluedisk/Workspace/kisp-app/django/bin/profiling/gather_profile_stats.py",
+		"/Users/bluedisk/Workspace/kisp-app/core/urls.py",
+		"/Users/bluedisk/Workspace/kisp-app/core/templates/core/index.html",
+		"/Users/bluedisk/Workspace/kisp-app/core/templates/core/event_list.html",
+		"/Users/bluedisk/Workspace/kisp-app/core/sms.py",
+		"/Users/bluedisk/Workspace/kisp-app/core/templates/core/agent_entry_edit.html",
+		"/Users/bluedisk/Workspace/kisp-app/djangotoolbox/fields.py",
+		"/Users/bluedisk/Workspace/kisp-app/django/forms/fields.py",
+		"/Users/bluedisk/Workspace/kisp-app/core/admin_form.py",
+		"/Users/bluedisk/Workspace/kisp-app/django/forms/widgets.py",
+		"/Users/bluedisk/Workspace/kisp-app/django/utils/encoding.py",
+		"/Users/bluedisk/Library/Application Support/Sublime Text 2/Packages/Default/Preferences.sublime-settings",
+		"/Users/bluedisk/Workspace/kisp-app/django/db/models/fields/__init__.py",
+		"/Users/bluedisk/Workspace/kisp-app/django/core/validators.py",
+		"/Users/bluedisk/Workspace/kisp-app/django/conf/locale/ko/LC_MESSAGES/django.po",
+		"/Users/bluedisk/Workspace/kisp-app/django/contrib/auth/backends.py",
+		"/Users/bluedisk/Workspace/kisp-app/django/contrib/auth/__init__.py",
+		"/Users/bluedisk/Workspace/kisp-app/core/templates/base_form.html",
+		"/Users/bluedisk/Workspace/kisp-app/core/templates/user/change_pw_done.html",
+		"/Users/bluedisk/Workspace/kisp-app/core/templates/registration/password_reset_email.html",
+		"/Users/bluedisk/Workspace/kisp-app/core/templates/user/signup.html",
+		"/Users/bluedisk/Workspace/kisp-app/django/forms/forms.py",
+		"/Users/bluedisk/Workspace/kisp-app/django/contrib/auth/forms.py",
+		"/Users/bluedisk/Workspace/kisp-app/core/templates/user/profile.html",
+		"/Users/bluedisk/Workspace/kisp-app/core/templates/auth/profile.html",
+		"/Users/bluedisk/Workspace/kisp-app/core/templates/signup.html",
+		"/Users/bluedisk/Workspace/kisp-app/core/templates/registration/login.html",
+		"/Users/bluedisk/Workspace/Wholook/wholook-web/core/static/css/popup_base.css",
+		"/Users/bluedisk/Workspace/kisp-app/core/templates/base_outside_form.html",
+		"/Users/bluedisk/Workspace/kisp-app/auth/views.py",
+		"/Users/bluedisk/Workspace/kisp-app/core/templates/thanks.html",
+		"/Users/bluedisk/Workspace/kisp-app/auth/urls.py",
+		"/Users/bluedisk/Workspace/kisp-app/auth/templates/auth/signup.html",
+		"/Users/bluedisk/Workspace/kisp-app/auth/models.py",
+		"/Users/bluedisk/Workspace/kisp-app/auth/forms.py",
+		"/Users/bluedisk/Workspace/kisp-app/auth/admin.py",
+		"/Users/bluedisk/Desktop/test.py",
+		"/Users/bluedisk/Workspace/kisp-app/cron.yaml",
+		"/Users/bluedisk/Workspace/kisp-app/sms_sender.py",
+		"/Users/bluedisk/Workspace/Wholook/wholook-web/test.py",
+		"/Users/bluedisk/Workspace/kisp-app/django_admin_bootstrapped/templates/admin/login.html",
+		"/Users/bluedisk/Workspace/kisp-app/core/templates/core/sms_sent.html",
+		"/Users/bluedisk/Workspace/kisp-app/core/templates/core/kisppage.html",
+		"/Users/bluedisk/Workspace/kisp-app/core/templates/core/sms.html",
+		"/Users/bluedisk/Workspace/kisp-app/static/css/base.css",
+		"/Users/bluedisk/Workspace/kisp-app/core/templates/core/contact.html",
+		"/Users/bluedisk/Workspace/kisp-app/core/captcha_util.py",
+		"/Users/bluedisk/Workspace/kisp-app/captcha/fields.py",
+		"/Users/bluedisk/Workspace/kisp-app/core/templates/core/thanks.html",
+		"/Users/bluedisk/Workspace/kisp-app/core/templates/core/entry.html",
+		"/Users/bluedisk/Workspace/kisp-app/tinymce/widgets.py",
+		"/Users/bluedisk/Workspace/Wholook/wholook-web/core/sms.py",
+		"/Users/bluedisk/Workspace/Wholook/wholook-web/boot.sh",
+		"/Users/bluedisk/Workspace/Wholook/wholook-web/wholook.req",
+		"/Users/bluedisk/Workspace/kisp-app/tinymce/models.py",
+		"/Users/bluedisk/Workspace/kisp-app/settings.py",
+		"/Users/bluedisk/Workspace/kisp-app/core/templatetags/kisppage.py",
+		"/Users/bluedisk/Workspace/kisp-app/core/templates/base_outside.html",
+		"/Users/bluedisk/Workspace/kisp-app/kispapp/urls.py",
+		"/Users/bluedisk/Workspace/kisp-app/core/tests.py",
+		"/pp.pp",
+		"/Users/bluedisk/Library/Application Support/Sublime Text 2/Packages/User/Preferences.sublime-settings",
+		"/Users/bluedisk/Workspace/kisp-app/core/templatetags/__init__.py",
+		"/Users/bluedisk/Workspace/kisp-app/app.yaml",
+		"/Users/bluedisk/Workspace/kisp-app/testapp/admin.py",
+		"/Users/bluedisk/Workspace/kisp-app/filetransfers/templates/filetransfers/change_form.html",
+		"/Users/bluedisk/Workspace/kisp-app/kisp0000/app.yaml",
+		"/Users/bluedisk/Workspace/kisp-app/filetransfers/templatetags/filetransfers.py",
+		"/Users/bluedisk/Workspace/kisp-app/core/static/css/base.css",
+		"/Users/bluedisk/Workspace/kisp-app/core/templates/core/request.html",
+		"/Users/bluedisk/Workspace/kisp-app/core/templates/core/about_oz.html",
+		"/Users/bluedisk/Workspace/kisp-app/core/templates/core/about_kisp.html",
+		"/Users/bluedisk/Workspace/kisp-app/core/templates/core/regist.html",
+		"/Users/bluedisk/Workspace/kisp-app/home/admin.py",
+		"/Users/bluedisk/Workspace/kisp-app/home/models.py",
+		"/Users/bluedisk/Workspace/kisp-app/home/templates/home/index.html",
+		"/Users/bluedisk/Workspace/kisp-app/home/templates/home/regist.html",
+		"/Users/bluedisk/Workspace/kisp-app/home/templates/home/regist_list.html",
+		"/Users/bluedisk/Workspace/kisp-app/home/urls.py",
+		"/Users/bluedisk/Workspace/kisp-app/home/views.py",
+		"/Users/bluedisk/Downloads/torrent/Tangled [2010]DVDRip[Xvid]AC3 5.1[Eng]BlueLady.smi",
+		"/Users/bluedisk/Workspace/kisp-app/home/static/bootstrap3/css/bootstrap.css",
+		"/Users/bluedisk/Workspace/kisp-app/home/templates/base.html",
+		"/Users/bluedisk/Workspace/kisp-app/home/templates/home/contact.html",
+		"/Users/bluedisk/Workspace/kisp-app/home/templates/home/request.html",
+		"/Users/bluedisk/Workspace/kisp-app/home/templates/home/about_oz.html",
+		"/Users/bluedisk/Workspace/kisp-app/home/templates/home/about_kisp.html",
+		"/Users/bluedisk/Workspace/Wholook/wholook-web/board/models.py",
+		"/Users/bluedisk/Workspace/OnesFun/BGW/src/com/cnt/db/dbAccess.java",
+		"/Users/bluedisk/Workspace/GAE/kisp-app/home/urls.py",
+		"/Users/bluedisk/Workspace/Wholook/wholook-web/core/urls.py",
+		"/Users/bluedisk/Workspace/Wholook/wholook-web/wholook/urls.py",
+		"/Users/bluedisk/Workspace/Wholook/wholook-web/core/static/handsontable/jquery.handsontable.full.js",
+		"/Users/bluedisk/Workspace/Wholook/wholook-web/core/static/handsontable/jquery.handsontable.full.js_nonebeta",
+		"/Users/bluedisk/Downloads/Ani/Kakumeiki Valvrave 2/Kakumeiki Valvrave 2 - 04.smi",
+		"/Users/bluedisk/Downloads/Ani/Kakumeiki Valvrave 2/Kakumeiki Valvrave 2 - 01.smi",
+		"/Users/bluedisk/Downloads/Ani/[Raws]_Log_Horizon_-_13__NHK-E_1280x720_x264_AAC_.ass",
+		"/Users/bluedisk/Workspace/OnesFun/BGW/src/com/cnt/db/BgwPosUpload.java",
+		"/Users/bluedisk/Dropbox/Workspace/OnesFun/BGW/src/com/cnt/db/BgwPosUpload.java",
+		"/Users/bluedisk/Dropbox/Workspace/OnesFun/BGW/src/com/cnt/db/DiscouponMasterFile.java",
+		"/Users/bluedisk/Workspace/OnesFunAndroid/SkmncOneCoupon/src/com/skmc/onecoupon/LoginActivity.java",
+		"/Users/bluedisk/Workspace/OnesFunAndroid/SkmncOneCoupon/src/com/skmc/onecoupon/IntroActivity.java",
+		"/Users/bluedisk/text.txt",
+		"/Users/bluedisk/Dropbox/Workspace/OnesFun/BGW/src/sqlMap/BGW_APPRMEMO_HISTORY.xml",
+		"/Users/bluedisk/Desktop/참고문헌 전체.txt",
+		"/Users/bluedisk/Desktop/어제 참고문헌",
+		"/Users/bluedisk/Library/Application Support/Sublime Text 2/Packages/Bluedisk/bluedisk.py",
+		"/Users/bluedisk/Library/Application Support/Sublime Text 2/Packages/Bluedisk/bluedisk.sublime-commands",
+		"/Users/bluedisk/Library/Application Support/Sublime Text 2/Packages/Bluedisk/bluedisk.sublime-command",
+		"/Users/bluedisk/Library/Application Support/Sublime Text 2/Packages/User/bluedisk.py",
+		"/Users/bluedisk/Library/Application Support/Sublime Text 2/Packages/Package Control/Package Control.sublime-settings"
+	],
+	"find":
+	{
+		"height": 35.0
+	},
+	"find_in_files":
+	{
+		"height": 93.0,
+		"where_history":
+		[
+			"/Users/bluedisk/Workspace/kisp-app/",
+			"/Users/bluedisk/Workspace/kisp-app/core",
+			"",
+			",$",
+			"",
+			"<open files>",
+			"",
+			"\\'",
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": true,
+		"find_history":
+		[
+			"member-frame",
+			"채ㅜㅅㅁㅊㅅ",
+			"Event",
+			"if user",
+			"if e",
+			"if user",
+			"commit=",
+			"new_agent",
+			"profile",
+			"profle",
+			"reset",
+			"nomap",
+			"nomap.png",
+			"nomap",
+			"course_map",
+			"img",
+			"event",
+			"get_carpool_display",
+			"entry",
+			"agent_",
+			"is_auth",
+			"EntryForm",
+			"skill",
+			"Course",
+			"Model",
+			"ListOverrideField(models.ForeignKey(",
+			"List",
+			"listfield",
+			"field",
+			"\"field",
+			"field'",
+			"field",
+			"cpr",
+			"Skill",
+			"AgentProfile",
+			"UserP",
+			"userprofile",
+			"UserProfile",
+			"Multi",
+			"MultiSkillField",
+			"validate_email",
+			"emailField",
+			"Email",
+			"signup",
+			"User",
+			"tab_as",
+			"Profile",
+			"skill",
+			"__init",
+			"UserSigninForm",
+			"login",
+			"UserCreationForm",
+			"LOGIN_",
+			"ErrorDict",
+			"PROJECT_DIR",
+			"VERS",
+			"vers",
+			"ver",
+			"popup",
+			"user",
+			"Basic",
+			"AuthenticationForm",
+			"UserCreationForm",
+			"phone",
+			"UserCreationForm",
+			"email",
+			"AUTH_",
+			"USER",
+			"MAX",
+			"FILE_UPLOAD_MAX_MEMORY_SIZE",
+			"='",
+			",'",
+			"('",
+			"sendSMS",
+			"SITE",
+			"SMSLog",
+			"smslog",
+			"DateTimeField",
+			"timezone",
+			"sendSMS",
+			"max_leng",
+			"limit",
+			"FileField",
+			"FieldF",
+			"ImageF",
+			"limit",
+			"input",
+			"LOGIN",
+			"background",
+			"UPLOAD",
+			"MAX_UPLOAD_SIZE",
+			"ImageField",
+			"reverse",
+			"NON_FIELD_ERRORS",
+			"from django.forms.forms import NON_FIELD_ERRORS \n",
+			"datetime",
+			"perm",
+			"envent_id",
+			"envent",
+			"session",
+			"href=\"\"",
+			"href=\"#\"",
+			"pubilc",
+			"update",
+			"HTMLFi",
+			"<br>",
+			" :",
+			"CHAR",
+			"_page",
+			"permi",
+			"AUTH",
+			"AUTHENTICATION_BACKENDS",
+			"filet",
+			"file",
+			"admin_",
+			"{\n	    		'image':'face_test.png',\n	    		'name':'이원우'\n    		},\n    		{\n	    		'image':'face_test.png',\n	    		'name':'이원우'\n    		},    		\n    		{\n	    		'image':'face_test.png',\n	    		'name':'이원우'\n    		},    		\n    		{\n	    		'image':'face_test.png',\n	    		'name':'이원우'\n    		},    		\n    		{\n	    		'image':'face_test.png',\n	    		'name':'이원우'\n    		},\n    		{\n	    		'image':'face_test.png',\n	    		'name':'이원우'\n    		},\n    		{\n	    		'image':'face_test.png',\n	    		'name':'이원우'\n    		},    		\n    		{\n	    		'image':'face_test.png',\n	    		'name':'이원우'\n    		},    		\n    		{\n	    		'image':'face_test.png',\n	    		'name':'이원우'\n    		},    		\n    		{\n	    		'image':'face_test.png',\n	    		'name':'이원우'\n    		},",
+			".error",
+			"form",
+			"ObjectListField",
+			"MyClassForm",
+			"ListField",
+			"field",
+			"^-",
+			"-",
+			"ListField",
+			"self.call",
+			"self.call_",
+			"List"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"AgentProfile",
+			"=u'",
+			",u'",
+			"(u'",
+			"<br/>",
+			"",
+			"_pack",
+			".errors",
+			"EventForm",
+			"",
+			"MASTERFILE_PATH",
+			"",
+			"$2($1), \"$5\", $4학위논문, $3.",
+			"$2($1), \"$3\"",
+			"\\t",
+			"",
+			"\\t0$1",
+			"0$1",
+			"0$0",
+			"0$",
+			"0$0",
+			"0$1",
+			"0%1",
+			",",
+			",$",
+			"ENGINE=MyISAM",
+			",",
+			"cur_verse",
+			"\\'",
+			"$1[\"$2\"]",
+			"}",
+			"",
+			"\"condition\": [\"model\",\"regist\"]",
+			"\"condition\": [\"plan\"]",
+			"\"condition\": [\"regist\"]",
+			"[\"model\",\"plan\",\"contract\"]",
+			"feature",
+			"cal",
+			"cj",
+			"lg",
+			"kt",
+			"code",
+			"lg",
+			"kt",
+			"code",
+			"\\}\\,\\n",
+			"},\\n",
+			",\\n",
+			"FEATURE",
+			"\"$1\"",
+			"'",
+			"\"$1\"",
+			"\"$0\"",
+			",",
+			"'$1':",
+			",",
+			"'$1':",
+			"'$1'",
+			":"
+		],
+		"reverse": false,
+		"show_context": false,
+		"use_buffer2": false,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 2,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "core/views.py",
+					"settings":
+					{
+						"buffer_size": 8780,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								5176,
+								5176
+							]
+						],
+						"settings":
+						{
+							"codeintel": true,
+							"codeintel_config":
+							{
+								"JavaScript":
+								{
+									"codeintel_max_recursive_dir_depth": 2.0,
+									"codeintel_scan_files_in_project": false,
+									"javascriptExtraPaths":
+									[
+									]
+								},
+								"PHP":
+								{
+									"codeintel_max_recursive_dir_depth": 5.0,
+									"codeintel_scan_files_in_project": false,
+									"phpExtraPaths":
+									[
+									]
+								},
+								"Python":
+								{
+									"env":
+									{
+									}
+								}
+							},
+							"codeintel_enabled_languages":
+							[
+								"JavaScript",
+								"Mason",
+								"XBL",
+								"XUL",
+								"RHTML",
+								"SCSS",
+								"Python",
+								"HTML",
+								"Ruby",
+								"Python3",
+								"XML",
+								"Sass",
+								"XSLT",
+								"Django",
+								"HTML5",
+								"Perl",
+								"CSS",
+								"Twig",
+								"Less",
+								"Smarty",
+								"Node.js",
+								"Tcl",
+								"TemplateToolkit",
+								"PHP"
+							],
+							"codeintel_live": true,
+							"codeintel_live_enabled_languages":
+							[
+								"JavaScript",
+								"Mason",
+								"XBL",
+								"XUL",
+								"RHTML",
+								"SCSS",
+								"Python",
+								"HTML",
+								"Ruby",
+								"Python3",
+								"XML",
+								"Sass",
+								"XSLT",
+								"Django",
+								"HTML5",
+								"Perl",
+								"CSS",
+								"Twig",
+								"Less",
+								"Smarty",
+								"Node.js",
+								"Tcl",
+								"TemplateToolkit",
+								"PHP"
+							],
+							"codeintel_max_recursive_dir_depth": 10.0,
+							"codeintel_scan_exclude_dir":
+							{
+								"JavaScript":
+								[
+									"/build/",
+									"/min/"
+								]
+							},
+							"codeintel_scan_files_in_project": true,
+							"codeintel_selected_catalogs":
+							[
+								"PyWin32",
+								"jQuery",
+								"Rails"
+							],
+							"codeintel_snippets": true,
+							"codeintel_syntax_map":
+							{
+								"Python Django": "Python"
+							},
+							"codeintel_tooltips": "popup",
+							"incomplete_sync": null,
+							"origin_encoding": "UTF-8",
+							"remote_loading": false,
+							"sublime_auto_complete": true,
+							"synced": false,
+							"syntax": "Packages/Djaneiro/Syntaxes/Python Django.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 2382.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "core/templates/core/event.html",
+					"settings":
+					{
+						"buffer_size": 4149,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3944,
+								3944
+							]
+						],
+						"settings":
+						{
+							"codeintel": true,
+							"codeintel_config":
+							{
+								"JavaScript":
+								{
+									"codeintel_max_recursive_dir_depth": 2.0,
+									"codeintel_scan_files_in_project": false,
+									"javascriptExtraPaths":
+									[
+									]
+								},
+								"PHP":
+								{
+									"codeintel_max_recursive_dir_depth": 5.0,
+									"codeintel_scan_files_in_project": false,
+									"phpExtraPaths":
+									[
+									]
+								},
+								"Python":
+								{
+									"env":
+									{
+									}
+								}
+							},
+							"codeintel_enabled_languages":
+							[
+								"JavaScript",
+								"Mason",
+								"XBL",
+								"XUL",
+								"RHTML",
+								"SCSS",
+								"Python",
+								"HTML",
+								"Ruby",
+								"Python3",
+								"XML",
+								"Sass",
+								"XSLT",
+								"Django",
+								"HTML5",
+								"Perl",
+								"CSS",
+								"Twig",
+								"Less",
+								"Smarty",
+								"Node.js",
+								"Tcl",
+								"TemplateToolkit",
+								"PHP"
+							],
+							"codeintel_live": true,
+							"codeintel_live_enabled_languages":
+							[
+								"JavaScript",
+								"Mason",
+								"XBL",
+								"XUL",
+								"RHTML",
+								"SCSS",
+								"Python",
+								"HTML",
+								"Ruby",
+								"Python3",
+								"XML",
+								"Sass",
+								"XSLT",
+								"Django",
+								"HTML5",
+								"Perl",
+								"CSS",
+								"Twig",
+								"Less",
+								"Smarty",
+								"Node.js",
+								"Tcl",
+								"TemplateToolkit",
+								"PHP"
+							],
+							"codeintel_max_recursive_dir_depth": 10.0,
+							"codeintel_scan_exclude_dir":
+							{
+								"JavaScript":
+								[
+									"/build/",
+									"/min/"
+								]
+							},
+							"codeintel_scan_files_in_project": true,
+							"codeintel_selected_catalogs":
+							[
+								"PyWin32",
+								"jQuery",
+								"Rails"
+							],
+							"codeintel_snippets": true,
+							"codeintel_syntax_map":
+							{
+								"Python Django": "Python"
+							},
+							"codeintel_tooltips": "popup",
+							"incomplete_sync": null,
+							"origin_encoding": "UTF-8",
+							"remote_loading": false,
+							"sublime_auto_complete": true,
+							"synced": false,
+							"syntax": "Packages/Djaneiro/Syntaxes/HTML (Django).tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 978.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "core/models.py",
+					"settings":
+					{
+						"buffer_size": 7462,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								5635,
+								5635
+							]
+						],
+						"settings":
+						{
+							"codeintel": true,
+							"codeintel_config":
+							{
+								"JavaScript":
+								{
+									"codeintel_max_recursive_dir_depth": 2.0,
+									"codeintel_scan_files_in_project": false,
+									"javascriptExtraPaths":
+									[
+									]
+								},
+								"PHP":
+								{
+									"codeintel_max_recursive_dir_depth": 5.0,
+									"codeintel_scan_files_in_project": false,
+									"phpExtraPaths":
+									[
+									]
+								},
+								"Python":
+								{
+									"env":
+									{
+									}
+								}
+							},
+							"codeintel_enabled_languages":
+							[
+								"JavaScript",
+								"Mason",
+								"XBL",
+								"XUL",
+								"RHTML",
+								"SCSS",
+								"Python",
+								"HTML",
+								"Ruby",
+								"Python3",
+								"XML",
+								"Sass",
+								"XSLT",
+								"Django",
+								"HTML5",
+								"Perl",
+								"CSS",
+								"Twig",
+								"Less",
+								"Smarty",
+								"Node.js",
+								"Tcl",
+								"TemplateToolkit",
+								"PHP"
+							],
+							"codeintel_live": true,
+							"codeintel_live_enabled_languages":
+							[
+								"JavaScript",
+								"Mason",
+								"XBL",
+								"XUL",
+								"RHTML",
+								"SCSS",
+								"Python",
+								"HTML",
+								"Ruby",
+								"Python3",
+								"XML",
+								"Sass",
+								"XSLT",
+								"Django",
+								"HTML5",
+								"Perl",
+								"CSS",
+								"Twig",
+								"Less",
+								"Smarty",
+								"Node.js",
+								"Tcl",
+								"TemplateToolkit",
+								"PHP"
+							],
+							"codeintel_max_recursive_dir_depth": 10.0,
+							"codeintel_scan_exclude_dir":
+							{
+								"JavaScript":
+								[
+									"/build/",
+									"/min/"
+								]
+							},
+							"codeintel_scan_files_in_project": true,
+							"codeintel_selected_catalogs":
+							[
+								"PyWin32",
+								"jQuery",
+								"Rails"
+							],
+							"codeintel_snippets": true,
+							"codeintel_syntax_map":
+							{
+								"Python Django": "Python"
+							},
+							"codeintel_tooltips": "popup",
+							"incomplete_sync": null,
+							"origin_encoding": "UTF-8",
+							"remote_loading": false,
+							"sublime_auto_complete": true,
+							"synced": false,
+							"syntax": "Packages/Djaneiro/Syntaxes/Python Django.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 2760.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "core/templates/core/event_list.html",
+					"settings":
+					{
+						"buffer_size": 1465,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1177,
+								1177
+							]
+						],
+						"settings":
+						{
+							"codeintel": true,
+							"codeintel_config":
+							{
+								"JavaScript":
+								{
+									"codeintel_max_recursive_dir_depth": 2.0,
+									"codeintel_scan_files_in_project": false,
+									"javascriptExtraPaths":
+									[
+									]
+								},
+								"PHP":
+								{
+									"codeintel_max_recursive_dir_depth": 5.0,
+									"codeintel_scan_files_in_project": false,
+									"phpExtraPaths":
+									[
+									]
+								},
+								"Python":
+								{
+									"env":
+									{
+									}
+								}
+							},
+							"codeintel_enabled_languages":
+							[
+								"JavaScript",
+								"Mason",
+								"XBL",
+								"XUL",
+								"RHTML",
+								"SCSS",
+								"Python",
+								"HTML",
+								"Ruby",
+								"Python3",
+								"XML",
+								"Sass",
+								"XSLT",
+								"Django",
+								"HTML5",
+								"Perl",
+								"CSS",
+								"Twig",
+								"Less",
+								"Smarty",
+								"Node.js",
+								"Tcl",
+								"TemplateToolkit",
+								"PHP"
+							],
+							"codeintel_live": true,
+							"codeintel_live_enabled_languages":
+							[
+								"JavaScript",
+								"Mason",
+								"XBL",
+								"XUL",
+								"RHTML",
+								"SCSS",
+								"Python",
+								"HTML",
+								"Ruby",
+								"Python3",
+								"XML",
+								"Sass",
+								"XSLT",
+								"Django",
+								"HTML5",
+								"Perl",
+								"CSS",
+								"Twig",
+								"Less",
+								"Smarty",
+								"Node.js",
+								"Tcl",
+								"TemplateToolkit",
+								"PHP"
+							],
+							"codeintel_max_recursive_dir_depth": 10.0,
+							"codeintel_scan_exclude_dir":
+							{
+								"JavaScript":
+								[
+									"/build/",
+									"/min/"
+								]
+							},
+							"codeintel_scan_files_in_project": true,
+							"codeintel_selected_catalogs":
+							[
+								"PyWin32",
+								"jQuery",
+								"Rails"
+							],
+							"codeintel_snippets": true,
+							"codeintel_syntax_map":
+							{
+								"Python Django": "Python"
+							},
+							"codeintel_tooltips": "popup",
+							"incomplete_sync": null,
+							"origin_encoding": "UTF-8",
+							"remote_loading": false,
+							"sublime_auto_complete": true,
+							"synced": false,
+							"syntax": "Packages/Djaneiro/Syntaxes/HTML (Django).tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "core/templates/core/contact.html",
+					"settings":
+					{
+						"buffer_size": 2907,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1089,
+								1089
+							]
+						],
+						"settings":
+						{
+							"codeintel": true,
+							"codeintel_config":
+							{
+								"JavaScript":
+								{
+									"codeintel_max_recursive_dir_depth": 2.0,
+									"codeintel_scan_files_in_project": false,
+									"javascriptExtraPaths":
+									[
+									]
+								},
+								"PHP":
+								{
+									"codeintel_max_recursive_dir_depth": 5.0,
+									"codeintel_scan_files_in_project": false,
+									"phpExtraPaths":
+									[
+									]
+								},
+								"Python":
+								{
+									"env":
+									{
+									}
+								}
+							},
+							"codeintel_enabled_languages":
+							[
+								"JavaScript",
+								"Mason",
+								"XBL",
+								"XUL",
+								"RHTML",
+								"SCSS",
+								"Python",
+								"HTML",
+								"Ruby",
+								"Python3",
+								"XML",
+								"Sass",
+								"XSLT",
+								"Django",
+								"HTML5",
+								"Perl",
+								"CSS",
+								"Twig",
+								"Less",
+								"Smarty",
+								"Node.js",
+								"Tcl",
+								"TemplateToolkit",
+								"PHP"
+							],
+							"codeintel_live": true,
+							"codeintel_live_enabled_languages":
+							[
+								"JavaScript",
+								"Mason",
+								"XBL",
+								"XUL",
+								"RHTML",
+								"SCSS",
+								"Python",
+								"HTML",
+								"Ruby",
+								"Python3",
+								"XML",
+								"Sass",
+								"XSLT",
+								"Django",
+								"HTML5",
+								"Perl",
+								"CSS",
+								"Twig",
+								"Less",
+								"Smarty",
+								"Node.js",
+								"Tcl",
+								"TemplateToolkit",
+								"PHP"
+							],
+							"codeintel_max_recursive_dir_depth": 10.0,
+							"codeintel_scan_exclude_dir":
+							{
+								"JavaScript":
+								[
+									"/build/",
+									"/min/"
+								]
+							},
+							"codeintel_scan_files_in_project": true,
+							"codeintel_selected_catalogs":
+							[
+								"PyWin32",
+								"jQuery",
+								"Rails"
+							],
+							"codeintel_snippets": true,
+							"codeintel_syntax_map":
+							{
+								"Python Django": "Python"
+							},
+							"codeintel_tooltips": "popup",
+							"incomplete_sync": null,
+							"origin_encoding": "UTF-8",
+							"remote_loading": false,
+							"sublime_auto_complete": true,
+							"synced": false,
+							"syntax": "Packages/Djaneiro/Syntaxes/HTML (Django).tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 67.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 34.0
+	},
+	"input":
+	{
+		"height": 31.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 209.0
+	},
+	"output.find_results":
+	{
+		"height": 100.0
+	},
+	"output.sftp":
+	{
+		"height": 0.0
+	},
+	"replace":
+	{
+		"height": 64.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+			[
+				"blu",
+				"/Users/bluedisk/Library/Application Support/Sublime Text 2/Packages/User/bluedisk.py"
+			],
+			[
+				"exa",
+				"/Users/bluedisk/Library/Application Support/Sublime Text 2/Packages/User/bluedisk.py"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"selected_items":
+		[
+			[
+				"",
+				"/Users/bluedisk/Workspace/Wholook/wholook-web/wholook.sublime-project"
+			]
+		],
+		"width": 380.0
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 230.0,
+	"status_bar_visible": true
+}

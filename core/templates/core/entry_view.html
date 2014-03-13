@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+	<div class="page-header">
+		<h3>신청 내역 <small>{{ entry.event.title }}</small></h3>
+	</div>
+
+	<b>{{event.series.title}}</b>
+	<dl class="dl-horizontal">
+		<dt>장소:</dt> <dd>{{entry.event.location}}</dd>
+		<dt>집합시간:</dt> <dd>{{entry.event.assemble_time}}</dd>
+		<dt>출발시간:</dt> <dd>{{entry.event.race_time}}</dd>
+	</dl>
+	<HR>
+	<div class=" clearfix">
+		<dl class="col-sm-6 dl-horizontal">
+			<dt>대원명</dt><dd>{{ entry.name }}</dd>
+			{% if me %}
+			<dt>휴대폰</dt><dd>{{ entry.cell }}</dd>
+			<dt>주민번호</dt><dd>{{ entry.regnum }}</dd>
+			{% endif %}
+		</dl>
+		<dl class="col-sm-6 dl-horizontal">
+			<dt>패트롤 타입</dt><dd>{{ entry.get_htype_display }}</dd>
+			
+			{% if me %}
+			<dt>패트롤 거리</dt><dd>{{ entry.get_hdist_display }}</dd>
+			<dt>티셔츠 사이즈</dt><dd>{{ entry.tsize }}</dd>
+			<dt>마일리지</dt><dd>{{ entry.milesage }}</dd>
+			{% endif %}
+		</dl>
+		<dl class="col-sm-6 dl-horizontal">
+			<dt>카풀</dt><dd>{{ entry.get_carpool_display }}</dd>
+			<dt>지역</dt><dd>{{ entry.location }}</dd>
+		</dl>
+		<dl class="col-sm-6 dl-horizontal">
+			{% if me %}
+			<dt>가능스킬</dt><dd>{{ entry.skill_display }}</dd>
+			{% endif %}
+		</dl>
+{% if me %}
+		<dl class="col-sm-10 col-sm-offset-1">
+			<dt>그 외 요청사항</dt><dd class='well'>{{ entry.etc }}</dd>
+		</dl>
+{% endif %}
+
+	</div>
+	<HR>
+{% if not me %}
+	<form rule="form" method="post">
+	{% csrf_token %}
+	<div class="container">
+		<h3>문자 보내기</h3>
+
+		<div class="col-sm-7">
+			<div class="form-group{% if form.caller.errors %} has-error{% endif %}">
+				<label for="caller">보낸 사람 번호</label>
+				<input type="text" class="form-control" name="caller" id="caller" placeholder="반드시 본인 휴대폰 번호를 입력해주세요." value="{{ form.caller.value|default_if_none:'' }}">
+				<span class="help-block">{{ form.caller.errors }}</span>
+			</div>
+			<div class="form-group{% if form.msg.errors %} has-error{% endif %}">
+				<label for="msg">보낼 메시지</label>
+				<input type="text" class="form-control" name="msg" id="msg" maxlength='80' placeholder="80Byte 이내로 입력해주세요. 전송한 모든 내용은 저장됩니다." value="{{ form.msg.value|default_if_none:'' }}">
+				<span class="help-block">{{ form.msg.errors }}</span>
+			</div>
+		</div>
+		<div class="col-sm-5">
+			<div class="form-group{% if form.captcha.errors %} has-error{% endif %}">
+			<label for="captcha">자동 입력 방지</label>
+			{{ form.captcha }}				
+			<span class="help-block">{{ form.captcha.errors }}</span>
+			</div>
+		</div>
+	</div>
+	<div class="container">
+		<div class="col-sm-7">
+			<button class="btn btn-danger" type="submit">문자 전송</button>
+		</div>
+	</div>
+	</form>
+	<HR>
+{% endif %}
+<div class='container'>
+{% if my_entry_id == entry.id %}
+	<div class="col-sm-8">
+		<a href="{% url 'event' entry.event.id %}" class='btn btn-info btn-block btn-lg'>
+			"{{entry.event.title}}" 행사로 돌아가기
+		</a>
+	</div>
+	<div class="col-sm-4">
+		{% if user.is_authenticated %}
+		<a href="{% url 'agent_entry_edit' entry.event.id %}" class='btn btn-warning btn-block btn-lg'>
+		{% else %}
+		<a href="{% url 'entry_edit' entry.id %}" class='btn btn-warning btn-block btn-lg'>
+		{% endif %}
+			신청 내용 수정
+		</a>
+	</div>
+{% else %}
+	<div class="col-sm-12">
+		<a href="{% url 'event' entry.event.id %}" class='btn btn-info btn-block btn-lg'>
+			"{{entry.event.title}}" 행사로 돌아가기
+		</a>
+	</div>
+{% endif %}
+</div>
+
+{% endblock %}

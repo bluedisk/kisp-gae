@@ -1,0 +1,131 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+	<div class="page-header">
+		<h3>Contact US <small>KISP 스탭들과 연락처 입니다</small></h3>
+	</div>
+
+	<h4>NAVER CAFE</h4>
+	<div class="container">
+		<a href="http://cafe.naver.com/kisp/" class="btn btn-info" target="_new">KISP 카페 바로가기 <span class="glyphicon glyphicon-new-window"></span></a><br><br>
+		<small>* KISP는 네이버 카페를 중심으로 활동하고 있습니다.</small>
+	</div>
+	<BR>
+	<h4>스탭진</h4>
+	<div class="col-sm-3 text-center">
+		<img src="/static/image/face_test.png" class="img-circle" width="140">
+		<div class="text-center" style="margin-top:25px">
+			<string>이원우</string> / 대장
+		</div>
+		<br>
+		<div class="text-muted text-center">
+			패트롤 요청, 협업 요청 담당<br>
+			<a href="mailto:bluedisk@gmail.com"><span class="glyphicon glyphicon-envelope"></span> bluedisk@gmail.com</a>
+		</div>
+	</div>
+
+	<div class="col-sm-3 text-center">
+		<img src="/static/image/noface.png" class="img-circle" width="140">
+		<div class="text-center" style="margin-top:25px">
+			<string>김은희</string> / 회계
+		</div>
+		<br>
+		<div class="text-muted text-center">
+			회계, 운영 담당<br>
+		</div>
+	</div>
+
+	<div class="col-sm-3 text-center">
+		<img src="/static/image/noface.png" class="img-circle" width="140">
+		<div class="text-center" style="margin-top:25px">
+			<string>권혁진</string> / 부메니저
+		</div>
+		<br>
+		<div class="text-muted text-center">
+			패트롤 진행 담당<br>
+		</div>
+	</div>
+	
+	<div class="col-sm-3 text-center">
+		<img src="/static/image/noface.png" class="img-circle" width="140">
+		<div class="text-center" style="margin-top:25px">
+			<string>김삼수</string> / 스탭
+		</div>
+		<br>
+		<div class="text-muted text-center">
+			패트롤 진행 담당<br>
+		</div>
+	</div>
+	
+</div>
+<BR><BR>
+<div class="container">
+	<h4>대원들</h4>
+	<div class="member-container">
+
+		{% for member in members %}
+		<div class="member-frame" style="background-image: url({{ member.image }}); ">
+			<div class="member-name">{{member.name}}</div>
+		</div>
+		{% endfor %}
+
+
+	</div>
+</div>
+{% endblock %}	
+
+{% block head_extra %}
+<style>
+	.member-container {
+		position:relative;
+		left:50%;
+		margin:0px;
+		margin-left:-350px;
+		width:700px;
+		padding:0px;		
+		cursor:pointer;
+	}
+	.member-frame {		
+		position:relative;
+		width:140px;
+		height:140px;
+		padding:0px;
+		margin:0px;
+		overflow:hidden;
+		float:left;	
+
+		background-color: #D0D0D0;
+		background-repeat: no-repeat; 
+		background-size: cover;
+		background-position: center
+	}
+	.member-name {
+		position: absolute;
+		top:0px;
+		left:0px;
+		width:140px;
+		height:140px;
+		background-color: black;
+		text-align: center;
+		line-height: 140px;
+		color:white;
+		font-weight: bold;
+		opacity: 0;
+	}
+</style>
+{% endblock %}
+
+{% block script %}
+<script>
+
+	$('.member-frame').on('mouseover',function() {
+		$(this).find('div').animate({'opacity':'0.7'})
+	});
+
+	$('.member-frame').on('mouseout',function() {
+		$(this).find('div').animate({'opacity':'0'})
+	});
+
+</script>
+{% endblock %}
+

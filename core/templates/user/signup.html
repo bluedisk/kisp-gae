@@ -1,0 +1,25 @@
+{% extends "base_form.html" %}
+
+
+{% block error_msg %}
+<strong>회원 가입에 실패했습니다!</strong> 에러가 표시된 항목을 다시 확인 후 시도해주세요.
+{% endblock %}
+
+
+{% block form %}
+
+	<form class="form-signin" method="post" action="">
+		{% csrf_token %}
+		<input type="hidden" name="next" value="{{ next|default_if_none:'/' }}" />
+
+		<h2 class="form-signin-heading">가입신청</h2>
+		{% include "form_fields.html" %}
+
+		<button class="btn btn-lg btn-primary" type="submit">
+			가입하기
+		</button>
+	</form>
+
+<!-- /container -->
+
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block content %}
+<BR>
+    <div class="container">
+     <div class="pager-header">
+      <h3>패트롤 신청 <small> 전체 행사 리스트</small>
+{% if user.is_staff %}
+  <a href="{% url 'admin:core_event_changelist' %}" class="btn btn-sm btn-default pull-right">
+    <span class="glyphicon glyphicon-pencil"></span> 수정하기
+  </a>
+  {% endif %}
+
+      </h3>
+  </div>
+    <hr>
+  {% for event in events %}
+
+  <div class="container">        
+    <h4>{{event.year_title|safe}} <a class="btn btn-primary btn-sm" href="{% url 'event' event.pk %}">자세히보기 <span class="glyphicon glyphicon-chevron-right"></span></a></h4>
+
+    <div class="panel panel-default">
+        <div class="panel-heading"><p>{{event.title}}</p></div>
+        <div class="panel-body">
+            <p class="col-sm-6">
+                <label>코스:</label> {{ event.course_list }}<br/>
+                <label>참가자수:</label> {{event.participants}}<br/>
+                <label>대회일자:</label> {{event.event_day}}<br/>
+                <label>요청인원:</label> {{event.requested}} 명(신청 {{event.entry_count}} 명)
+            </p>
+            <p class="col-sm-6">
+                <label>장소:</label> {{event.location_tag|safe}}<br/>
+                <label>집합시간:</label> {{event.assemble_time}}<br/>
+                <label>출발시간:</label> {{event.race_time}}<br/>
+                <label>모집마감:</label> {{event.regist_end}}<br/>
+            </p>
+        </div>
+    </div>
+</div>
+<hr>
+{% endfor %}
+
+</div>
+
+{% endblock %}

@@ -2,3 +2,4 @@
 .gaedata/
 static/
 .DS_Store
+*.pyc

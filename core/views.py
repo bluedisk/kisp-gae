@@ -79,6 +79,9 @@ def entry_view(request,entry_id):
 	if request.session.get('entry') == int(entry_id):
 		me = True
 
+	if request.user.is_authenticated() and request.user == entry.user:
+		me = True
+
 	if request.method == 'POST':
 		form = SendSmsForm(request.POST)
 		last_sms = request.session.get('last_sms')

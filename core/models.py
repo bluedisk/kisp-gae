@@ -213,6 +213,12 @@ class Agent(models.Model):
 	def __unicode__(self):
 		return "%s(%s)"%(self.user.first_name, self.user.username)
 
+	def regnum_masked(self):
+		return self.regnum[:6]+"-*******"
+	
+	def skill_display(self):
+		skill = [ sk.name for sk in Skill.objects.filter(pk__in=self.skill)]
+		return ", ".join(skill)
 
 	user = models.OneToOneField(User, related_name='agent')
 
@@ -221,7 +227,7 @@ class Agent(models.Model):
 	mileage = models.CharField(u'마일리지', max_length=32, blank=True)
 	tsize = models.CharField(u'티셔츠사이즈', max_length=5, choices=TSIZE_CHOICES, blank=True)
 
-	image = models.ImageField(upload_to=u'agent_image/', null=True, blank=True, verbose_name=u'대원사진(140x140)')
+	image = models.ImageField(upload_to=u'agent_image/', null=True, blank=True, verbose_name=u'대원사진(140x140, 1MB이하)')
 
 	skill = ModelListField(Skill,'name')
 

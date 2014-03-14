@@ -11,9 +11,9 @@
 
 	{% else %}
 
-	{% if field.field.native %}
+	{% if field.name in form.Meta.native_fields %}
 	<label for="{{field.html_name}}">{{field.label}}</label>
-	{{ field }}
+	<div>{{ field }}</div>
 	{% else %}
 		<label for="{{field.html_name}}" class="sr-only">{{field.label}}</label>
 		<input type="{{ field.field.widget.input_type }}" class="form-control" placeholder="{{field.label}}" id="{{field.html_name}}" name="{{field.html_name}}" value="{{field.value|default_if_none:""}}">

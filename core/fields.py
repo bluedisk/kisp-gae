@@ -6,7 +6,6 @@ from djangotoolbox.fields import ListField
 
 class FormListField(MultipleChoiceField):
     widget = CheckboxSelectMultiple
-    native = True
 
     def __init__(self, model=None, order_by='pk', *args, **kwargs):
         self._model = model

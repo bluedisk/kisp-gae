@@ -1,11 +1,6 @@
 {% extends "base_form.html" %}
 
 
-{% block error_msg %}
-<strong>정보 변경에 실패했습니다!</strong> 에러가 표시된 항목을 다시 확인 후 시도해주세요.
-{% endblock %}
-
-
 {% block form %}
 {% if saved %}
 <div class="alert alert-success alert-dismissable">
@@ -13,17 +8,38 @@
   <strong>저장 완료!</strong> 정상적으로 저장되었습니다. 
 </div>
 {% endif %}
-	<form class="form-signin form-agent" method="post" action="">
-		{% csrf_token %}
-		<input type="hidden" name="next" value="{{ next }}" />
 
-		<h2 class="form-signin-heading">세부 정보</h2>
-		{% include "form_fields.html" %}
 
-		<button class="btn btn-lg btn-primary" type="submit">
-			저장하기
-		</button>
-	</form>
+<div class="form-signin form-agent">
+	<h2 class="form-signin-heading">대원 정보</h2>
+
+	<div class="row">
+
+		<div class="col-md-7">
+			<dl class="dl-horizontal">
+				<dt>휴대폰</dt>
+				<dd>{{agent.cell}}</dd>
+				<dt>주민번호</dt>
+				<dd>{{agent.regnum_masked}}</dd>
+				<dt>마일리지</dt>
+				<dd>{{agent.mileage}}</dd>
+				<dt>티셔츠 사이즈</dt>
+				<dd>{{agent.tsize}}</dd>
+				<dt>가능 기술</dt>
+				<dd>{{agent.skill_display}}</dd>
+				<dt>지역</dt>
+				<dd>{{agent.location}}</dd>
+			</dl>
+		</div>
+		<div class="col-md-5">
+			<img src="{{ agent.file.url }}" class="img-thumbnail" width=140>
+		</div>
+	</div>
+	<a href="{% url 'agent_edit' %}" class="btn btn-lg btn-warning">
+		수정하기
+	</a>
+
+</div>
 
 <!-- /container -->
 

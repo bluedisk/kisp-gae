@@ -15,6 +15,7 @@ class EntryForm(forms.ModelForm):
     class Meta:
         model=Entry
         fields = [ 'name', 'cell', 'regnum', 'htype', 'hdist', 'tsize', 'mileage', 'etc', 'carpool', 'location','skill']
+        native_fields = [ 'skill', 'course' ]
 
     captcha = ReCaptchaField()
 
@@ -22,6 +23,7 @@ class AgentEntryForm(forms.ModelForm):
     class Meta:
         model=Entry
         fields = [ 'name', 'cell', 'regnum', 'htype', 'hdist', 'tsize', 'mileage', 'etc', 'carpool', 'location','skill']
+        native_fields = ['skill']
 
 
 class SendSmsForm(forms.Form):
@@ -195,5 +197,6 @@ class AgentForm(forms.ModelForm):
     class Meta:
         model = Agent
         fields = ['cell','regnum','mileage','tsize','image','skill','location']
+        native_fields = ['image','skill']
 
             

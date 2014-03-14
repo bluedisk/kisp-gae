@@ -8,6 +8,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
+from django.shortcuts import get_object_or_404
 
 from core.models import Event, Entry, Agent, Page, ReservedSMS
 from core.forms import EntryForm, AgentEntryForm, SendSmsForm, UserSignupForm, UserSigninForm, AgentForm
@@ -15,6 +16,8 @@ from core.sms import sendSMS
 
 from datetime import datetime, date, timedelta
 import logging
+
+from filetransfers.api import serve_file, prepare_upload
 
 def index(request):
 	return render(request,'core/index.html', {'events':Event.objects.all()})
@@ -198,10 +201,7 @@ def contact(request):
 
 	def extract_user(agent):
 		name = agent.user.first_name
-		image = '/static/image/noface.png'
-
-		if agent.image.name:
-			image = image.url
+		image = agent.image_url
 
 		return {'name':name, 'image':image }
 
@@ -322,10 +322,27 @@ def change_pw(request):
 
 	return render(request, "user/change_pw_form.html", { 'form': form })
 
+
+
 @login_required
-def agent(request):
-	
-	saved=False
+def agent_view(request):
+	try:
+		agent = request.user.agent
+	except:
+		agent = {
+			'cell':u'등록안됨',
+			'regnum_masked':u'등록안됨',
+			'mileage':u'등록안됨',
+			'tsize':u'등록안됨',
+			'skill_display':u'등록안됨',
+			'location':u'등록안됨',
+			'image_url':u'/static/image/noface.png'
+		}
+	return render(request, "user/agent.html", { 'agent': agent })
+
+@login_required
+def agent_edit(request):
+	view_url = reverse('core.views.agent_edit')
 
 	try:	
 		agent = request.user.agent
@@ -333,7 +350,7 @@ def agent(request):
 		agent = None
 
 	if request.method == 'POST':
-		form = AgentForm(request.POST)
+		form = AgentForm(request.POST,request.FILES)
 
 		if form.is_valid():
 			new_agent = form.save(commit=False)
@@ -342,22 +359,24 @@ def agent(request):
 				new_agent.pk = agent.pk
 
 			new_agent.user = request.user
-	
+
+			if not new_agent.image and not request.POST.get('image-clear',False):
+				new_agent.image = agent.image
+
 			new_agent.save()
 
 			form = AgentForm(instance=new_agent)
-			saved=True
-#			return HttpResponseRedirect(reverse('/'))
+			return HttpResponseRedirect(reverse('agent_view'))
 	else:
-		# try:
-		# 	agent = Agent.objects.get(pk=request.user)
-		# except:
-		# 	agent = None
-		
 		form = AgentForm(instance=agent)
 
-	return render(request, "user/agent.html", { 'form': form, 'saved':saved})
+	upload_url, upload_data = prepare_upload(request, view_url)
+
+	return render(request, "user/agent_edit.html", { 'form': form, 'upload_url': upload_url, 'upload_data': upload_data})
 
 
+def agent_image(request, agent_id):
+    agent = get_object_or_404(Agent, pk=agent_id)
+    return serve_file(request, agent.file)
 
 

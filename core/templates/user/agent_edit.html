@@ -1,4 +1,5 @@
 {% extends "base_form.html" %}
+{% load filetransfers %}
 
 {% block error_msg %}
 <strong>정보 변경에 실패했습니다!</strong> 에러가 표시된 항목을 다시 확인 후 시도해주세요.
@@ -13,9 +14,9 @@
 </div>
 {% endif %}
 
-    <form class="form-signin form-agent" method="post" action="" enctype="multipart/form-data">
+    <form class="form-signin form-agent" method="post" action="{{ upload_url }}" enctype="multipart/form-data">
         {% csrf_token %}
-        
+        {% render_upload_data upload_data %}
         <h2 class="form-signin-heading">대원 정보</h2>
         
         {% include "form_fields.html" %}

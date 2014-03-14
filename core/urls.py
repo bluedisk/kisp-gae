@@ -40,4 +40,5 @@ urlpatterns = patterns('',
     url(r'^passwd/$', 'core.views.change_pw', name='change_pw'),
     url(r'^reset/$', 'core.views.reset_pw', name='reset_pw'),
 
+    url(r'^agent/image/(?P<agent_id>\d+)/$', 'core.views.agent_image', name='agent_image'),
 )

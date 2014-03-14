@@ -134,6 +134,7 @@ INSTALLED_APPS = (
     'djangotoolbox',
     'autoload',
     'dbindexer',
+    'filetransfers',
 
     # custom add-ons
     'permission_backend_nonrel',

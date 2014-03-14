@@ -220,6 +220,12 @@ class Agent(models.Model):
 		skill = [ sk.name for sk in Skill.objects.filter(pk__in=self.skill)]
 		return ", ".join(skill)
 
+	def image_url(self):
+		if self.image.name:
+			return self.image.url+'=s280-c'
+
+		return '/static/image/noface.png'
+
 	user = models.OneToOneField(User, related_name='agent')
 
 	cell = models.CharField(u'휴대폰', max_length=32)
@@ -227,7 +233,7 @@ class Agent(models.Model):
 	mileage = models.CharField(u'마일리지', max_length=32, blank=True)
 	tsize = models.CharField(u'티셔츠사이즈', max_length=5, choices=TSIZE_CHOICES, blank=True)
 
-	image = models.ImageField(upload_to=u'agent_image/', null=True, blank=True, verbose_name=u'대원사진(140x140, 1MB이하)')
+	image = models.FileField(upload_to=u'agent_image/', null=True, blank=True, verbose_name=u'대원사진(140x140 권장)')
 
 	skill = ModelListField(Skill,'name')
 

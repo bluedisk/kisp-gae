@@ -11,7 +11,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import get_object_or_404
 
 from core.models import Event, Entry, Agent, Page, ReservedSMS
-from core.forms import EntryForm, AgentEntryForm, SendSmsForm, UserSignupForm, UserSigninForm, AgentForm
+from core.forms import EntryForm, AgentEntryForm, SendSmsForm, SendUserSmsForm, UserSignupForm, UserSigninForm, AgentForm
 from core.sms import sendSMS
 
 from datetime import datetime, date, timedelta
@@ -103,7 +103,7 @@ def entry_view(request,entry_id):
 
 			sendSMS(msg, caller, callee)
 
-			return render(request,'core/sms_sent.html', {'entry':entry, 'sms':{'caller':caller, 'callee':callee, 'msg':msg }})
+			return render(request,'core/carpool_sms_sent.html', {'entry':entry, 'sms':{'caller':caller, 'callee':callee, 'msg':msg }})
 	else:
 		form = SendSmsForm() # An unbound form
 
@@ -215,14 +215,40 @@ def contact(request):
    	return render(request, 'core/contact.html', {'viewname':'contact', 'members':members})
 
 
+@login_required
 def send_sms_by_entry(request):
 	entries = Entry.objects.filter(pk__in = request._GET['ids'].split(',') )
-	return render(request, 'core/sms.html', {'viewname':'event', 'entries':entries})
+	return send_sms(request,entries)
 
-
+@login_required
 def send_sms_by_event(request, eid):
 	entries = Entry.objects.filter(event__pk=eid)
-	return render(request, 'core/sms.html', {'viewname':'event', 'entries':entries})
+	return send_sms(request,entries)
+
+@login_required
+def send_sms(request, entries):
+	form = None
+	sent = False
+
+	if request.method == 'POST':
+		form = SendUserSmsForm(request.POST)
+
+		if form.is_valid():
+			callees = ",".join(entry.cell for entry in entries)
+			sendSMS( form.cleaned_data['msg'], form.cleaned_data['caller'], callees)
+
+			sent=True
+			form = None
+
+	if not form:
+		caller = ''
+		if request.user.agent:
+			caller = request.user.agent.cell
+
+		form = SendUserSmsForm(initial={'caller':caller})
+
+	return render(request, 'core/sms.html', {'viewname':'event', 'entries':entries, 'form':form, 'sent':sent})
+
 
 class KISPPageView(DetailView):
 	template_name = "core/kisppage.html"
@@ -321,7 +347,6 @@ def change_pw(request):
 		form = UserChangePasswordForm()
 
 	return render(request, "user/change_pw_form.html", { 'form': form })
-
 
 
 @login_required

@@ -5,8 +5,6 @@
 		<h3>문자 전송 하기 <small></small></h3>
 	</div>
 
-	<code> 아직 구현중... 동작 안함... </code>
-
 	<form rule="form" method="post">
 	{% csrf_token %}
 	<div class="container">
@@ -32,6 +30,10 @@
 				<label for="msg">보낼 메시지</label>
 				<input type="text" class="form-control" name="msg" id="msg" maxlength='80' placeholder="80Byte 이내로 입력해주세요. 전송한 모든 내용은 저장됩니다." value="{{ form.msg.value|default_if_none:'' }}">
 				<span class="help-block">{{ form.msg.errors }}</span>
+			</div>
+			<div class="alert alert-success" {% if not sent %}hidden='True'{% endif %}>
+				<button type="button" class='close' data-dismiss="alert" aria-hidden="true">&times;</button>
+				<strong>전송성공!</strong>전송이 성공했습니다.
 			</div>
 		</div>
 	</div>

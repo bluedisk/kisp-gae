@@ -5,7 +5,7 @@ from django.core.urlresolvers import reverse
 from django.forms import ModelForm
 from django.http import HttpResponseRedirect
 
-from core.models import Event, EventCompany, Series, Course, Entry, Agent, Page, SMSLog, ReservedSMS, Skill
+from core.models import Event, EventImage, EventCompany, Series, Course, Entry, Agent, Page, SMSLog, ReservedSMS, Skill
 from core.models import ContactGroup, ContactItem
 
 from django.contrib.auth.models import User
@@ -21,7 +21,8 @@ class EventForm(ModelForm):
     class Meta:
         model = Event
 
-
+class EventImageAdmin(admin.ModelAdmin):
+    list_display=('event','title')
 
 class EventAdmin(admin.ModelAdmin):
     form = EventForm
@@ -34,7 +35,7 @@ class EventAdmin(admin.ModelAdmin):
     send_sms.short_description = u"[SMS] 선택된 행사 참가 대원들에게 문자 메시지를 전송합니다."
 
     actions = [send_sms]
-
+    
 
 class EventCompanyAdmin(admin.ModelAdmin):
     pass
@@ -81,6 +82,7 @@ class SMSLogAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Event, EventAdmin)
+admin.site.register(EventImage, EventImageAdmin)
 admin.site.register(EventCompany, EventCompanyAdmin)
 admin.site.register(Series, SeriesAdmin)
 admin.site.register(Course, CourseAdmin)

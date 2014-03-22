@@ -27,9 +27,13 @@ class AgentEntryForm(forms.ModelForm):
 
 
 class SendSmsForm(forms.Form):
-	caller = forms.CharField(max_length=14, required=True)
-	msg = forms.CharField(max_length=80, required=True)
-	captcha = ReCaptchaField()
+    caller = forms.CharField(max_length=14, required=True)
+    msg = forms.CharField(max_length=80, required=True)
+    captcha = ReCaptchaField()
+
+class SendUserSmsForm(forms.Form):
+    caller = forms.CharField(max_length=14, required=True)
+    msg = forms.CharField(max_length=80, required=True)
 
 
 class UserSignupForm(forms.ModelForm):

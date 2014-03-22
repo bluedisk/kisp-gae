@@ -2,8 +2,10 @@
 # -*- coding:utf-8 -*-
 
 from django.db import models
+from djangotoolbox.fields import ListField, EmbeddedModelField
 from core.fields import ModelListField
 from tinymce.models import HTMLField
+
 from django.contrib.auth.models import User
 from datetime import date, datetime
 from gettext import gettext as _
@@ -114,6 +116,18 @@ class Event(models.Model):
 	requested = models.IntegerField(u'요청 인원(명)', blank=True, default=20)
 
 
+class EventImage(models.Model):
+	class Meta:
+		verbose_name = u"행사 사진"
+		verbose_name_plural = u"행사 사진들"
+
+	def __unicode__(self):
+		return self.title
+
+	image = models.FileField(upload_to=u'event_image/', verbose_name=u'이미지들')
+	title = models.CharField('이미지설명', max_length=255)
+	event = models.ForeignKey(Event, verbose_name=u'행사', related_name='images')
+
 ENTRY_TYPE_CHOICES = (
 		(u'wk',u'도보 패트롤'),
 		(u'il',u'인라인 패트롤'),
@@ -138,6 +152,7 @@ TSIZE_CHOICES = (
 	)
 
 CARPOOL_TYPE_CHOICES = (
+		(u'none', u'카풀 안함(기본)'),
 		(u'serv', u'카풀 제공 가능'),
 		(u'need', u'카풀 받기를 원함'),
 	)

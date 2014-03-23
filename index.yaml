@@ -76,6 +76,12 @@ indexes:
   - name: __key__
     direction: desc
 
+- kind: core_eventimage
+  properties:
+  - name: featured
+  - name: event_id
+  - name: order
+
 - kind: core_page
   properties:
   - name: __key__

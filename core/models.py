@@ -233,7 +233,7 @@ class EventImage(models.Model):
 	def __unicode__(self):
 		return self.title
 
-	title = models.CharField(u'이미지설명', max_length=255)
+	title = models.CharField(u'이미지설명', max_length=255, blank=True)
 	image = models.FileField(upload_to=u'event/images/', verbose_name=u'이미지')
 	featured = models.BooleanField(verbose_name=u'표지 사진 여부')
 	event = models.ForeignKey(Event, verbose_name=u'행사', related_name='images')

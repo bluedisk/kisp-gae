@@ -1,8 +1,5 @@
 {% extends 'base.html' %}
 
-{% block head_extra %}
-<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
-{% endblock %}
 
 {% block content %}
 <div class="container">
@@ -22,6 +19,12 @@
 		</h3>
 	</div>
 	<div id="description" class="well">
+		{% if featured %}
+		<div style="padding-bottom:15px">
+			<img src="{{ featured.image.url }}" class="img-responsive" >
+		</div>
+  		{% endif %}
+
 		<p class="lead">{{ event.year_title|safe }}</p>
 		<blockquote>{{ event.title }}</blockquote>
 
@@ -41,22 +44,29 @@
 					<dt>출발시간</dt> <dd>{{event.race_time}}</dd>
 				</dl>
 				<dl class="dl-horizontal">
-					<dt>모집 시작</dt> <dd>{{event.regist_start}}</dd>
-					<dt>모집 마감</dt> <dd>{{event.regist_end}}</dd>
-					<dt></dt> <dd class="{{regist_hint_class}}"><small>{{regist_hint}}</small></dd>
+					<dt>모집 시작</dt> <dd>{{event.recruit_open}}</dd>
+					<dt>모집 마감</dt> <dd>{{event.recruit_deadline}}</dd>
+					<dt></dt> <dd class="{{status_class}}"><small>{{status_text}}</small></dd>
 				</dl>
 			</div>
-			<div class="col-sm-5">
-				{% if event.course_map %}
-				<a href="{{ event.course_map.url }}" class="thumbnail" target="_new">
-					<div style="height:300px; background-size:contain; background:url('{{ event.course_map.url }}') no-repeat;background-position:center">
+			<div class="col-sm-6">			
+				{% for image in images %}
+				
+				<div class="image-frame img-thumbnail" href="{{ image.image.url }}" style="background-image: url({{ image.image.url }}=s280-c); ">
+					<div class="image-name">
+						{% if user.is_staff %}
+						<a href="{% url 'event_image_del' event.id image.id %}" class="image-close close" style="padding:10px; color:white">&times;</a>
+						{% endif %}
+						{{image.title}}
 					</div>
-  				</a>
-  				{% else %}
-  					<div class="thumbnail" style="height:300px; padding:55px; background-size:contain;  text-align:center; background:gray no-repeat;background-position:center">
-  						<h3>No Map</h3>
-					</div>
-  				{% endif %}
+				</div>
+				{% endfor %}
+				{% if user.is_staff %}
+				<div class="image-frame">
+					<a href="{% url 'event_image_add' event.id %}" target="_top"><h2 class="image-text"><i class="fa fa-plus"></i></h2></a>
+				</div>
+				{% endif %}						
+
 			</div>
 		</div>
 		<dl class="dl-horizontal">
@@ -86,6 +96,10 @@
 				{% endfor %}
 			</dd>
 			{% endif %}
+			<BR>
+			<pre>
+{{ event.desc }}
+			</pre>
 
 		</dl>
 
@@ -109,4 +123,80 @@
 		</div>			
 	</div>
 </div>
+{% endblock %}
+
+{% block head_extra %}
+<style>
+	.image-container {
+		position:relative;
+		left:50%;
+		margin:0px;
+		margin-left:-350px;
+		width:700px;
+		padding:5px;		
+		cursor:pointer;
+	}
+	.image-frame {		
+		position:relative;
+		width:140px;
+		height:140px;
+		padding:0px;
+		margin:0px;
+		overflow:hidden;
+		float:left;	
+
+		background-color: #D0D0D0;
+		background-repeat: no-repeat; 
+		background-size: cover;
+		background-position: center
+	}
+	.image-name {
+		cursor:pointer;
+		position: absolute;
+		top:0px;
+		left:0px;
+		width:140px;
+		height:140px;
+		background-color: black;
+		text-align: center;
+		line-height: 140px;
+		color:white;
+		font-weight: bold;
+		opacity: 0;
+	}
+	.image-text {
+
+		position: absolute;
+		padding: 0px;
+		margin: 0px;
+		top:0px;
+		left:0px;
+		width:140px;
+		height:140px;
+		background-color: #eeeeee;
+		text-align: center;
+		line-height: 140px;
+		color:black;
+		border:solid 1px #d0d0d0;
+		font-weight: bold;
+	}
+</style>
+{% endblock %}
+
+{% block script %}
+<script>
+
+	$('.image-frame').on('mouseover',function() {
+		$(this).find('div').animate({'opacity':'0.7'})
+	});
+
+	$('.image-frame').on('mouseout',function() {
+		$(this).find('div').animate({'opacity':'0'})
+	});
+
+	$('.image-frame').on('click', function() {
+		window.open($(this).attr('href'), '_top');
+	});
+
+</script>
 {% endblock %}

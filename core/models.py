@@ -7,8 +7,12 @@ from core.fields import ModelListField
 from tinymce.models import HTMLField
 
 from django.contrib.auth.models import User
-from datetime import date, datetime
+from datetime import date, datetime, timedelta
 from gettext import gettext as _
+
+import logging
+logger = logging.getLogger('model')
+logger.setLevel(logging.DEBUG)
 
 class Series(models.Model):
 
@@ -43,14 +47,56 @@ class Course(models.Model):
 	class Meta:
 		verbose_name = u"# 코스 종류"
 		verbose_name_plural = u"# 코스 종류 들"
-		ordering = (u'distance',)
+		ordering = ['distance',]
 
 	def __unicode__(self):
 		return "%s (%s)"%(self.title,self.distance)
 
 	title = models.CharField(u'코스명', max_length=255)
 	distance = models.FloatField(u'거리')
- 
+
+EVENT_STATUS_INFO = {
+	'ended':{
+	'title':u'대회 종료',
+	'description':u'모든 진행이 종료 되었습니다.',
+	'class':'muted'
+	},
+	'feedback':{
+	'title':u'종료 보고 중',
+	'description':u'대회가 종료 되었습니다. 종료 보고를 입력해주세요.',
+	'class':'info'
+	},
+	'progress':{
+	'title':u'대회 진행 중',
+	'description':u'대회가 지금 현재 진행 중 입니다.',
+	'class':'primary'
+	},
+	'recruit_end':{
+	'title':u'모집 마감',
+	'description':u'모집이 마감되었습니다.',
+	'class':'danger'
+	},
+	'recruit':{
+	'title':u'모집 중',
+	'description':u'곧 모집이 마감됩니다!',
+	'class':'warning'
+	},
+	'soon':{
+	'title':u'모집 준비 중',
+	'description':u'곧 모집을 시작합니다.',
+	'class':'success'
+	},
+	'ready':{
+	'title':u'모집 준비 중',
+	'description':u'아직 모집 기간이 아닙니다.',
+	'class':'success'
+	},
+	'none':{
+	'title':u'',
+	'description':u'',
+	'class':'muted'
+	}
+} 
 
 class Event(models.Model):
 	
@@ -72,9 +118,9 @@ class Event(models.Model):
 
 	def is_registable(self):
 		today = date.today()
-		if self.regist_start > today:
+		if self.recruit_open > today:
 			return False
-		if self.regist_end < today:
+		if self.recruit_deadline < today:
 			return False
 
 		return True
@@ -84,36 +130,75 @@ class Event(models.Model):
 			return '<a href="%s">%s</a>'%(self.location_url, self.location)
 
 		return self.location
-
 	
 	def event_day_display(self):
 		WEEKDAY_KOR = u"월화수목금토일-------"
 		return u"%s년 %s월 %s일 (%s)"%(self.event_day.year, self.event_day.month, self.event_day.day, WEEKDAY_KOR[self.event_day.weekday()])
 
+
+
+	def get_status(self):
+
+		today = date.today()
+		logger.debug('today:%s'%today)
+
+		if self.feedback_deadline < today:
+			status = 'ended'
+		
+		elif self.feedback_deadline <= today:
+			status = 'feedback'
+
+		elif self.event_day == today:
+			status = 'progress'
+
+		elif self.recruit_deadline < today:
+			status = 'recruit_end'
+
+		elif self.recruit_deadline <= today+timedelta(days=1):
+			status = 'recruit'
+
+		elif self.recruit_open == today+timedelta(days=1):
+			status = 'soon'
+
+		elif self.recruit_open > today:
+			status = 'ready'
+
+		else:
+			status = 'none'
+
+		return EVENT_STATUS_INFO[status]
+
+	def get_status_text(self):
+		return self.get_status()['title']
+
+	def get_status_class(self):
+		return self.get_status()['class']
+
 	title = models.CharField(u'행사명',max_length=255)
 	short_title = models.CharField(u'짧은 행사명',max_length=30)
-
-	desc = models.TextField(u'세부설명', blank=True)
 
 	series = models.ForeignKey(u'Series', verbose_name=u'시리즈명', related_name=u'event')
 	company = models.ForeignKey(EventCompany, verbose_name=u'이벤트사', related_name=u'event')
 
-	course_map = models.ImageField(upload_to=u'map/',null=True, blank=True, verbose_name=u'코스지도')
+	desc = models.TextField(u'세부설명', blank=True)
+	requested = models.IntegerField(u'요청 인원(명)', blank=True, default=20)
 
 	location = models.CharField(u'장소', max_length=255)
 	location_url = models.CharField(u'장소링크', max_length=255)
 
-	course = ModelListField(Course,'title')
-	participants = models.TextField(u'참가자', blank=True)
 
-	regist_start = models.DateField(u'등록 시작일', blank=True)
-	regist_end = models.DateField(u'등록 마감일', blank=True)
+	course = ModelListField(Course,'title')
+	participants = models.TextField(u'참가자 설명', blank=True)
 
 	event_day = models.DateField(u'대회일', blank=True)
 	assemble_time = models.TimeField(u'집결 시간', blank=True)
 	race_time = models.TimeField(u'출발 시간', blank=True)
 
-	requested = models.IntegerField(u'요청 인원(명)', blank=True, default=20)
+	recruit_open = models.DateField(u'등록 시작일', blank=True, null=True)
+	recruit_deadline = models.DateField(u'등록 마감일', blank=True, null=True)
+	feedback_deadline = models.DateField(u'결과 보고 종료일', blank=True, null=True)
+
+
 
 
 class EventImage(models.Model):
@@ -124,9 +209,11 @@ class EventImage(models.Model):
 	def __unicode__(self):
 		return self.title
 
-	image = models.FileField(upload_to=u'event_image/', verbose_name=u'이미지들')
-	title = models.CharField('이미지설명', max_length=255)
+	title = models.CharField(u'이미지설명', max_length=255)
+	image = models.FileField(upload_to=u'event/images/', verbose_name=u'이미지')
+	featured = models.BooleanField(verbose_name=u'표지 사진 여부')
 	event = models.ForeignKey(Event, verbose_name=u'행사', related_name='images')
+	order = models.IntegerField('순서', default=0)
 
 ENTRY_TYPE_CHOICES = (
 		(u'wk',u'도보 패트롤'),

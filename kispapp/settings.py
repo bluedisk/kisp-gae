@@ -6,10 +6,15 @@
 # of "djangoappengine" from this file.
 from djangoappengine.settings_base import *
 
+import os.path
+SITE_ROOT = os.path.dirname(os.path.realpath(__file__))
+PROJECT_PATH = os.path.abspath(os.path.dirname(__name__))
+
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
 )
 
+DEBUG=True
 MANAGERS = ADMINS
 
 # Activate django-dbindexer for the default database

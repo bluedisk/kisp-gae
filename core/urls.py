@@ -17,6 +17,9 @@ urlpatterns = patterns('',
     url(r'^event/$', 'core.views.event_list', name='event_list'),
     url(r'^event/(?P<eid>\d+)/$', 'core.views.event', name='event'),
 
+    url(r'^event/image/add/(?P<eid>\d+)/$', 'core.views.event_image_add', name='event_image_add'),
+    url(r'^event/image/del/(?P<eid>\d+)/(?P<iid>\d+)/$', 'core.views.event_image_del', name='event_image_del'),
+
     url(r'^entry/(?P<entry_id>\d+)/$', 'core.views.entry_view', name='entry_view'),
     url(r'^entry/(?P<event_id>\d+)/add/$', 'core.views.entry_edit', name='entry_add'),
     url(r'^entry/(?P<entry_id>\d+)/edit/$', 'core.views.entry_edit', name='entry_edit'),

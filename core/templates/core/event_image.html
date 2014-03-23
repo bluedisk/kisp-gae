@@ -1,0 +1,24 @@
+{% extends "base_form.html" %}
+{% load filetransfers %}
+
+{% block error_msg %}
+<strong>업로드에 실패했습니다!</strong> 에러가 표시된 항목을 다시 확인 후 시도해주세요.
+{% endblock %}
+
+
+{% block form %}
+
+    <form class="form-signin form-agent" method="post" action="{{ upload_url }}" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% render_upload_data upload_data %}
+        <h2 class="form-signin-heading">행사 이미지 추가하기<small>{{ event.title }}</small></h2>
+        
+        {% include "form_fields.html" %}
+        <button class="btn btn-lg btn-primary" type="submit">
+            저장하기
+        </button>
+    </form>
+
+<!-- /container -->
+
+{% endblock %}

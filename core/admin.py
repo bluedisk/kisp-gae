@@ -11,30 +11,43 @@ from core.models import ContactGroup, ContactItem
 from django.contrib.auth.models import User
 from django.contrib.auth.admin import UserAdmin
 
-class EventForm(ModelForm):
-    def __init__(self, *args, **kwargs):
-        super(EventForm,self).__init__(*args, **kwargs)
-        # self.fields['course'].widget.choices = [(i.pk, i) for i in Course.objects.all()]
-        # if self.instance.pk:
-        #     self.fields['course'].initial = self.instance.course
-
-    class Meta:
-        model = Event
 
 class EventImageAdmin(admin.ModelAdmin):
-    list_display=('event','title')
+    list_filter=('event',)
+    list_display=('event','title','order',)
+    ordering=('event','order',)
+
+    list_editable=('title','order',)
 
 class EventAdmin(admin.ModelAdmin):
-    form = EventForm
-    list_display = ('title','location','assemble_time')
+    class Media:
+        from django.conf import settings
+        js = [ '/static/js/admin-date-autoset.js', ]
 
-    def send_sms(self, request, queryset):
-        selected = request.POST.getlist(admin.ACTION_CHECKBOX_NAME)
-        return HttpResponseRedirect(reverse('send_sms_by_event')+"id=%s"%(",".join(selected)))
+    list_display = ('title','location','event_day')
 
-    send_sms.short_description = u"[SMS] 선택된 행사 참가 대원들에게 문자 메시지를 전송합니다."
+    fieldsets = (
+        (u'행사 제목', {
+            'fields':('title','short_title','series','company'),
+            }),
+        (u'행사 정보', {
+            'fields':(("location",'location_url'),'course','requested','desc','participants'),
+            }),        
+        (u'행사 일정', {
+            'fields':('event_day','assemble_time','race_time'),
+            }),
+        (u'진행 일정', {
+            'fields':('recruit_open','recruit_deadline','feedback_deadline'),
+            }),
+    )
 
-    actions = [send_sms]
+    # def send_sms(self, request, queryset):
+    #     selected = request.POST.getlist(admin.ACTION_CHECKBOX_NAME)
+    #     return HttpResponseRedirect(reverse('send_sms_by_event')+"id=%s"%(",".join(selected)))
+
+    # send_sms.short_description = u"[SMS] 선택된 행사 참가 대원들에게 문자 메시지를 전송합니다."
+
+    # actions = [send_sms]
     
 
 class EventCompanyAdmin(admin.ModelAdmin):
@@ -50,24 +63,24 @@ class EntryAdmin(admin.ModelAdmin):
     list_display=('name','cell','mileage','htype','hdist','skill_display')
     list_filter=('event','htype')
 
-    fieldset = (
-        ('Title', {
-            'fields':('title',"subtitle"),
-            }),
-        ('detail', {
-            'classes':('wide',),
-            'fields': ('subtitle', 'content')
-            }   
-        )
-    )
+    # fieldset = (
+    #     ('Title', {
+    #         'fields':('title',"subtitle"),
+    #         }),
+    #     ('detail', {
+    #         'classes':('wide',),
+    #         'fields': ('subtitle', 'content')
+    #         }   
+    #     )
+    # )
 
-    def send_sms(self, request, queryset):
-        selected = request.POST.getlist(admin.ACTION_CHECKBOX_NAME)
-        return HttpResponseRedirect(reverse('send_sms_by_entry')+"ids=%s"%(",".join(selected)))
+    # def send_sms(self, request, queryset):
+    #     selected = request.POST.getlist(admin.ACTION_CHECKBOX_NAME)
+    #     return HttpResponseRedirect(reverse('send_sms_by_entry')+"ids=%s"%(",".join(selected)))
 
-    send_sms.short_description = u"[SMS] 선택된 대원에게 문자 메시지를 전송합니다."
+    # send_sms.short_description = u"[SMS] 선택된 대원에게 문자 메시지를 전송합니다."
 
-    actions = [send_sms]
+    # actions = [send_sms]
 
 class AgentAdmin(admin.ModelAdmin):
     list_display=('user','cell','mileage',)

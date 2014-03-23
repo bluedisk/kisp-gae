@@ -10,8 +10,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import get_object_or_404
 
-from core.models import Event, Entry, Agent, Page, ReservedSMS
-from core.forms import EntryForm, AgentEntryForm, SendSmsForm, SendUserSmsForm, UserSignupForm, UserSigninForm, AgentForm
+from core.models import Event, EventImage, Entry, Agent, Page, ReservedSMS
+from core.forms import EntryForm, AgentEntryForm, SendSmsForm, SendUserSmsForm, UserSignupForm, UserSigninForm, AgentForm, EventImageForm
 from core.sms import sendSMS
 
 from datetime import datetime, date, timedelta
@@ -43,35 +43,28 @@ def event(request,eid):
 		except:
 			pass
 
-	today = date.today()
-	if event.regist_end < today:
-		regist_hint = u'모집이 마감되었습니다.'
-		regist_hint_class = 'text-danger'
+	status = event.get_status()
 
-	elif event.regist_end <= today+timedelta(days=1):
-		regist_hint = u'곧 모집이 마감됩니다!'
-		regist_hint_class = 'text-warning'
+	status_text = status['description']
+	status_class = 'text-'+status['class']
 
-	elif event.regist_start == today+timedelta(days=1):
-		regist_hint = u'곧 모집을 시작합니다.'
-		regist_hint_class = 'text-success'
-	elif event.regist_start > today:
-		regist_hint = u'아직 모집 기간이 아닙니다.'
-		regist_hint_class = 'text-success'
-	else:
-		regist_hint = u''
-		regist_hint_class = ''
+	try:
+		featured = EventImage.objects.get(featured = True, event = event)
+	except:
+		featured = None
 
-
+	images = EventImage.objects.filter(featured = False, event = event).order_by('order')
 
 	return render(request,'core/event.html', {
 		'viewname':'event-list', 
 		'event':event ,
+		'featured':featured,
+		'images':images,
 		'entries':entries, 
 		'carpools':carpools,
 		'entry':entry,
-		'regist_hint': regist_hint,
-		'regist_hint_class': regist_hint_class
+		'status_text': status_text,
+		'status_class': status_class
 	})
 
 def entry_view(request,entry_id):
@@ -294,7 +287,7 @@ def signup(request):
             new_user = authenticate(username=form.cleaned_data['username'], password=form.cleaned_data['password1'])
 
             login(request, new_user)
-            return HttpResponseRedirect(reverse('agent'))
+            return HttpResponseRedirect(reverse('agent_edit'))
     else:
         form = UserSignupForm()
 
@@ -385,12 +378,12 @@ def agent_edit(request):
 
 			new_agent.user = request.user
 
-			if not new_agent.image and not request.POST.get('image-clear',False):
+			if not new_agent.image and not request.POST.get('image-clear',False) and agent:
 				new_agent.image = agent.image
 
 			new_agent.save()
 
-			form = AgentForm(instance=new_agent)
+			#form = AgentForm(instance=new_agent)
 			return HttpResponseRedirect(reverse('agent_view'))
 	else:
 		form = AgentForm(instance=agent)
@@ -399,9 +392,42 @@ def agent_edit(request):
 
 	return render(request, "user/agent_edit.html", { 'form': form, 'upload_url': upload_url, 'upload_data': upload_data})
 
-
 def agent_image(request, agent_id):
     agent = get_object_or_404(Agent, pk=agent_id)
     return serve_file(request, agent.file)
+
+@login_required
+def event_image_add(request, eid):
+	view_url = reverse('core.views.event_image_add', args=[eid])
+	event = Event.objects.get(id=eid)
+
+	if request.method == 'POST':
+		form = EventImageForm(request.POST,request.FILES)
+
+		if form.is_valid():
+
+			if form.cleaned_data['featured']:
+				EventImage.objects.filter(featured=True).update(featured=False)
+
+			new_image = form.save(commit=False)
+			new_image.event = event
+			new_image.save()
+
+			return HttpResponseRedirect(reverse('event', args=[eid]))
+	else:
+		form = EventImageForm()
+
+	upload_url, upload_data = prepare_upload(request, view_url)
+	return render(request, "core/event_image.html", { 'form': form, 'event':event, 'upload_url': upload_url, 'upload_data': upload_data})
+
+@login_required
+def event_image_del(request, eid, iid):
+	if request.user.is_staff:
+		EventImage.objects.get(pk=iid).delete()
+
+	return HttpResponseRedirect(reverse('event', args=[eid]))
+
+
+
 
 

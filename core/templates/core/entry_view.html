@@ -55,7 +55,7 @@
 		<div class="col-sm-7">
 			<div class="form-group{% if form.caller.errors %} has-error{% endif %}">
 				<label for="caller">보낸 사람 번호</label>
-				<input type="text" class="form-control" name="caller" id="caller" placeholder="반드시 본인 휴대폰 번호를 입력해주세요." value="{{ form.caller.value|default_if_none:'' }}">
+				<input type="text" class="form-control" name="caller" id="caller" placeholder="반드시 본인 휴대폰 번호를 입력해주세요." value="{% firstof user.agent.cell form.caller.value '' %}">
 				<span class="help-block">{{ form.caller.errors }}</span>
 			</div>
 			<div class="form-group{% if form.msg.errors %} has-error{% endif %}">

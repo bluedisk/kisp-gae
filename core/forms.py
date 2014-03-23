@@ -1,6 +1,6 @@
 # -*- coding:utf-8 -*-
 from django import forms
-from core.models import Entry, Agent
+from core.models import Entry, Agent, EventImage
 from captcha.fields import ReCaptchaField
 from django.contrib.auth.models import User
 
@@ -202,5 +202,13 @@ class AgentForm(forms.ModelForm):
         model = Agent
         fields = ['cell','regnum','mileage','tsize','image','skill','location']
         native_fields = ['image','skill']
+
+
+
+class EventImageForm(forms.ModelForm):
+    class Meta:
+        model = EventImage
+        fields = ['title','image','featured',]
+        native_fields = ['image','featured',]
 
             

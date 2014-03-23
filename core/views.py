@@ -49,11 +49,11 @@ def event(request,eid):
 	status_class = 'text-'+status['class']
 
 	try:
-		featured = EventImage.objects.get(featured = True, event = event)
+		featured = EventImage.objects.get(event = event, featured = True)
 	except:
 		featured = None
 
-	images = EventImage.objects.filter(featured = False, event = event).order_by('order')
+	images = EventImage.objects.filter(event = event, featured = False).order_by('order')
 
 	return render(request,'core/event.html', {
 		'viewname':'event-list', 
@@ -414,7 +414,7 @@ def event_image_add(request, eid):
 		if form.is_valid():
 
 			if form.cleaned_data['featured']:
-				EventImage.objects.filter(featured=True).update(featured=False)
+				EventImage.objects.filter(event=event, featured=True).update(featured=False)
 
 			new_image = form.save(commit=False)
 			new_image.event = event

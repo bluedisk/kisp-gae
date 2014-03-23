@@ -190,6 +190,13 @@ def agent_entry_edit(request, event_id=None):
 		'form':form, 
 	})
 
+@login_required
+def agent_entry_del(request, event_id=None):
+	return render(request,'core/info.html', {
+		'title':'공사중!', 
+		'msg':'죄송합니다. 이 기능은 아직 제작 중 입니다. 삭제를 원하시면 스탭에게 요청해주세요.',
+	})
+
 def contact(request):
 
 	def extract_user(agent):

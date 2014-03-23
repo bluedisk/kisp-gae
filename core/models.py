@@ -12,7 +12,7 @@ from gettext import gettext as _
 
 import logging
 logger = logging.getLogger('model')
-logger.setLevel(logging.DEBUG)
+logger.setLevel(logging.INFO)
 
 class Series(models.Model):
 
@@ -59,7 +59,7 @@ EVENT_STATUS_INFO = {
 	'ended':{
 	'title':u'대회 종료',
 	'description':u'모든 진행이 종료 되었습니다.',
-	'class':'muted'
+	'class':'default'
 	},
 	'feedback':{
 	'title':u'종료 보고 중',
@@ -76,20 +76,25 @@ EVENT_STATUS_INFO = {
 	'description':u'모집이 마감되었습니다.',
 	'class':'danger'
 	},
+	'recruit_end_soon':{
+	'title':u'모집 중',
+	'description':u'곧 모집이 마감됩니다.',
+	'class':'warning'
+	},	
 	'recruit':{
 	'title':u'모집 중',
-	'description':u'곧 모집이 마감됩니다!',
-	'class':'warning'
+	'description':u'모집을 진행중입니다.',
+	'class':'success'
 	},
 	'soon':{
 	'title':u'모집 준비 중',
 	'description':u'곧 모집을 시작합니다.',
-	'class':'success'
+	'class':'info'
 	},
 	'ready':{
 	'title':u'모집 준비 중',
 	'description':u'아직 모집 기간이 아닙니다.',
-	'class':'success'
+	'class':'default'
 	},
 	'none':{
 	'title':u'',
@@ -103,6 +108,7 @@ class Event(models.Model):
 	class Meta:
 		verbose_name = u"행사"
 		verbose_name_plural = u"행사들"
+		ordering = ['-event_day']
 
 	def __unicode__(self):
 		return self.title
@@ -135,17 +141,32 @@ class Event(models.Model):
 		WEEKDAY_KOR = u"월화수목금토일-------"
 		return u"%s년 %s월 %s일 (%s)"%(self.event_day.year, self.event_day.month, self.event_day.day, WEEKDAY_KOR[self.event_day.weekday()])
 
+	def featured_image(self):
+		try:
+			return EventImage.objects.get(event=self, featured=True).image.url+'=s280-c'
+		except:
+			pass
 
+		try:
+			return EventImage.objects.filter(event=self, featured=False)[0].image.url+'=s280-c'
+		except:
+			pass
+
+		return 'http://placehold.it/280x280&text=no+image'
 
 	def get_status(self):
 
 		today = date.today()
+		tomorrow = today + timedelta(days=1)
+
 		logger.debug('today:%s'%today)
+
+		status = 'none';
 
 		if self.feedback_deadline < today:
 			status = 'ended'
 		
-		elif self.feedback_deadline <= today:
+		elif self.event_day < today and self.feedback_deadline >= today:
 			status = 'feedback'
 
 		elif self.event_day == today:
@@ -154,17 +175,19 @@ class Event(models.Model):
 		elif self.recruit_deadline < today:
 			status = 'recruit_end'
 
-		elif self.recruit_deadline <= today+timedelta(days=1):
-			status = 'recruit'
+		elif self.recruit_open <= today:
+			if self.recruit_deadline == tomorrow:
+				status = 'recruit_end_soon'
+			
+			elif self.recruit_deadline >= today:
+				status = 'recruit'
 
-		elif self.recruit_open == today+timedelta(days=1):
+		elif self.recruit_open == tomorrow:
 			status = 'soon'
 
 		elif self.recruit_open > today:
 			status = 'ready'
 
-		else:
-			status = 'none'
 
 		return EVENT_STATUS_INFO[status]
 
@@ -205,6 +228,7 @@ class EventImage(models.Model):
 	class Meta:
 		verbose_name = u"행사 사진"
 		verbose_name_plural = u"행사 사진들"
+		ordering = ['event','order']
 
 	def __unicode__(self):
 		return self.title

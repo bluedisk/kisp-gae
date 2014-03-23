@@ -110,7 +110,14 @@
 				{% if not entry %}
 				<a href="{% url 'agent_entry_add' event.pk %}" class="btn btn-primary btn-lg btn-block{% if not event.is_registable %} disabled{% endif %}">신청하기</a>
 				{% else %}
-				<a href="{% url 'agent_entry_edit' event.pk %}" class="btn btn-warning btn-lg btn-block{% if not entry or not event.is_registable%} disabled{% endif %}">수정하기</a> 
+				<div class="row">
+					<div class="col-md-10 col-xs-8">
+						<a href="{% url 'agent_entry_edit' event.pk %}" class="btn btn-warning btn-lg btn-block{% if not entry or not event.is_registable%} disabled{% endif %}">수정하기</a> 
+					</div>
+					<div class="col-md-2 col-xs-4">
+						<a href="{% url 'agent_entry_del' event.pk %}" class="btn btn-danger btn-lg btn-block{% if not entry or not event.is_registable%} disabled{% endif %}">삭제하기</a> 
+					</div>
+				</div>
 				{% endif %}
 			{% else %}
 				{% if not entry %}

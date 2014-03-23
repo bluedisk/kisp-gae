@@ -26,14 +26,21 @@
           
             {% for event in events %}
             <div class="col-md-4">
-                <h3>{{event.short_title}}<span class="label label-{{event.get_status_class}} label-status">{{ event.get_status_text }}</h5></span>
-                <p>{{event.title}}</p>
+                <h3>{{event.short_title}} <span class="label label-{{event.get_status_class}} label-status">{{ event.get_status_text }}</h5></span>
+                <div class="row">
+                <div class="col-md-6">
+                    <img src="{{event.featured_image}}" class="img-responsive img-thumbnail">
+                </div>
+                <div class="col-md-6">
                 <dl>
                     <dt>코스</dt><dd>{{ event.course_list }}</dd>
                     <dt>장소</dt><dd>{{event.location}}</dd>
                     <dt>대회일자</dt><dd>{{event.event_day_display}}</dd>
                     <dt>집합시간</dt><dd>{{event.assemble_time}}</dd>
                 </dl>
+                </div>
+                
+                </div>
                 <a class="btn btn-warning" href="{% url 'event' event.pk %}" role="button">자세히보기 <span class="glyphicon glyphicon-chevron-right"></span></a></p>
             </div>
             {% endfor %}

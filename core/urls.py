@@ -26,6 +26,7 @@ urlpatterns = patterns('',
 
     url(r'^entry/(?P<event_id>\d+)/agent/add/$', 'core.views.agent_entry_edit', name='agent_entry_add'),
     url(r'^entry/(?P<event_id>\d+)/agent/edit/$', 'core.views.agent_entry_edit', name='agent_entry_edit'),
+    url(r'^entry/(?P<event_id>\d+)/agent/del/$', 'core.views.agent_entry_del', name='agent_entry_del'),
     
     url(r'^contact/$', 'core.views.contact', name='contact'),
 

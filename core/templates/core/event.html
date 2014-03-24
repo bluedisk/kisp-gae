@@ -15,6 +15,12 @@
   <a href="{% url 'send_sms_by_event' event.pk %}" class="btn btn-sm btn-default pull-right" style="margin-right:5px">
     <i class="fa fa-comment"></i> 문자 발송
   </a>
+
+  &nbsp;
+  <a href="{% url 'export_agent' event.pk %}" class="btn btn-sm btn-info pull-right" style="margin-right:5px">
+    <i class="fa fa-save"></i> xls로 목록 받기
+  </a>
+  
   {% endif %}
 		</h3>
 	</div>

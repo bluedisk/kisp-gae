@@ -18,6 +18,8 @@ urlpatterns = patterns('',
     url(r'^event/$', 'core.views.event_list', name='event_list'),
     url(r'^event/(?P<eid>\d+)/$', 'core.views.event', name='event'),
 
+    url(r'^event/(?P<eid>\d+)/export/$', 'core.xlexport.agent', name='export_agent'),
+
     url(r'^event/image/add/(?P<eid>\d+)/$', 'core.views.event_image_add', name='event_image_add'),
     url(r'^event/image/del/(?P<eid>\d+)/(?P<iid>\d+)/$', 'core.views.event_image_del', name='event_image_del'),
 

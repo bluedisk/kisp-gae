@@ -53,8 +53,21 @@ indexes:
   - name: __key__
     direction: desc
 
+- kind: core_entry
+  properties:
+  - name: event_id
+  - name: __key__
+    direction: desc
+
 - kind: core_event
   properties:
+  - name: __key__
+    direction: desc
+
+- kind: core_event
+  properties:
+  - name: event_day
+    direction: desc
   - name: __key__
     direction: desc
 

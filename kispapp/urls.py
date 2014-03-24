@@ -14,6 +14,6 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
 
     url(r'^', include('core.urls')),
-) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+) #+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 urlpatterns += staticfiles_urlpatterns()

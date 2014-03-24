@@ -313,7 +313,7 @@ def signin(request):
 
 			next = request.POST['next']
 			if not Agent.objects.filter(user=user).count():
-				next = reverse('agent')
+				next = reverse('agent_edit')
 
 			return HttpResponseRedirect(next)	
 	else:

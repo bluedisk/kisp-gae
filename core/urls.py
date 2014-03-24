@@ -13,6 +13,7 @@ urlpatterns = patterns('',
     url(r'^about/$', KISPPageView.as_view(), {'viewname':'about'}, name="about"),
     url(r'^aboutoz/$', KISPPageView.as_view(), {'viewname':'aboutoz'}, name="aboutoz"),
     url(r'^request/$', KISPPageView.as_view(), {'viewname':'request'}, name="request"),
+    url(r'^team/$', KISPPageView.as_view(), {'viewname':'team_table'}, name="team"),
     
     url(r'^event/$', 'core.views.event_list', name='event_list'),
     url(r'^event/(?P<eid>\d+)/$', 'core.views.event', name='event'),

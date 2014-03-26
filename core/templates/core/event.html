@@ -6,21 +6,28 @@
 	<div class="page-header">
 		<h3>행사 정보 <small>{{ event.title }}</small>
 {% if user.is_staff %}
-  <a href="{% url 'admin:core_event_change' event.pk %}" class="btn btn-sm btn-default pull-right">
-    <span class="glyphicon glyphicon-pencil"></span> 수정하기
-  </a> 
-  <a href="{% url 'admin:core_entry_changelist' %}?event__id__exact={{ event.pk}}" class="btn btn-sm btn-default pull-right" style="margin-right:5px">
-    <span class="glyphicon glyphicon-list"></span> 참가자 세부보기
-  </a>  
-  <a href="{% url 'send_sms_by_event' event.pk %}" class="btn btn-sm btn-default pull-right" style="margin-right:5px">
-    <i class="fa fa-comment"></i> 문자 발송
-  </a>
+<div class="pull-right">
+	{% if event.get_status == 'feedback' or event.get_status == 'progress' %}
+	<a href="{% url 'feedback' event.pk %}" class="btn btn-sm btn-primary" style="margin-right:5px">
+		<i class="fa fa-check"></i> 결과 보고 보기
+	</a>
+	{% endif %}
 
-  &nbsp;
-  <a href="{% url 'export_agent' event.pk %}" class="btn btn-sm btn-info pull-right" style="margin-right:5px">
-    <i class="fa fa-save"></i> xls로 목록 받기
-  </a>
-  
+	<a href="{% url 'send_sms_by_event' event.pk %}" class="btn btn-sm btn-default" style="margin-right:5px">
+		<i class="fa fa-comment"></i> 문자 발송
+	</a>
+
+	<a href="{% url 'admin:core_entry_changelist' %}?event__id__exact={{ event.pk}}" class="btn btn-sm btn-default" style="margin-right:5px">
+		<span class="glyphicon glyphicon-list"></span> 참가자 세부보기
+	</a>  
+	<a href="{% url 'export_agent' event.pk %}" class="btn btn-sm btn-info" style="margin-right:5px">
+		<i class="fa fa-save"></i> xls로 목록 받기
+	</a>
+	<a href="{% url 'admin:core_event_change' event.pk %}" class="btn btn-sm btn-warning">
+		<span class="glyphicon glyphicon-pencil"></span> 수정하기
+	</a> 
+</div>
+
   {% endif %}
 		</h3>
 	</div>
@@ -79,7 +86,14 @@
 			<dt>패트롤 참가자</dt>
 			<dd>
 				{% for entry in entries %}
-				<span class="col-sm-4"><a href="{% url 'entry_view' entry.entry %}">{{ entry.display }} <i class="fa fa-comment"></i></a></span>
+				<span class="col-sm-4"><a href="{% url 'entry_view' entry.entry %}" data-toggle="tooltip" title="신청내역보기">{{ entry.display }} <i class="fa fa-comment"></i></a> 
+				{% if entry.name in confirmed %}
+					<i class="fa fa-check-square-o text-success" data-toggle="tooltip" title="결과 보고 승인 됨"></i> 
+				{% endif %}
+				{% if entry.name in feedbacks %}
+					<i class="fa fa-minus-square-o text-warning" data-toggle="tooltip" title="결과 보고를 작성한 대원"></i> 
+				{% endif %}
+				</span>
 				{% empty %}
 				<code>아직 신청자가 없습니다.</code>
 				{% endfor %}
@@ -89,7 +103,7 @@
 			<dt>카플 가능</dt>
 			<dd>
 				{% for carpool in carpools.servers %}
-				<span class="col-sm-4"><a href="{% url 'entry_view' carpool.entry %}">{{ carpool.display }} <i class="fa fa-comment"></i></a></span>
+				<span class="col-sm-4"><a href="{% url 'entry_view' carpool.entry %}" data-toggle="tooltip" title="카풀 요청 문자 보내기">{{ carpool.display }} <i class="fa fa-comment"></i></a></span>
 				{% endfor %}
 			</dd>
 			{% endif %}
@@ -98,7 +112,7 @@
 			<dt>카풀 신청</dt>
 			<dd>
 				{% for carpool in carpools.needs %}
-				<span class="col-sm-4"><a href="{% url 'entry_view' carpool.entry %}">{{ carpool.display }} <i class="fa fa-comment"></i></a></span>
+				<span class="col-sm-4"><a href="{% url 'entry_view' carpool.entry %}" data-toggle="tooltip" title="카풀 가능 문자 보내기">{{ carpool.display }} <i class="fa fa-comment"></i></a></span>
 				{% endfor %}
 			</dd>
 			{% endif %}
@@ -113,23 +127,43 @@
 	<div class="row">
 		<div class="col-sm-12">
 			{% if user.is_authenticated %}
-				{% if not entry %}
-				<a href="{% url 'agent_entry_add' event.pk %}" class="btn btn-primary btn-lg btn-block{% if not event.is_registable %} disabled{% endif %}">신청하기</a>
+				{% if event.get_status == 'recuit' %}
+					{% if entry %}
+						<div class="row">
+							<div class="col-md-10 col-xs-8">
+								<a href="{% url 'agent_entry_edit' event.pk %}" class="btn btn-warning btn-lg btn-block">수정하기</a> 
+							</div>
+							<div class="col-md-2 col-xs-4">
+								<a href="{% url 'agent_entry_del' event.pk %}" class="btn btn-danger btn-lg btn-block">삭제하기</a> 
+							</div>
+						</div>
+					{% else %}
+						<a href="{% url 'agent_entry_add' event.pk %}" class="btn btn-primary btn-lg btn-block">신청하기</a>
+					{% endif %}
+				{% elif event.get_status == 'feedback' or event.get_status == 'progress' %}
+					<a href="{% url 'feedback_write' event.pk %}" class="btn btn-info btn-lg btn-block">결과 보고</a>
+
+				{% elif event.get_status == 'ready' %}
+					<a href="#" class="btn btn-primary btn-lg btn-block disabled">아직 모집 기간이 아닙니다.</a>
+				
 				{% else %}
-				<div class="row">
-					<div class="col-md-10 col-xs-8">
-						<a href="{% url 'agent_entry_edit' event.pk %}" class="btn btn-warning btn-lg btn-block{% if not entry or not event.is_registable%} disabled{% endif %}">수정하기</a> 
-					</div>
-					<div class="col-md-2 col-xs-4">
-						<a href="{% url 'agent_entry_del' event.pk %}" class="btn btn-danger btn-lg btn-block{% if not entry or not event.is_registable%} disabled{% endif %}">삭제하기</a> 
-					</div>
-				</div>
+					<a href="#" class="btn btn-default btn-lg btn-block disabled">진행이 종료되었습니다.</a>
 				{% endif %}
 			{% else %}
-				{% if not entry %}
-				<a href="{% url 'entry_add' event.pk %}" class="btn btn-primary btn-lg btn-block{% if not event.is_registable %} disabled{% endif %}">신청하기</a> 
+				{% if event.get_status == 'recuit' %}
+					{% if entry %}
+						<a href="{% url 'entry_edit' entry.pk %}" class="btn btn-warning btn-lg btn-block">수정하기</a> 
+					{% else %}
+						<a href="{% url 'entry_add' event.pk %}" class="btn btn-primary btn-lg btn-block">신청하기</a> 
+					{% endif %}
+				{% elif event.get_status == 'feedback' or event.get_status == 'progress' %}
+					<a href="{% url 'feedback_write' event.pk %}" class="btn btn-primary btn-lg btn-block">결과 보고</a>
+
+				{% elif event.get_status == 'ready' %}
+					<a href="#" class="btn btn-primary btn-lg btn-block disabled">아직 모집 기간이 아닙니다.</a>
+				
 				{% else %}
-				<a href="{% url 'entry_edit' entry.pk %}" class="btn btn-warning btn-lg btn-block{% if not entry or not event.is_registable%} disabled{% endif %}">수정하기</a> 
+					<a href="#" class="btn btn-default btn-lg btn-block disabled">진행이 종료되었습니다.</a>
 				{% endif %}
 
 			{% endif %}
@@ -210,6 +244,8 @@
 	$('.image-frame').on('click', function() {
 		window.open($(this).attr('href'), '_top');
 	});
+
+	$('[data-toggle="tooltip"]').tooltip();
 
 </script>
 {% endblock %}

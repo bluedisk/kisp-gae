@@ -8,7 +8,7 @@
 
 {% block form %}
 
-    <form class="form-signin form-agent" method="post" action="{{ upload_url }}" enctype="multipart/form-data">
+    <form class="form-signin form-wide" method="post" action="{{ upload_url }}" enctype="multipart/form-data">
         {% csrf_token %}
         {% render_upload_data upload_data %}
         <h2 class="form-signin-heading">행사 이미지 추가하기<small>{{ event.short_title }}</small></h2>

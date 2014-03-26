@@ -1,6 +1,6 @@
 # -*- coding:utf-8 -*-
 from django import forms
-from core.models import Entry, Agent, EventImage
+from core.models import Entry, Agent, EventImage, Feedback
 from captcha.fields import ReCaptchaField
 from django.contrib.auth.models import User
 
@@ -10,6 +10,9 @@ from django.contrib.auth.hashers import (
 )
 from django.contrib.auth import authenticate, get_user_model
 
+import re
+
+from core.utils import *
 
 class EntryForm(forms.ModelForm):
     class Meta:
@@ -18,12 +21,24 @@ class EntryForm(forms.ModelForm):
         native_fields = [ 'skill', 'course' ]
 
     captcha = ReCaptchaField()
+ 
+    def clean_cell(self):
+        cell = self.cleaned_data['cell']
+        cell = format_cell(cell)
+
+        return cell
 
 class AgentEntryForm(forms.ModelForm):
     class Meta:
         model=Entry
         fields = [ 'name', 'cell', 'regnum', 'htype', 'hdist', 'tsize', 'mileage', 'etc', 'carpool', 'location','skill']
         native_fields = ['skill']
+
+    def clean_cell(self):
+        cell = self.cleaned_data['cell']
+        cell = format_cell(cell)
+
+        return cell
 
 
 class SendSmsForm(forms.Form):
@@ -203,6 +218,11 @@ class AgentForm(forms.ModelForm):
         fields = ['cell','regnum','mileage','tsize','image','skill','location']
         native_fields = ['image','skill']
 
+    def clean_cell(self):
+        cell = self.cleaned_data['cell']
+        cell = format_cell(cell)
+
+        return cell
 
 
 class EventImageForm(forms.ModelForm):
@@ -211,4 +231,55 @@ class EventImageForm(forms.ModelForm):
         fields = ['title','image','featured',]
         native_fields = ['image','featured',]
 
+class FeedbackForm(forms.ModelForm):
+    class Meta:
+        model = Feedback
+        fields = ['name', 'event', 'cell', 'where','spend', 'patient','report','suggest']
+        widgets = {
+            'event': forms.HiddenInput,
+        }
+    
+    spend = forms.CharField(label=u'사용 금액')
+
+    def clean_name(self):
+        name = self.data['name']
+        cell = format_cell(self.data['cell'])
+        event = self.data['event']
+
+        try:
+            Entry.objects.get(event=event, name=name, cell=cell)
+        except:
+            raise forms.ValidationError(u'참가자중에 일치하는 대원 정보가 없습니다.')
+
+        return name
+ 
+
+    def clean_spend(self):
+        spend = self.cleaned_data['spend']
+        spend = int(re.sub('[^0-9]','',spend))
+     
+        return spend
+
+    def clean_where(self):
+        where = self.cleaned_data['where']
+        spend = self.data['spend']
+        spend = re.sub('[^0-9]','',spend) or '0'
+        spend = int(spend)
+
+        if spend != 0 and not where:
+            raise forms.ValidationError(u'해당 금액을 사용한 내역 입력이 필요합니다.')
+
+        return where
+
+    def clean_cell(self):
+        name = self.data['name']
+        cell = format_cell(self.data['cell'])
+        event = self.data['event']
+
+        try:
+            Entry.objects.get(event=event, name=name, cell=cell)
+        except:
+            raise forms.ValidationError(u'참가자중에 일치하는 대원 정보가 없습니다.')
+
+        return cell
             

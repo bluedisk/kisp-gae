@@ -71,12 +71,12 @@ EVENT_STATUS_INFO = {
 	'description':u'대회가 지금 현재 진행 중 입니다.',
 	'class':'primary'
 	},
-	'recruit_end':{
+	'organizing':{
 	'title':u'모집 마감',
 	'description':u'모집이 마감되었습니다.',
 	'class':'danger'
 	},
-	'recruit_end_soon':{
+	'recruit_ending':{
 	'title':u'모집 중',
 	'description':u'곧 모집이 마감됩니다.',
 	'class':'warning'
@@ -86,7 +86,7 @@ EVENT_STATUS_INFO = {
 	'description':u'모집을 진행중입니다.',
 	'class':'success'
 	},
-	'soon':{
+	'ready_ending':{
 	'title':u'모집 준비 중',
 	'description':u'곧 모집을 시작합니다.',
 	'class':'info'
@@ -159,7 +159,32 @@ class Event(models.Model):
 		today = date.today()
 		tomorrow = today + timedelta(days=1)
 
-		logger.debug('today:%s'%today)
+		status = 'none';
+
+		if self.feedback_deadline < today:
+			status = 'ended'
+		
+		elif self.event_day < today and self.feedback_deadline >= today:
+			status = 'feedback'
+
+		elif self.event_day == today:
+			status = 'progress'
+
+		elif self.recruit_deadline < today:
+			status = 'organizing'
+
+		elif self.recruit_open <= today:
+			status = 'recruit'
+
+		elif self.recruit_open > today:
+			status = 'ready'
+
+		return status
+
+	def get_status_info(self):
+
+		today = date.today()
+		tomorrow = today + timedelta(days=1)
 
 		status = 'none';
 
@@ -173,29 +198,28 @@ class Event(models.Model):
 			status = 'progress'
 
 		elif self.recruit_deadline < today:
-			status = 'recruit_end'
+			status = 'organizing'
 
 		elif self.recruit_open <= today:
 			if self.recruit_deadline == tomorrow:
-				status = 'recruit_end_soon'
+				status = 'recruit_ending'
 			
 			elif self.recruit_deadline >= today:
 				status = 'recruit'
 
 		elif self.recruit_open == tomorrow:
-			status = 'soon'
+			status = 'ready_ending'
 
 		elif self.recruit_open > today:
 			status = 'ready'
 
-
 		return EVENT_STATUS_INFO[status]
 
 	def get_status_text(self):
-		return self.get_status()['title']
+		return self.get_status_info()['title']
 
 	def get_status_class(self):
-		return self.get_status()['class']
+		return self.get_status_info()['class']
 
 	title = models.CharField(u'행사명',max_length=255)
 	short_title = models.CharField(u'짧은 행사명',max_length=30)
@@ -209,6 +233,7 @@ class Event(models.Model):
 	location = models.CharField(u'장소', max_length=255)
 	location_url = models.CharField(u'장소링크', max_length=255)
 
+	supported_cost = models.IntegerField(u'지원금액', default=15000)
 
 	course = ModelListField(Course,'title')
 	participants = models.TextField(u'참가자 설명', blank=True)
@@ -292,6 +317,7 @@ class Entry(models.Model):
 	def digest(self):
 		digest = {
 			'display':"%s (%sXXXX)"%(self.name,self.cell[:-4]),
+			'name':self.name,
 			'entry':self.pk
 		}
 		return digest
@@ -454,3 +480,27 @@ class ContactItem(models.Model):
     cell = models.CharField(u'휴대폰', max_length=255)
     etc1 = models.CharField(u'기타1', max_length=255)
     etc2 = models.CharField(u'기타1=2', max_length=255)
+
+
+class Feedback(models.Model):
+	class Meta:
+		verbose_name = _('Feedback')
+		verbose_name_plural = _('Feedbacks')
+
+		def __unicode__(self):
+			return "[%s] %s"%(self.event.short_title, self.name)
+
+	confirm = models.BooleanField(u'승인여부', default=False)
+	
+	event = models.ForeignKey(Event, verbose_name=u'행사')
+	name = models.CharField(u'대원명', max_length=256)
+	cell = models.CharField(u'휴대폰', max_length=30)
+
+	where = models.CharField(u'사용 내역', max_length=256, blank=True)
+	spend = models.IntegerField(u'사용 금액')
+
+	patient = models.TextField(u'발생한 환자', blank=True)
+	report = models.TextField(u'전달 할 사항', blank=True)
+	suggest = models.TextField(u'제안 할 사항', blank=True)
+
+

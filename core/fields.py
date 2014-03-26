@@ -27,4 +27,3 @@ class ModelListField(ListField):
 
     def formfield(self, **kwargs):
         return FormListField(model=self._model, order_by=self._order_by, **kwargs)
-

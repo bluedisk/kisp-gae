@@ -1,9 +1,10 @@
 # -*- coding:utf-8 -*-
 from django.conf.urls import patterns, url
 from django.core.urlresolvers import reverse
-from django.views.generic import DetailView, FormView
+from django.views.generic import ListView, DetailView, FormView
 
 from core.views import KISPPageView
+from core.models import Feedback
 
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.models import User
@@ -19,6 +20,8 @@ urlpatterns = patterns('',
     url(r'^event/(?P<eid>\d+)/$', 'core.views.event', name='event'),
 
     url(r'^event/(?P<eid>\d+)/export/$', 'core.xlexport.agent', name='export_agent'),
+    url(r'^event/(?P<eid>\d+)/feedback/write/$', 'core.views.feedback_write', name='feedback_write'),
+    url(r'^event/(?P<eid>\d+)/feedback/$', 'core.views.feedback', name='feedback'),
 
     url(r'^event/image/add/(?P<eid>\d+)/$', 'core.views.event_image_add', name='event_image_add'),
     url(r'^event/image/del/(?P<eid>\d+)/(?P<iid>\d+)/$', 'core.views.event_image_del', name='event_image_del'),

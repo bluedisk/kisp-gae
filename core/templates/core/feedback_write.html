@@ -1,0 +1,120 @@
+{% extends "base_form.html" %}
+{% load humanize %}
+
+{% block error_msg %}
+<strong>결과 보고에 실패했습니다!</strong> 에러가 표시된 항목을 다시 확인 후 시도해주세요.
+{% endblock %}
+
+
+{% block form %}
+
+    <form class="form-signin form-wide" method="post" action="">
+        {% csrf_token %}
+        <input type="hidden" name="event" value="{{ event.pk }}" />
+
+        <div class="lead">
+        <h2 class="form-signin-heading">"{{ event.short_title }}" 결과 보고</h2>
+        </div>
+
+        <h4>대원 정보</h4>     
+
+        <div class="form-group {%if form.name.errors %}has-error{% endif %}">   
+            <label for="{{form.name.html_name}}" class="sr-only">{{form.name.label}}</label>
+            <input type="text" class="form-control" placeholder="{{form.name.label}}" id="{{form.name.html_name}}" name="{{form.name.html_name}}" value="{{form.name.value|default_if_none:""}}">
+
+            {% for error in form.name.errors %}
+            <span class="help-block">{{error}}</span>
+            {% endfor %}
+        </div>
+
+        <div class="form-group {%if form.cell.errors %}has-error{% endif %}">   
+
+            <label for="{{form.cell.html_name}}" class="sr-only">{{form.cell.label}}</label>
+            <input type="text" class="form-control" placeholder="{{form.cell.label}}" id="{{form.cell.html_name}}" name="{{form.cell.html_name}}" value="{{form.cell.value|default_if_none:""}}">
+
+            {% for error in form.cell.errors %}
+            <span class="help-block">{{error}}</span>
+            {% endfor %}
+
+        </div>
+
+        <h4>비용 정산</h4>     
+        지급 금액 총 {{ event.supported_cost|intcomma }}원 중 
+        <div class="form-group {%if form.where.errors %}has-error{% endif %}">   
+            <label for="{{form.where.html_name}}" class="sr-only">{{form.where.label}}</label>
+            <input type="text" class="form-control" placeholder="{{form.where.label}}" id="{{form.where.html_name}}" name="{{form.where.html_name}}" value="{{form.where.value|default_if_none:""}}">
+            {% for error in form.where.errors %}
+            <span class="help-block">{{error}}</span>
+            {% endfor %}
+        </div>
+        <div class="form-group {%if form.spend.errors %}has-error{% endif %}">   
+            <label for="{{form.spend.html_name}}" class="sr-only">{{form.spend.label}}</label>
+            <div class="input-group">
+                <span class="input-group-addon">&#8361;</span>
+                <input type="text" class="form-control number" placeholder="{{form.spend.label}}" id="{{form.spend.html_name}}" name="{{form.spend.html_name}}" value="{{form.spend.value|default_if_none:""}}">
+                <span class="input-group-addon">원</span>
+            </div>
+            {% for error in form.spend.errors %}
+            <span class="help-block">{{error}}</span>
+            {% endfor %}
+        </div>
+        잔액: <span id="left_cost">{{ event.supported_cost|intcomma }}</span>원
+
+        <h4>진행 보고 및 의견</h4>     
+        <div class="form-group {%if form.patient.errors %}has-error{% endif %}">   
+            <label for="{{form.patient.html_name}}" class="sr-only">{{form.patient.label}}</label>
+            <textarea class="form-control" placeholder="패트롤 중 환자가 발생했던 경우 발생 상황, 내용, 처리 방법과 결과를 적어주세요." id="{{form.patient.html_name}}" name="{{form.patient.html_name}}"rows=4>{{form.patient.value|default_if_none:""}}</textarea>
+            {% for error in form.patient.errors %}
+            <span class="help-block">{{error}}</span>
+            {% endfor %}
+        </div>
+        <div class="form-group {%if form.report.errors %}has-error{% endif %}">   
+            <label for="{{form.report.html_name}}" class="sr-only">{{form.report.label}}</label>
+            <textarea class="form-control" placeholder="사무국 측에 전달하고 싶은 사항이나. 의견이 있으면 여기에 적어주세요." id="{{form.report.html_name}}" name="{{form.report.html_name}}"rows=4>{{form.report.value|default_if_none:""}}</textarea>
+            {% for error in form.report.errors %}
+            <span class="help-block">{{error}}</span>
+            {% endfor %}
+        </div>
+        <div class="form-group {%if form.suggest.errors %}has-error{% endif %}">   
+            <label for="{{form.suggest.html_name}}" class="sr-only">{{form.suggest.label}}</label>
+            <textarea class="form-control" placeholder="제안할 사항이나 추가적으로 언급할 내용이 있으면 여기에 적어주세요." id="{{form.suggest.html_name}}" name="{{form.suggest.html_name}}" rows=4>{{form.suggest.value|default_if_none:""}}</textarea>
+            {% for error in form.suggest.errors %}
+            <span class="help-block">{{error}}</span>
+            {% endfor %}
+        </div>
+
+        <button class="btn btn-lg btn-primary" type="submit">
+            결과 보고 보내기
+        </button>
+    </form>
+
+<!-- /container -->
+
+{% endblock %}
+
+
+{% block script %}
+<script>
+
+$(function() {
+    $('input.number').number(true);
+
+    $('input.number').on('keyup', function(e) {
+
+        var supported = {{ event.supported_cost }};
+        var spend = $(this).val();
+        var left = supported-spend;
+
+        if ( left < 0 ) 
+            $('#left_cost').addClass('text-danger');
+        else
+            $('#left_cost').removeClass('text-danger');
+
+        $('#left_cost').number(left);
+    });
+})
+
+</script>
+{% endblock %}
+
+

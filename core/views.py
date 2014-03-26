@@ -10,8 +10,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import get_object_or_404
 
-from core.models import Event, EventImage, Entry, Agent, Page, ReservedSMS
-from core.forms import EntryForm, AgentEntryForm, SendSmsForm, SendUserSmsForm, UserSignupForm, UserSigninForm, AgentForm, EventImageForm
+from core.models import Event, EventImage, Entry, Agent, Page, ReservedSMS, Feedback
+from core.forms import EntryForm, AgentEntryForm, SendSmsForm, SendUserSmsForm, UserSignupForm, UserSigninForm, AgentForm, EventImageForm, FeedbackForm
 from core.sms import sendSMS
 
 from datetime import datetime, date, timedelta
@@ -27,7 +27,7 @@ def event_list(request):
 	return render(request,'core/event_list.html', {'viewname':'event-list', 'events':events})
 
 def event(request,eid):
-	event = Event.objects.get(pk=eid)
+	event = get_object_or_404(Event, id=eid);
 
 	all_entries = Entry.objects.filter(event__pk=eid)
 	entries = [entry.digest() for entry in all_entries]
@@ -43,7 +43,7 @@ def event(request,eid):
 		except:
 			pass
 
-	status = event.get_status()
+	status = event.get_status_info()
 
 	status_text = status['description']
 	status_class = 'text-'+status['class']
@@ -55,12 +55,17 @@ def event(request,eid):
 
 	images = EventImage.objects.filter(event = event, featured = False).order_by('order')
 
+	feedbacks = list(f.name for f in Feedback.objects.filter(event = event, confirm = False))
+	confirmed = list(f.name for f in Feedback.objects.filter(event = event, confirm = True))
+
 	return render(request,'core/event.html', {
 		'viewname':'event-list', 
 		'event':event ,
 		'featured':featured,
 		'images':images,
 		'entries':entries, 
+		'feedbacks':feedbacks,
+		'confirmed':confirmed,
 		'carpools':carpools,
 		'entry':entry,
 		'status_text': status_text,
@@ -70,7 +75,8 @@ def event(request,eid):
 def entry_view(request,entry_id):
 	me = False
 	form = None
-	entry = Entry.objects.get(pk=entry_id)
+	entry = get_object_or_404(Entry, pk=entry_id);
+
 
 	if request.session.get('entry') == int(entry_id):
 		me = True
@@ -114,12 +120,12 @@ def entry_edit(request,entry_id=None, event_id=None):
 		raise PermissionDenied()
 
 	if entry_id:
-		entry = Entry.objects.get(pk=entry_id)
+		entry = get_object_or_404(Entry, pk=entry_id);
 	else:
 		entry = None
 
 	if event_id:
-		event = Event.objects.get(pk=event_id)
+		event = get_object_or_404(Event, pk=event_id);
 	else:
 		event = entry.event
 
@@ -151,7 +157,7 @@ def entry_edit(request,entry_id=None, event_id=None):
 def agent_entry_edit(request, event_id=None):
 
 	user = request.user
-	event = Event.objects.get(pk=event_id)
+	event = get_object_or_404(Event, pk=event_id);
 
 	try:
 		entry = Entry.objects.get(event=event, user=user)
@@ -406,7 +412,7 @@ def agent_image(request, agent_id):
 @login_required
 def event_image_add(request, eid):
 	view_url = reverse('core.views.event_image_add', args=[eid])
-	event = Event.objects.get(id=eid)
+	event = get_object_or_404(Event, id=eid);
 
 	if request.method == 'POST':
 		form = EventImageForm(request.POST,request.FILES)
@@ -430,11 +436,28 @@ def event_image_add(request, eid):
 @login_required
 def event_image_del(request, eid, iid):
 	if request.user.is_staff:
-		EventImage.objects.get(pk=iid).delete()
+		image = get_object_or_404(EventImage, pk=iid);
+		image.delete()
 
 	return HttpResponseRedirect(reverse('event', args=[eid]))
 
+def feedback_write(request, eid):
+	event = get_object_or_404(Event, id=eid);
+	
+	if request.method == 'POST':
+		form = FeedbackForm(request.POST)
 
+		if form.is_valid():
+			form.save()
 
+			return HttpResponseRedirect(reverse('event', args=[eid]))
+	else:
+		form = FeedbackForm()
 
+	return render(request, "core/feedback_write.html", { 'form':form, 'event':event })
 
+def feedback(request, eid):
+	event = get_object_or_404(Event, id=eid);
+	feedbacks = Feedback.objects.filter(event=event)
+
+	return render(request, "core/feedback.html", {'feedbacks':feedbacks, 'event':event})

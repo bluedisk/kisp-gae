@@ -127,7 +127,7 @@
 	<div class="row">
 		<div class="col-sm-12">
 			{% if user.is_authenticated %}
-				{% if event.get_status == 'recuit' %}
+				{% if event.get_status == 'recruit' %}
 					{% if entry %}
 						<div class="row">
 							<div class="col-md-10 col-xs-8">
@@ -147,10 +147,10 @@
 					<a href="#" class="btn btn-primary btn-lg btn-block disabled">아직 모집 기간이 아닙니다.</a>
 				
 				{% else %}
-					<a href="#" class="btn btn-default btn-lg btn-block disabled">진행이 종료되었습니다.</a>
+					<a href="#" class="btn btn-default btn-lg btn-block disabled">진행이 종료되었습니다.{{event.get_status}}</a>
 				{% endif %}
 			{% else %}
-				{% if event.get_status == 'recuit' %}
+				{% if event.get_status == 'recruit' %}
 					{% if entry %}
 						<a href="{% url 'entry_edit' entry.pk %}" class="btn btn-warning btn-lg btn-block">수정하기</a> 
 					{% else %}

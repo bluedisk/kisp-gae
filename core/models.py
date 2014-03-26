@@ -233,7 +233,7 @@ class Event(models.Model):
 	location = models.CharField(u'장소', max_length=255)
 	location_url = models.CharField(u'장소링크', max_length=255)
 
-	supported_cost = models.IntegerField(u'지원금액', default=15000)
+	support = models.IntegerField(u'지원금액', default=15000)
 
 	course = ModelListField(Course,'title')
 	participants = models.TextField(u'참가자 설명', blank=True)

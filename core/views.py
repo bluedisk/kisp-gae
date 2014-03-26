@@ -452,7 +452,13 @@ def feedback_write(request, eid):
 
 			return HttpResponseRedirect(reverse('event', args=[eid]))
 	else:
-		form = FeedbackForm()
+		if request.user.is_authenticated():
+			form = FeedbackForm(initial={
+				'name':request.user.first_name,
+				'cell':request.user.agent.cell
+				})
+		else:
+			form = FeedbackForm()
 
 	return render(request, "core/feedback_write.html", { 'form':form, 'event':event })
 

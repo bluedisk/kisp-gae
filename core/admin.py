@@ -31,7 +31,7 @@ class EventAdmin(admin.ModelAdmin):
             'fields':('title','short_title','series','company'),
             }),
         (u'행사 정보', {
-            'fields':(("location",'location_url'),'course','requested','desc','participants'),
+            'fields':(("location",'location_url'),'support','course','requested','desc','participants'),
             }),        
         (u'행사 일정', {
             'fields':('event_day','assemble_time','race_time'),
@@ -60,7 +60,7 @@ class CourseAdmin(admin.ModelAdmin):
     pass
 
 class EntryAdmin(admin.ModelAdmin):
-    list_display=('name','cell','mileage','htype','hdist','skill_display')
+    list_display=('name','cell','mileage','htype','hdist','skill_display','etc')
     list_filter=('event','htype')
 
     # fieldset = (

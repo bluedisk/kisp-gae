@@ -10,8 +10,7 @@ from django.template.defaultfilters import truncatechars  # or truncatewords
 from django.contrib.auth.models import User
 
 from datetime import date, datetime, timedelta
-import pytz
-from kispapp.settings import TIME_ZONE
+from core import timezone
 
 from gettext import gettext as _
 
@@ -129,8 +128,7 @@ class Event(models.Model):
 
 	def is_registable(self):
 
-		tzinfo = pytz.timezone(TIME_ZONE)
-		today = tzinfo.localize(datetime.now()).date()
+		today = timezone.today()
 
 		if self.recruit_open > today:
 			return False
@@ -138,6 +136,10 @@ class Event(models.Model):
 			return False
 
 		return True
+
+	def can_feedback(self):
+		status = self.get_status()
+		return status in ('progress','feedback','ended')
 
 	def location_tag(self):
 		if self.location_url:
@@ -164,9 +166,7 @@ class Event(models.Model):
 
 	def get_status(self):
 
-
-		tzinfo = pytz.timezone(TIME_ZONE)
-		today = tzinfo.localize(datetime.now()).date()
+		today = timezone.today()
 		tomorrow = today + timedelta(days=1)
 
 		status = 'none';
@@ -193,8 +193,7 @@ class Event(models.Model):
 
 	def get_status_info(self):
 
-		tzinfo = pytz.timezone(TIME_ZONE)
-		today = tzinfo.localize(datetime.now()).date()
+		today = timezone.today()
 
 		tomorrow = today + timedelta(days=1)
 
@@ -256,7 +255,7 @@ class Event(models.Model):
 
 	recruit_open = models.DateField(u'등록 시작일', blank=True, null=True)
 	recruit_deadline = models.DateField(u'등록 마감일', blank=True, null=True)
-	feedback_deadline = models.DateField(u'결과 보고 종료일', blank=True, null=True)
+	feedback_deadline = models.DateField(u'후기 작성 종료일', blank=True, null=True)
 
 
 

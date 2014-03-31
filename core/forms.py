@@ -5,14 +5,13 @@ from captcha.fields import ReCaptchaField
 from django.contrib.auth.models import User
 
 from django.utils.translation import ugettext, ugettext_lazy as _
-from django.contrib.auth.hashers import (
-    MAXIMUM_PASSWORD_LENGTH, UNUSABLE_PASSWORD, identify_hasher,
-)
 from django.contrib.auth import authenticate, get_user_model
 
 import re
 
 from core.utils import *
+
+MAXIMUM_PASSWORD_LENGTH = 256
 
 class EntryForm(forms.ModelForm):
     class Meta:

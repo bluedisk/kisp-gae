@@ -92,12 +92,12 @@
 			<dt>패트롤 참가자</dt>
 			<dd>
 				{% for entry in entries %}
-				<span class="col-sm-4"><a href="{% url 'entry_view' entry.entry %}" data-toggle="tooltip" title="신청내역보기">{{ entry.display }} <i class="fa fa-comment"></i></a> 
+				<span class="col-sm-4"><a href="{% url 'entry_view' entry.entry %}" data-toggle="tooltip" title="신청내역보기">{{ entry.display }}</a> 
 				{% if entry.name in confirmed %}
 					<i class="fa fa-check-square-o text-success" data-toggle="tooltip" title="후기 작성 승인 됨"></i> 
 				{% endif %}
 				{% if entry.name in feedbacks %}
-					<i class="fa fa-minus-square-o text-warning" data-toggle="tooltip" title="후기 작성를 작성한 대원"></i> 
+					<i class="fa fa-pencil-square-o text-warning" data-toggle="tooltip" title="후기 작성를 작성한 대원"></i> 
 				{% endif %}
 				</span>
 				{% empty %}

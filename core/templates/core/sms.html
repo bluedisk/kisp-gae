@@ -27,8 +27,9 @@
 				<span class="help-block">{{ form.caller.errors }}</span>
 			</div>
 			<div class="form-group{% if form.msg.errors %} has-error{% endif %}">
-				<label for="msg">보낼 메시지</label>
+				<label for="msg">보낼 메시지 </label> - <span id="msg-help"><span id="bytelen">0</span>/80 바이트</span>
 				<input type="text" class="form-control" name="msg" id="msg" maxlength='80' placeholder="80Byte 이내로 입력해주세요. 전송한 모든 내용은 저장됩니다." value="{{ form.msg.value|default_if_none:'' }}">
+				
 				<span class="help-block">{{ form.msg.errors }}</span>
 			</div>
 			<div class="alert alert-success" {% if not sent %}hidden='True'{% endif %}>
@@ -46,5 +47,39 @@
 	<HR>
 
 </div>
+
+{% endblock %}
+
+{% block script %}
+
+<script>
+
+function bytelen(str) {
+	var l = 0;
+	for (var i=0; i<str.length; i++) l += (str.charCodeAt(i) > 128) ? 2 : 1;
+	return l;
+}
+
+function updateLen(text) {
+	var len = bytelen(text);
+	$('#bytelen').text(len);
+
+	if ( len > 80 ) 
+		$('#msg-help').addClass('text_danger');
+	else
+		$('#msg-help').removeClass('text_danger');
+}
+
+$(function() {
+	var text = $('#msg').val();
+	updateLen(text);
+})
+
+$('#msg').on('keyup', function(e) {
+	var text = $(this).val();
+	updateLen(text);	
+})
+
+</script>
 
 {% endblock %}

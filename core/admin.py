@@ -60,7 +60,7 @@ class CourseAdmin(admin.ModelAdmin):
     pass
 
 class EntryAdmin(admin.ModelAdmin):
-    list_display=('name','cell','mileage','htype','hdist','skill_display','etc')
+    list_display=('name','cell','mileage','htype','hdist','skill_display','short_etc')
     list_filter=('event','htype')
 
     # fieldset = (

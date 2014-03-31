@@ -59,6 +59,121 @@ indexes:
   - name: __key__
     direction: desc
 
+- kind: core_entry
+  properties:
+  - name: event_id
+  - name: hdist
+  - name: __key__
+    direction: desc
+
+- kind: core_entry
+  properties:
+  - name: event_id
+  - name: hdist
+  - name: htype
+  - name: __key__
+    direction: desc
+
+- kind: core_entry
+  properties:
+  - name: event_id
+  - name: hdist
+  - name: htype
+    direction: desc
+  - name: __key__
+    direction: desc
+
+- kind: core_entry
+  properties:
+  - name: event_id
+  - name: hdist
+    direction: desc
+  - name: __key__
+    direction: desc
+
+- kind: core_entry
+  properties:
+  - name: event_id
+  - name: hdist
+    direction: desc
+  - name: htype
+  - name: __key__
+    direction: desc
+
+- kind: core_entry
+  properties:
+  - name: event_id
+  - name: hdist
+    direction: desc
+  - name: htype
+    direction: desc
+  - name: __key__
+    direction: desc
+
+- kind: core_entry
+  properties:
+  - name: event_id
+  - name: htype
+  - name: __key__
+    direction: desc
+
+- kind: core_entry
+  properties:
+  - name: event_id
+  - name: htype
+  - name: hdist
+    direction: desc
+  - name: __key__
+    direction: desc
+
+- kind: core_entry
+  properties:
+  - name: event_id
+  - name: htype
+    direction: desc
+  - name: __key__
+    direction: desc
+
+- kind: core_entry
+  properties:
+  - name: event_id
+  - name: htype
+    direction: desc
+  - name: hdist
+    direction: desc
+  - name: __key__
+    direction: desc
+
+- kind: core_entry
+  properties:
+  - name: event_id
+  - name: mileage
+  - name: __key__
+    direction: desc
+
+- kind: core_entry
+  properties:
+  - name: event_id
+  - name: mileage
+    direction: desc
+  - name: __key__
+    direction: desc
+
+- kind: core_entry
+  properties:
+  - name: event_id
+  - name: name
+  - name: __key__
+    direction: desc
+
+- kind: core_entry
+  properties:
+  - name: event_id
+  - name: name
+    direction: desc
+  - name: __key__
+    direction: desc
+
 - kind: core_event
   properties:
   - name: __key__

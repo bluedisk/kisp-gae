@@ -15,7 +15,9 @@ from core.forms import EntryForm, AgentEntryForm, SendSmsForm, SendUserSmsForm, 
 from core.sms import sendSMS
 
 from datetime import datetime, date, timedelta
+
 import logging
+
 
 from filetransfers.api import serve_file, prepare_upload
 
@@ -453,9 +455,16 @@ def feedback_write(request, eid):
 			return HttpResponseRedirect(reverse('event', args=[eid]))
 	else:
 		if request.user.is_authenticated():
+
+			try:
+				agent = Agent.objects.get(user=request.user)
+				cell = agent.cell
+			except:
+				cell = None
+
 			form = FeedbackForm(initial={
 				'name':request.user.first_name,
-				'cell':request.user.agent.cell
+				'cell':cell
 				})
 		else:
 			form = FeedbackForm()

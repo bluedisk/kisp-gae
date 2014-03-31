@@ -70,10 +70,7 @@ def setup_env():
         sys.path = [ sdk_path ] + sys.path
 
         # Then call fix_sys_path from the SDK
-        try:
-            from dev_appserver import fix_sys_path
-        except ImportError:
-            from old_dev_appserver import fix_sys_path
+        from dev_appserver import fix_sys_path
         fix_sys_path()
 
     setup_project()
@@ -150,11 +147,7 @@ def setup_project():
     # enable https connections (seem to be broken on Windows because
     # the _ssl module is disallowed).
     if not have_appserver:
-        try:
-            from google.appengine.tools import dev_appserver
-        except ImportError:
-            from google.appengine.tools import old_dev_appserver as dev_appserver
-
+        from google.appengine.tools import dev_appserver
         try:
             # Backup os.environ. It gets overwritten by the
             # dev_appserver, but it's needed by the subprocess module.
@@ -180,15 +173,11 @@ def setup_project():
                          "is disabled.")
     elif not on_production_server:
         try:
-            from google.appengine.tools import dev_appserver
-        except ImportError:
-            from google.appengine.tools import old_dev_appserver as dev_appserver
-
-        try:
             # Restore the real subprocess module.
             from google.appengine.api.mail_stub import subprocess
             sys.modules['subprocess'] = subprocess
             # Re-inject the buffer() builtin into the subprocess module.
+            from google.appengine.tools import dev_appserver
             subprocess.buffer = dev_appserver.buffer
         except Exception, e:
             logging.warn("Could not add the subprocess module to the "

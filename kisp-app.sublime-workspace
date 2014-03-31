@@ -256,18 +256,34 @@
 	"buffers":
 	[
 		{
-			"file": "core/views.py",
+			"file": "core/models.py",
 			"settings":
 			{
-				"buffer_size": 12135,
+				"buffer_size": 13030,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "core/admin.py",
+			"file": "core/urls.py",
 			"settings":
 			{
-				"buffer_size": 3240,
+				"buffer_size": 2910,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "core/tests.py",
+			"settings":
+			{
+				"buffer_size": 988,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "core/views.py",
+			"settings":
+			{
+				"buffer_size": 12226,
 				"line_ending": "Unix"
 			}
 		}
@@ -384,13 +400,16 @@
 	},
 	"file_history":
 	[
-		"/Users/bluedisk/Workspace/kisp-app/core/models.py",
+		"/Users/bluedisk/Workspace/kisp-app/kispapp/settings.py",
+		"/Users/bluedisk/Workspace/kisp-app/core/views.py",
 		"/Users/bluedisk/Workspace/kisp-app/core/admin.py",
+		"/Users/bluedisk/Workspace/kisp-app/core/templates/core/sms.html",
+		"/Users/bluedisk/Workspace/kisp-app/index.yaml",
+		"/Users/bluedisk/Workspace/kisp-app/core/models.py",
 		"/Users/bluedisk/Workspace/kisp-app/core/templates/core/feedback_write.html",
 		"/Users/bluedisk/Workspace/kisp-app/core/templates/core/event.html",
 		"/Users/bluedisk/Workspace/kisp-app/core/xlexport.py",
 		"/Users/bluedisk/Workspace/kisp-app/core/urls.py",
-		"/Users/bluedisk/Workspace/kisp-app/core/views.py",
 		"/Users/bluedisk/Workspace/kisp-app/core/forms.py",
 		"/Users/bluedisk/Workspace/kisp-app/core/static/css/auth.css",
 		"/Users/bluedisk/Workspace/kisp-app/core/templates/core/feedback.html",
@@ -405,7 +424,6 @@
 		"/Users/bluedisk/Workspace/kisp-app/core/templates/base.html",
 		"/Users/bluedisk/Workspace/kisp-app/core/static/js/jquery-1.9.1.min.js",
 		"/Users/bluedisk/Workspace/kisp-app/core/templates/form_fields.html",
-		"/Users/bluedisk/Workspace/kisp-app/kispapp/settings.py",
 		"/Users/bluedisk/Workspace/kisp-app/core/templatetags/kisppage.py",
 		"/Users/bluedisk/Workspace/kisp-app/core/templates/core/event_image.html",
 		"/Users/bluedisk/Workspace/kisp-app/core/templates/core/info.html",
@@ -416,7 +434,6 @@
 		"/Users/bluedisk/Workspace/kisp-app/xltest.py",
 		"/Users/bluedisk/Workspace/kisp-app/xlcolor.py",
 		"/Users/bluedisk/Workspace/kisp-app/core/templates/xltest.py",
-		"/Users/bluedisk/Workspace/kisp-app/index.yaml",
 		"/Users/bluedisk/Workspace/kisp-app/kispapp/urls.py",
 		"/Users/bluedisk/Workspace/kisp-app/core/templates/core/index.html",
 		"/Users/bluedisk/Workspace/kisp-app/core/templates/user/signup.html",
@@ -425,7 +442,6 @@
 		"/Users/bluedisk/Workspace/kisp-app/core/static/js/admin-date-autoset.js",
 		"/Users/bluedisk/Workspace/kisp-app/core/templates/core/event_list.html",
 		"/Users/bluedisk/Workspace/kisp-app/kisp-app.sublime-workspace",
-		"/Users/bluedisk/Workspace/kisp-app/core/templates/core/sms.html",
 		"/Users/bluedisk/Workspace/kisp-app/core/templates/core/carpool_sms_sent.html",
 		"/Users/bluedisk/Workspace/kisp-app/core/templates/core/entry_view.html",
 		"/Users/bluedisk/Workspace/kisp-app/core/templates/core/entry_edit.html",
@@ -519,7 +535,7 @@
 	},
 	"find_in_files":
 	{
-		"height": 93.0,
+		"height": 0.0,
 		"where_history":
 		[
 			"/Users/bluedisk/Workspace/kisp-app/, -*.sublime-workspace",
@@ -546,6 +562,22 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"now",
+			"today",
+			"today =",
+			"today()",
+			"now()",
+			"today",
+			"now()",
+			"today",
+			"today.date()",
+			"today = ",
+			"datetime.toda",
+			"		today = today.date()\n",
+			"+ timedelta(hours=9) + timedelta(hours=9)",
+			"date.today",
+			"today()",
+			"toda()",
 			"supported_cost",
 			"/a",
 			"a",
@@ -657,23 +689,7 @@
 			"채ㅜㅅㅁㅊㅅ",
 			"Event",
 			"if user",
-			"if e",
-			"if user",
-			"commit=",
-			"new_agent",
-			"profile",
-			"profle",
-			"reset",
-			"nomap",
-			"nomap.png",
-			"nomap",
-			"course_map",
-			"img",
-			"event",
-			"get_carpool_display",
-			"entry",
-			"agent_",
-			"is_auth"
+			"if e"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -756,23 +772,23 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 3,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "core/views.py",
+					"file": "core/models.py",
 					"settings":
 					{
-						"buffer_size": 12135,
+						"buffer_size": 13030,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								11765,
-								11765
+								4292,
+								4292
 							]
 						],
 						"settings":
@@ -889,25 +905,297 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 5738.0,
+						"translation.y": 2302.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "core/admin.py",
+					"file": "core/urls.py",
 					"settings":
 					{
-						"buffer_size": 3240,
+						"buffer_size": 2910,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1908,
-								1908
+								2907,
+								2907
+							]
+						],
+						"settings":
+						{
+							"codeintel": true,
+							"codeintel_config":
+							{
+								"JavaScript":
+								{
+									"codeintel_max_recursive_dir_depth": 2.0,
+									"codeintel_scan_files_in_project": false,
+									"javascriptExtraPaths":
+									[
+									]
+								},
+								"PHP":
+								{
+									"codeintel_max_recursive_dir_depth": 5.0,
+									"codeintel_scan_files_in_project": false,
+									"phpExtraPaths":
+									[
+									]
+								},
+								"Python":
+								{
+									"env":
+									{
+									}
+								}
+							},
+							"codeintel_enabled_languages":
+							[
+								"JavaScript",
+								"Mason",
+								"XBL",
+								"XUL",
+								"RHTML",
+								"SCSS",
+								"Python",
+								"HTML",
+								"Ruby",
+								"Python3",
+								"XML",
+								"Sass",
+								"XSLT",
+								"Django",
+								"HTML5",
+								"Perl",
+								"CSS",
+								"Twig",
+								"Less",
+								"Smarty",
+								"Node.js",
+								"Tcl",
+								"TemplateToolkit",
+								"PHP"
+							],
+							"codeintel_live": true,
+							"codeintel_live_enabled_languages":
+							[
+								"JavaScript",
+								"Mason",
+								"XBL",
+								"XUL",
+								"RHTML",
+								"SCSS",
+								"Python",
+								"HTML",
+								"Ruby",
+								"Python3",
+								"XML",
+								"Sass",
+								"XSLT",
+								"Django",
+								"HTML5",
+								"Perl",
+								"CSS",
+								"Twig",
+								"Less",
+								"Smarty",
+								"Node.js",
+								"Tcl",
+								"TemplateToolkit",
+								"PHP"
+							],
+							"codeintel_max_recursive_dir_depth": 10.0,
+							"codeintel_scan_exclude_dir":
+							{
+								"JavaScript":
+								[
+									"/build/",
+									"/min/"
+								]
+							},
+							"codeintel_scan_files_in_project": true,
+							"codeintel_selected_catalogs":
+							[
+								"PyWin32",
+								"jQuery",
+								"Rails"
+							],
+							"codeintel_snippets": true,
+							"codeintel_syntax_map":
+							{
+								"Python Django": "Python"
+							},
+							"codeintel_tooltips": "popup",
+							"incomplete_sync": null,
+							"origin_encoding": "ASCII",
+							"remote_loading": false,
+							"sublime_auto_complete": true,
+							"synced": false,
+							"syntax": "Packages/Djaneiro/Syntaxes/Python Django.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 136.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "core/tests.py",
+					"settings":
+					{
+						"buffer_size": 988,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								498,
+								537
+							]
+						],
+						"settings":
+						{
+							"codeintel": true,
+							"codeintel_config":
+							{
+								"JavaScript":
+								{
+									"codeintel_max_recursive_dir_depth": 2.0,
+									"codeintel_scan_files_in_project": false,
+									"javascriptExtraPaths":
+									[
+									]
+								},
+								"PHP":
+								{
+									"codeintel_max_recursive_dir_depth": 5.0,
+									"codeintel_scan_files_in_project": false,
+									"phpExtraPaths":
+									[
+									]
+								},
+								"Python":
+								{
+									"env":
+									{
+									}
+								}
+							},
+							"codeintel_enabled_languages":
+							[
+								"JavaScript",
+								"Mason",
+								"XBL",
+								"XUL",
+								"RHTML",
+								"SCSS",
+								"Python",
+								"HTML",
+								"Ruby",
+								"Python3",
+								"XML",
+								"Sass",
+								"XSLT",
+								"Django",
+								"HTML5",
+								"Perl",
+								"CSS",
+								"Twig",
+								"Less",
+								"Smarty",
+								"Node.js",
+								"Tcl",
+								"TemplateToolkit",
+								"PHP"
+							],
+							"codeintel_live": true,
+							"codeintel_live_enabled_languages":
+							[
+								"JavaScript",
+								"Mason",
+								"XBL",
+								"XUL",
+								"RHTML",
+								"SCSS",
+								"Python",
+								"HTML",
+								"Ruby",
+								"Python3",
+								"XML",
+								"Sass",
+								"XSLT",
+								"Django",
+								"HTML5",
+								"Perl",
+								"CSS",
+								"Twig",
+								"Less",
+								"Smarty",
+								"Node.js",
+								"Tcl",
+								"TemplateToolkit",
+								"PHP"
+							],
+							"codeintel_max_recursive_dir_depth": 10.0,
+							"codeintel_scan_exclude_dir":
+							{
+								"JavaScript":
+								[
+									"/build/",
+									"/min/"
+								]
+							},
+							"codeintel_scan_files_in_project": true,
+							"codeintel_selected_catalogs":
+							[
+								"PyWin32",
+								"jQuery",
+								"Rails"
+							],
+							"codeintel_snippets": true,
+							"codeintel_syntax_map":
+							{
+								"Python Django": "Python"
+							},
+							"codeintel_tooltips": "popup",
+							"incomplete_sync": null,
+							"origin_encoding": "ASCII",
+							"remote_loading": false,
+							"sublime_auto_complete": true,
+							"synced": false,
+							"syntax": "Packages/Djaneiro/Syntaxes/Python Django.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "core/views.py",
+					"settings":
+					{
+						"buffer_size": 12226,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								11570,
+								11570
 							]
 						],
 						"settings":
@@ -1021,11 +1309,10 @@
 							"sublime_auto_complete": true,
 							"synced": false,
 							"syntax": "Packages/Djaneiro/Syntaxes/Python Django.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 510.0,
+						"translation.y": 6044.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"

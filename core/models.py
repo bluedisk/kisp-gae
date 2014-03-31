@@ -6,8 +6,13 @@ from djangotoolbox.fields import ListField, EmbeddedModelField
 from core.fields import ModelListField
 from tinymce.models import HTMLField
 
+from django.template.defaultfilters import truncatechars  # or truncatewords
 from django.contrib.auth.models import User
+
 from datetime import date, datetime, timedelta
+import pytz
+from kispapp.settings import TIME_ZONE
+
 from gettext import gettext as _
 
 import logging
@@ -123,7 +128,10 @@ class Event(models.Model):
 		return Entry.objects.filter(event=self).count()
 
 	def is_registable(self):
-		today = date.today()
+
+		tzinfo = pytz.timezone(TIME_ZONE)
+		today = tzinfo.localize(datetime.now()).date()
+
 		if self.recruit_open > today:
 			return False
 		if self.recruit_deadline < today:
@@ -156,7 +164,9 @@ class Event(models.Model):
 
 	def get_status(self):
 
-		today = date.today()
+
+		tzinfo = pytz.timezone(TIME_ZONE)
+		today = tzinfo.localize(datetime.now()).date()
 		tomorrow = today + timedelta(days=1)
 
 		status = 'none';
@@ -183,7 +193,9 @@ class Event(models.Model):
 
 	def get_status_info(self):
 
-		today = date.today()
+		tzinfo = pytz.timezone(TIME_ZONE)
+		today = tzinfo.localize(datetime.now()).date()
+
 		tomorrow = today + timedelta(days=1)
 
 		status = 'none';
@@ -321,6 +333,9 @@ class Entry(models.Model):
 			'entry':self.pk
 		}
 		return digest
+
+	def short_etc(self):
+		return truncatechars(self.etc, 20)
 	
 	def carpool_digest(self):
 		digest = {

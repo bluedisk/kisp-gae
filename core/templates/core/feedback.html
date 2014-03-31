@@ -31,7 +31,11 @@
         {% for fb in feedbacks %}
         <tr id="{{ fb.id }}">
           <th><input type="checkbox" value="{{ fb.id }}"></th>
-          <td>{{ fb.confirm }}</td>
+          {% if fb.confirm %}
+          <td class="text-success">승인</td>
+          {% else %}
+          <td class="text-warning">미승인</td>
+          {% endif %}
           <td>{{ fb.name }}</td>
           <td>{{ fb.spend|intcomma }} 원</td>
           <td>{{ fb.where }}</td>
@@ -172,7 +176,7 @@
 
     $.each($('input:checked'), function(idx, obj){
       if ( $(obj).val() === 'on' ) return true;
-      
+
       checked_ids.push($(obj).val());
       names.push($(obj).parents('tr').find('td:eq(1)').text());
     });

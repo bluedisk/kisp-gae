@@ -80,6 +80,10 @@
         </div><!-- /.container -->
     </div><!-- /.navbar -->
 
+    <div class="alert alert-danger" style="position:fixed; top:50px; z-index:999" hidden="True" id="ie-warn">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <strong>브라우저 버전이 너무 낮습니다!</strong> 사이트가 정상동작 되지 않습니다.<a href="http://windows.microsoft.com/ko-kr/internet-explorer/download-ie">IE 9</a> 이상이나 <a href="https://www.google.com/intl/ko/chrome/browser/">Chrome</a> 브라우저를 이용해주세요.
+    </div>
     {% block content %}
     컨텐츠가 위치하는 장
     {% endblock %}
@@ -110,6 +114,24 @@
     <!-- <link type="text/css" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" rel="Stylesheet" />
     <script type="text/javascript" src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>  -->
     <script src="/static/bootstrap3/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript">
+    function getInternetExplorerVersion() {
+        var rv = -1;
+        if (navigator.appName == 'Microsoft Internet Explorer') {
+            var ua = navigator.userAgent;
+            var re = new RegExp("MSIE ([0-9]{1,}[\.0-9]{0,})");
+            if (re.exec(ua) != null)
+            rv = parseFloat(RegExp.$1);
+        }
+        return rv;
+    }
+    var ver= getInternetExplorerVersion();
+    if ( ver >= 0 && ver <= 8 ) {
+        $('#ie-warn').show();
+    } 
+
+    </script>
 
     {% block script %}
     {% endblock %}

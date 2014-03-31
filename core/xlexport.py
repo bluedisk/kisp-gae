@@ -29,37 +29,37 @@ def agent(request, eid):
      'font: bold true, height 300;'
      )
 
-    sheet.write_merge(0,0,0,4,u'%s 마라톤 패트롤 명단'%event.title,style)
-
-    sheet.col(0).width = 3000
-    sheet.col(1).width = 8000
-    sheet.col(2).width = 2000
-    sheet.col(3).width = 6000
-    sheet.col(4).width = 3000
+    sheet.write_merge(0,0,0,7,u'%s 마라톤 패트롤 명단'%event.title,style)
 
     style_lt = easyxf(
      'borders: left thick, right thin, top thick, bottom thin;'
-     'pattern: pattern solid, fore_colour 0x2f',
+     'pattern: pattern solid, fore_colour 0x2f;'
      'font: bold true;'
+     'align: horizontal center;'
      )
     style_mt = easyxf(
      'borders: left thin, right thin, top thick, bottom thin;'
-     'pattern: pattern solid, fore_colour 0x2f',
+     'pattern: pattern solid, fore_colour 0x2f;'
      'font: bold true;'
+     'align: horizontal center;'
      )
     style_rt = easyxf(
      'borders: left thin, right thick, top thick, bottom thin;'
-     'pattern: pattern solid, fore_colour 0x2f',
+     'pattern: pattern solid, fore_colour 0x2f;'
      'font: bold true;'
+     'align: horizontal center;'
      )
     style_lm = easyxf(
      'borders: left thick, right thin, top thin, bottom thin;'
+     'align: horizontal center;'
      )
     style_mm = easyxf(
      'borders: left thin, right thin, top thin, bottom thin;'
+     'align: horizontal center;'
      )
     style_rm = easyxf(
      'borders: left thin, right thick, top thin, bottom thin;'
+     'align: horizontal center;'
      )
     style_b = easyxf(
      'borders: top thick;'
@@ -67,54 +67,71 @@ def agent(request, eid):
 
     style_lb = easyxf(
      'borders: left thick, right thin, top thick, bottom thick;'
-     'pattern: pattern solid, fore_colour 0x2c',
+     'pattern: pattern solid, fore_colour 0x2c;'
+     'align: horizontal center;'
      )
     style_rb = easyxf(
      'borders: left thin, right thick, top thick, bottom thick;'
-     'pattern: pattern solid, fore_colour 0x2c',
+     'pattern: pattern solid, fore_colour 0x2c;'
+     'align: horizontal center;'
      )
 
+    sheet.col(0).width = 2000
+    sheet.col(1).width = 4000
+    sheet.col(2).width = 5000
+    sheet.col(3).width = 2000
+    sheet.col(4).width = 3000
+    sheet.col(5).width = 8000
+    sheet.col(6).width = 6000
+    sheet.col(7).width = 2000
+
+
     # write agent table
-    sheet.write(1,0,u'이름',style_lt)
-    sheet.write(1,1,u'주민번호',style_mt)
-    sheet.write(1,2,u'사이즈',style_mt)
-    sheet.write(1,3,u'비고',style_mt)
-    sheet.write(1,4,u'조장가능',style_rt)
+    row = 1
+    sheet.write(row,0,u'이름',style_lt)
+    sheet.write(row,1,u'연락처',style_mt)
+    sheet.write(row,2,u'주민번호',style_mt)
+    sheet.write(row,3,u'사이즈',style_mt)
+    sheet.write(row,4,u'희망거리',style_mt)
+    sheet.write(row,5,u'스킬',style_mt)
+    sheet.write(row,6,u'비고',style_mt)
+    sheet.write(row,7,u'조장가능',style_rt)
 
     size_count = {}
 
-    idx=2
+    row = row + 1
     for entry in entries:
-        sheet.write(idx,0, entry.name,style_lm)
-        sheet.write(idx,1, entry.regnum,style_mm)
-        sheet.write(idx,2, entry.tsize,style_mm)
-        sheet.write(idx,3, '',style_mm)
-        sheet.write(idx,4, '',style_rm)
+        sheet.write(row,0, entry.name,style_lm)
+        sheet.write(row,1, entry.cell,style_mm)
+        sheet.write(row,2, entry.regnum,style_mm)
+        sheet.write(row,3, entry.tsize,style_mm)
+        sheet.write(row,4, entry.get_hdist_display(),style_mm)
+        sheet.write(row,5, entry.skill_display(),style_mm)
+        sheet.write(row,6, '',style_mm)
+        sheet.write(row,7, '',style_rm)
 
         if not entry.tsize in size_count:
             size_count[entry.tsize] = 1
         else:   
             size_count[entry.tsize] = size_count[entry.tsize] + 1
-        idx = idx + 1
+        row = row + 1
 
-    sheet.write(idx,0, '',style_b)
-    sheet.write(idx,1, '',style_b)
-    sheet.write(idx,2, '',style_b)
-    sheet.write(idx,3, '',style_b)
-    sheet.write(idx,4, '',style_b)
-
+    for col in range(8):
+        sheet.write(row, col, '',style_b)
+    
     # write size table
-    sheet.write(2,6,u'사이즈',style_lt)
-    sheet.write(2,7,u'수량',style_rt)
+    row = 2
+    sheet.write(2,9,u'사이즈',style_lt)
+    sheet.write(2,10,u'수량',style_rt)
 
-    size_idx = 3
+    row = row + 1
     for size, count in size_count.items():
-        sheet.write(size_idx,6,size,style_lm)
-        sheet.write(size_idx,7,count,style_rm)
-        size_idx = size_idx + 1
+        sheet.write(row,9,size,style_lm)
+        sheet.write(row,10,count,style_rm)
+        row = row + 1
 
-    sheet.write(size_idx,6,'',style_lb)
-    sheet.write(size_idx,7,len(entries),style_rb)
+    sheet.write(row,9,'',style_lb)
+    sheet.write(row,10,len(entries),style_rb)
 
     output = cStringIO.StringIO()
     book.save(output)

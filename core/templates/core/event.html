@@ -5,30 +5,36 @@
 <div class="container">
 	<div class="page-header">
 		<h3>행사 정보 <small>{{ event.title }}</small>
-{% if user.is_staff %}
-<div class="pull-right">
-	{% if event.get_status == 'feedback' or event.get_status == 'progress' %}
-	<a href="{% url 'feedback' event.pk %}" class="btn btn-sm btn-primary" style="margin-right:5px">
-		<i class="fa fa-check"></i> 결과 보고 보기
-	</a>
-	{% endif %}
 
-	<a href="{% url 'send_sms_by_event' event.pk %}" class="btn btn-sm btn-default" style="margin-right:5px">
-		<i class="fa fa-comment"></i> 문자 발송
-	</a>
+		{% if user.is_staff %}
+		<div class="pull-right">
+			{% if event.can_feedback %}
+			<a href="{% url 'feedback' event.pk %}" class="btn btn-sm btn-primary" style="margin-right:5px">
+				<i class="fa fa-check"></i> 후기/정산 보기
+			</a>
+			{% endif %}
 
-	<a href="{% url 'admin:core_entry_changelist' %}?event__id__exact={{ event.pk}}" class="btn btn-sm btn-default" style="margin-right:5px">
-		<span class="glyphicon glyphicon-list"></span> 참가자 세부보기
-	</a>  
-	<a href="{% url 'export_agent' event.pk %}" class="btn btn-sm btn-info" style="margin-right:5px">
-		<i class="fa fa-save"></i> xls로 목록 받기
-	</a>
-	<a href="{% url 'admin:core_event_change' event.pk %}" class="btn btn-sm btn-warning">
-		<span class="glyphicon glyphicon-pencil"></span> 수정하기
-	</a> 
-</div>
+			
+			<a href="{% url 'send_sms_by_event' event.pk %}" class="btn btn-sm btn-default" style="margin-right:5px">
+				<i class="fa fa-comment"></i> 문자 발송
+			</a>
 
-  {% endif %}
+			<a href="{% url 'admin:core_entry_changelist' %}?event__id__exact={{ event.pk}}" class="btn btn-sm btn-default" style="margin-right:5px">
+				<span class="glyphicon glyphicon-list"></span> 참가자 세부보기
+			</a>  
+			<a href="{% url 'export_agent' event.pk %}" class="btn btn-sm btn-info" style="margin-right:5px">
+				<i class="fa fa-save"></i> xls로 목록 받기
+			</a>
+			<a href="{% url 'admin:core_event_change' event.pk %}" class="btn btn-sm btn-warning">
+				<span class="glyphicon glyphicon-pencil"></span> 수정하기
+			</a> 
+			<a href="{% url 'event_reserved_sms' event.pk %}" class="btn btn-sm btn-warning" style="margin-right:5px">
+				<i class="fa fa-gear"></i> 예약 문자 설정
+			</a>
+			
+		</div>
+		{% endif %}
+
 		</h3>
 	</div>
 	<div id="description" class="well">
@@ -88,10 +94,10 @@
 				{% for entry in entries %}
 				<span class="col-sm-4"><a href="{% url 'entry_view' entry.entry %}" data-toggle="tooltip" title="신청내역보기">{{ entry.display }} <i class="fa fa-comment"></i></a> 
 				{% if entry.name in confirmed %}
-					<i class="fa fa-check-square-o text-success" data-toggle="tooltip" title="결과 보고 승인 됨"></i> 
+					<i class="fa fa-check-square-o text-success" data-toggle="tooltip" title="후기 작성 승인 됨"></i> 
 				{% endif %}
 				{% if entry.name in feedbacks %}
-					<i class="fa fa-minus-square-o text-warning" data-toggle="tooltip" title="결과 보고를 작성한 대원"></i> 
+					<i class="fa fa-minus-square-o text-warning" data-toggle="tooltip" title="후기 작성를 작성한 대원"></i> 
 				{% endif %}
 				</span>
 				{% empty %}
@@ -141,13 +147,13 @@
 						<a href="{% url 'agent_entry_add' event.pk %}" class="btn btn-primary btn-lg btn-block">신청하기</a>
 					{% endif %}
 				{% elif event.get_status == 'feedback' or event.get_status == 'progress' %}
-					<a href="{% url 'feedback_write' event.pk %}" class="btn btn-info btn-lg btn-block">결과 보고</a>
+					<a href="{% url 'feedback_write' event.pk %}" class="btn btn-info btn-lg btn-block">후기 작성</a>
 
 				{% elif event.get_status == 'ready' %}
 					<a href="#" class="btn btn-primary btn-lg btn-block disabled">아직 모집 기간이 아닙니다.</a>
 				
 				{% else %}
-					<a href="#" class="btn btn-default btn-lg btn-block disabled">진행이 종료되었습니다.{{event.get_status}}</a>
+					<a href="#" class="btn btn-default btn-lg btn-block disabled">진행이 종료되었습니다.</a>
 				{% endif %}
 			{% else %}
 				{% if event.get_status == 'recruit' %}
@@ -157,7 +163,7 @@
 						<a href="{% url 'entry_add' event.pk %}" class="btn btn-primary btn-lg btn-block">신청하기</a> 
 					{% endif %}
 				{% elif event.get_status == 'feedback' or event.get_status == 'progress' %}
-					<a href="{% url 'feedback_write' event.pk %}" class="btn btn-primary btn-lg btn-block">결과 보고</a>
+					<a href="{% url 'feedback_write' event.pk %}" class="btn btn-primary btn-lg btn-block">후기 작성</a>
 
 				{% elif event.get_status == 'ready' %}
 					<a href="#" class="btn btn-primary btn-lg btn-block disabled">아직 모집 기간이 아닙니다.</a>

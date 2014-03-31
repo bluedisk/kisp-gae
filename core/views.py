@@ -15,7 +15,6 @@ from core.forms import EntryForm, AgentEntryForm, SendSmsForm, SendUserSmsForm, 
 from core.sms import sendSMS
 
 from datetime import datetime, date, timedelta
-
 import logging
 
 
@@ -475,4 +474,30 @@ def feedback(request, eid):
 	event = get_object_or_404(Event, id=eid);
 	feedbacks = Feedback.objects.filter(event=event)
 
-	return render(request, "core/feedback.html", {'feedbacks':feedbacks, 'event':event})
+	en_cnt = Entry.objects.filter(event=eid).count()
+	fb_cnt = feedbacks.count()
+
+	spend_sum = 0
+	for fb in feedbacks:
+		spend_sum = spend_sum + fb.spend
+
+	saved_sum = fb_cnt * event.support - spend_sum
+
+	return render(request, "core/feedback.html", {
+		'feedbacks':feedbacks, 
+		'event':event,
+
+		'entry_cnt':en_cnt,
+		'feedback_cnt':fb_cnt,
+		'spend':spend_sum,
+		'saved':saved_sum,
+		})
+
+
+def event_reserved_sms(request, eid):
+	event = get_object_or_404(Event, id=eid);
+
+	return render(request, "core/reserved_sms.html", {'event':event})
+
+
+

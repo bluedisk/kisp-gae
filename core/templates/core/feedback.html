@@ -1,50 +1,99 @@
 {% extends 'base.html' %}
 {% load humanize %}
 {% block content %}
-<BR>
-  <div class="container">
-   <div class="pager-header">
-    <h3>결과 보고 목록 <small>- {{ event.title }} </small> </h3>
+<BR/>
+<div class="container">
+  <div class="pager-header">
+    <h3>후기/정산 목록 <small>- {{ event.title }} </small> </h3>
   </div>
   <hr>
 
-  <table class="table table-striped table-hover clickable">
-    <thead>
-      <th width=5%><input type="checkbox" id="check_all"></th>
-      <th width=10%>승인여부</th>
-      <th width=10%>이름</th>
-      <th width=15%>사용 금액</th>
-      <th width=15%>사용 내역</th>
-      <th width=15%>환자</th>
-      <th width=15%>보고</th>
-      <th width=15%>제안</th>
-    </thead>
-    {% for fb in feedbacks %}
-    <tr>
-      <td><input type="checkbox" value="{{ fb.id }}"></td>
-      <td>{{ fb.confirm }}</td>
-      <td>{{ fb.name }}</td>
-      <td>{{ fb.spend|intcomma }} 원</td>
-      <td>{{ fb.where }}</td>
-      <td>{{ fb.patient|truncatechars:10 }}</td>
-      <td>{{ fb.report|truncatechars:10 }}</td>
-      <td>{{ fb.suggest|truncatechars:10 }}</td>
-    </tr>
-    {% empty %}
-    <tr>
-      <td colspan="7">아직 등록된 보고가 없습니다.</td>
-    </tr>
+<!-- Nav tabs -->
+  <ul class="nav nav-tabs">
+    <li class="active"><a href="#list" data-toggle="tab">목록</a></li>
+    <li><a href="#summery" data-toggle="tab">요약</a></li>
+  </ul>
 
-    {% endfor %}
-  </table>
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div class="tab-pane active" id="list">
+      <table class="table table-striped table-hover clickable">
+        <thead>
+          <th width=5%><input type="checkbox" id="check_all"></th>
+          <th width=10%>승인여부</th>
+          <th width=10%>이름</th>
+          <th width=15%>사용 금액</th>
+          <th width=15%>사용 내역</th>
+          <th width=15%>환자</th>
+          <th width=15%>보고</th>
+          <th width=15%>제안</th>
+        </thead>
+        {% for fb in feedbacks %}
+        <tr id="{{ fb.id }}">
+          <td><input type="checkbox" value="{{ fb.id }}"></td>
+          <td>{{ fb.confirm }}</td>
+          <td>{{ fb.name }}</td>
+          <td>{{ fb.spend|intcomma }} 원</td>
+          <td>{{ fb.where }}</td>
+          <td>{{ fb.patient|truncatechars:10 }}</td>
+          <td>{{ fb.report|truncatechars:10 }}</td>
+          <td>{{ fb.suggest|truncatechars:10 }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td colspan="7">아직 등록된 보고가 없습니다.</td>
+        </tr>
 
-  <div class="pull-right">
-  
-  <button class="btn btn-success" data-toggle="modal" data-target="#confirm-modal">선택 승인</button>
-  <button class="btn btn-danger" data-toggle="modal" data-target="#delete-modal">선택 삭제</button>
+        {% endfor %}
+      </table>
+
+      <div class="pull-right">
+        <button class="btn btn-success" data-toggle="modal" data-target="#confirm-modal">선택 승인</button>
+        <button class="btn btn-danger" data-toggle="modal" data-target="#delete-modal">선택 삭제</button>
+      </div>
+    </div>
+
+    <div class="tab-pane" id="summery">
+      <dl class="dl-horizontal">
+        <dt>패트롤 참가자</dt>
+        <dd>{{ entry_cnt }}</dd>
+        <dt>후기 작성자</dt>
+        <dd>{{ feedback_cnt }}</dd>
+        <dt>총 정산 금액</dt>
+        <dd>{{ spend|intcomma }} 원</dd>
+        <dt>총 적립 금액</dt>
+        <dd>{{ saved|intcomma }} 원</dd>
+      </dl>
+
+      <div class="form-group">
+        <label>환자 발생 기록</label>
+        <textarea class="form-control" rows="10">{% for fb in feedbacks %}{% if fb.patient %}
+{{fb.name}}:
+{{fb.patient}}
+{% endif %}{% endfor %}
+        </textarea>
+      </div>
+      <div class="form-group">
+        <label>진행 보고</label>
+        <textarea class="form-control" rows="10">{% for fb in feedbacks %}{% if fb.report %}
+{{fb.name}}:
+{{fb.report}}
+{% endif %}{% endfor %}          
+        </textarea>
+      </div>
+      <div class="form-group">
+        <label>제안 사항</label>
+        <textarea class="form-control" rows="10">{% for fb in feedbacks %}{% if fb.suggest %}
+{{fb.name}}:
+{{fb.suggest}}
+{% endif %}{% endfor %}          
+        </textarea>
+      </div>
+    </div>
 
   </div>
-</div>
+
+</div><!-- /.container -->
 
 {% endblock %}
 
@@ -90,6 +139,10 @@
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 
+
+<div class="modal fade" id="detail-modal">
+</div><!-- /.modal -->
+
 {% endblock %}
 
 {% block script %}
@@ -102,7 +155,11 @@
   });
 
   $('tr').on('click', function(e){
+    var id = $(this).attr('id');
 
+    $('#detail-modal').modal({
+      remote:'/feedback/'+id+"/"
+    });
   });
 
 </script>

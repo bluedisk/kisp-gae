@@ -2,7 +2,7 @@
 {% load humanize %}
 
 {% block error_msg %}
-<strong>결과 보고에 실패했습니다!</strong> 에러가 표시된 항목을 다시 확인 후 시도해주세요.
+<strong>후기 작성에 실패했습니다!</strong> 에러가 표시된 항목을 다시 확인 후 시도해주세요.
 {% endblock %}
 
 
@@ -13,7 +13,7 @@
         <input type="hidden" name="event" value="{{ event.pk }}" />
 
         <div class="lead">
-        <h2 class="form-signin-heading">"{{ event.short_title }}" 결과 보고</h2>
+        <h2 class="form-signin-heading">"{{ event.short_title }}" 후기/정산 작성</h2>
         </div>
 
         <h4>대원 정보</h4>     
@@ -60,7 +60,7 @@
         </div>
         잔액: <span id="left_cost">{{ event.support|intcomma }}</span>원
 
-        <h4>진행 보고 및 의견</h4>     
+        <h4>진행 후기 및 의견</h4>     
         <div class="form-group {%if form.patient.errors %}has-error{% endif %}">   
             <label for="{{form.patient.html_name}}" class="sr-only">{{form.patient.label}}</label>
             <textarea class="form-control" placeholder="패트롤 중 환자가 발생했던 경우 발생 상황, 내용, 처리 방법과 결과를 적어주세요." id="{{form.patient.html_name}}" name="{{form.patient.html_name}}"rows=4>{{form.patient.value|default_if_none:""}}</textarea>
@@ -84,7 +84,7 @@
         </div>
 
         <button class="btn btn-lg btn-primary" type="submit">
-            결과 보고 보내기
+            후기/정산 보내기
         </button>
     </form>
 

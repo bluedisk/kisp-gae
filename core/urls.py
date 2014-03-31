@@ -9,6 +9,8 @@ from core.models import Feedback
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.models import User
 
+from django.views.generic import DetailView
+
 urlpatterns = patterns('',
     url(r'^$', 'core.views.index',name='index'),
     url(r'^about/$', KISPPageView.as_view(), {'viewname':'about'}, name="about"),
@@ -22,6 +24,10 @@ urlpatterns = patterns('',
     url(r'^event/(?P<eid>\d+)/export/$', 'core.xlexport.agent', name='export_agent'),
     url(r'^event/(?P<eid>\d+)/feedback/write/$', 'core.views.feedback_write', name='feedback_write'),
     url(r'^event/(?P<eid>\d+)/feedback/$', 'core.views.feedback', name='feedback'),
+    url(r'^event/(?P<eid>\d+)/sms/$', 'core.views.send_sms_by_event'),
+    url(r'^event/(?P<eid>\d+)/sms/reserved/$', 'core.views.event_reserved_sms', name='event_reserved_sms'),
+
+    url(r'^feedback/(?P<pk>\d+)/$', DetailView.as_view(model=Feedback)),
 
     url(r'^event/image/add/(?P<eid>\d+)/$', 'core.views.event_image_add', name='event_image_add'),
     url(r'^event/image/del/(?P<eid>\d+)/(?P<iid>\d+)/$', 'core.views.event_image_del', name='event_image_del'),
@@ -52,6 +58,6 @@ urlpatterns = patterns('',
 
     url(r'^agent/image/(?P<agent_id>\d+)/$', 'core.views.agent_image', name='agent_image'),
 
-    url(r'^test/timezone/$','core.tests.timezone'),
+    url(r'^timezone/$','core.timezone.test'),
     
 )

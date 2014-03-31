@@ -204,6 +204,11 @@ indexes:
   - name: __key__
     direction: desc
 
+- kind: core_feedback
+  properties:
+  - name: __key__
+    direction: desc
+
 - kind: core_page
   properties:
   - name: __key__

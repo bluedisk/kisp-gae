@@ -30,7 +30,7 @@
         </thead>
         {% for fb in feedbacks %}
         <tr id="{{ fb.id }}">
-          <td><input type="checkbox" value="{{ fb.id }}"></td>
+          <th><input type="checkbox" value="{{ fb.id }}"></th>
           <td>{{ fb.confirm }}</td>
           <td>{{ fb.name }}</td>
           <td>{{ fb.spend|intcomma }} 원</td>
@@ -98,8 +98,8 @@
 {% endblock %}
 
 {% block popup %}
-
-<div class="modal fade" id="confirm-modal">
+{% csrf_token %}
+<div class="modal fade need-ids" id="confirm-modal">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -108,18 +108,17 @@
       </div>
       <div class="modal-body">
         <p>선택한 항목을 모두 <span class="label label-success">승인</span>하시겠습니까?</p>
-        <p class="text-success">항목, 항목, 항목, 항목, 항목, 항목, 항목</p>
-        <code>공사중 </code>
+        <p class="text-success id-list">항목, 항목, 항목, 항목, 항목, 항목, 항목</p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
-        <button type="button" class="btn btn-success">승인</button>
+        <button type="button" class="btn btn-success" data-loading-text="승인 중..." id="confirm">승인</button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 
-<div class="modal fade" id="delete-modal">
+<div class="modal fade need-ids" id="delete-modal">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -128,12 +127,11 @@
       </div>
       <div class="modal-body">
         <p>선택한 항목을 모두 <span class="label label-danger">삭제</span>하시겠습니까?</p>
-        <p class="text-danger">항목, 항목, 항목, 항목, 항목, 항목, 항목</p>
-        <code>공사중 </code>
+        <p class="text-danger id-list">항목, 항목, 항목, 항목, 항목, 항목, 항목</p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
-        <button type="button" class="btn btn-danger">삭제</button>
+        <button type="button" class="btn btn-danger" data-loading-text="삭제 중..." id="delete">삭제</button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
@@ -154,13 +152,86 @@
     $('input[type=checkbox]').prop('checked',checked);
   });
 
-  $('tr').on('click', function(e){
-    var id = $(this).attr('id');
+  $('td').on('click', function(e){
+    var id = $(this).parent().attr('id');
+    if ( !id ) return;
 
+    $('#detail-modal').removeData('bs.modal');
     $('#detail-modal').modal({
+      show: true,
       remote:'/feedback/'+id+"/"
     });
   });
+
+  var checked_ids=[];
+
+  function updateChecked() {
+    checked_ids = [];
+
+    var names = [];
+
+    $.each($('input:checked'), function(idx, obj){
+      if ( $(obj).val() === 'on' ) return true;
+      
+      checked_ids.push($(obj).val());
+      names.push($(obj).parents('tr').find('td:eq(1)').text());
+    });
+
+    if ( checked_ids.length == 0 ) 
+      $('.id-list').text('선택된 항목이 없습니다!');
+    else
+      $('.id-list').text(names);
+  }
+
+  $('.need-ids').on('show.bs.modal', function(e){
+    updateChecked();
+  })
+
+  $('#confirm').on('click',function(e){
+    $(this).button('loading');
+
+    $.ajax('{% url "feedback_confirm" %}', {
+      type:'POST',
+      data: { 
+        ids: JSON.stringify(checked_ids), 
+        csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val() 
+      },
+
+      success:function(result) {
+        console.log(result);
+        location.reload();
+      },
+
+      error: function() {
+        alert('에러! 승인을 실패했습니다.');
+      }
+
+    });
+  });
+  
+  $('#delete').on('click',function(e){
+    $(this).button('loading');
+
+    $.ajax('{% url "feedback_delete" %}',{
+      type:'POST',
+      data: { 
+        ids: JSON.stringify(checked_ids), 
+        csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val() 
+      },
+
+      success:function(result) {
+        console.log(result);
+        location.reload();
+      },
+
+      error: function() {
+        alert('에러! 삭제를 실패했습니다.');
+      }
+
+    });
+  });
+
+
 
 </script>
 

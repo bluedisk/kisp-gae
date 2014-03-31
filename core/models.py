@@ -472,8 +472,8 @@ class ReservedSMS(models.Model):
 
 class ContactGroup(models.Model):
     class Meta:
-        verbose_name = _('ContactGroup')
-        verbose_name_plural = _('ContactGroups')
+        verbose_name = _(u'연락처 그룹')
+        verbose_name_plural = _(u'연락처 그룹들')
 
     def __unicode__(self):
         return self.name
@@ -483,8 +483,8 @@ class ContactGroup(models.Model):
     
 class ContactItem(models.Model):
     class Meta:
-        verbose_name = _('ContactItem')
-        verbose_name_plural = _('ContactItems')
+        verbose_name = _(u'연락처')
+        verbose_name_plural = _(u'연락처들')
 
     def __unicode__(self):
         return self.name
@@ -498,11 +498,11 @@ class ContactItem(models.Model):
 
 class Feedback(models.Model):
 	class Meta:
-		verbose_name = _('Feedback')
-		verbose_name_plural = _('Feedbacks')
+		verbose_name = _(u'패트롤 후기')
+		verbose_name_plural = _(u'패트롤 후기들')
 
-		def __unicode__(self):
-			return "[%s] %s"%(self.event.short_title, self.name)
+	def __unicode__(self):
+		return "[%s] %s"%(self.event.short_title, self.name)
 
 	confirm = models.BooleanField(u'승인여부', default=False)
 	

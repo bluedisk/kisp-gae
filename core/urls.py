@@ -28,6 +28,8 @@ urlpatterns = patterns('',
     url(r'^event/(?P<eid>\d+)/sms/reserved/$', 'core.views.event_reserved_sms', name='event_reserved_sms'),
 
     url(r'^feedback/(?P<pk>\d+)/$', DetailView.as_view(model=Feedback)),
+    url(r'^feedback/confirm/$', 'core.views.feedback_confirm', name='feedback_confirm'),
+    url(r'^feedback/delete/$', 'core.views.feedback_delete', name='feedback_delete'),
 
     url(r'^event/image/add/(?P<eid>\d+)/$', 'core.views.event_image_add', name='event_image_add'),
     url(r'^event/image/del/(?P<eid>\d+)/(?P<iid>\d+)/$', 'core.views.event_image_del', name='event_image_del'),

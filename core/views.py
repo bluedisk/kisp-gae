@@ -6,7 +6,9 @@ from django.views.generic import DetailView
 from django.forms.util import ErrorDict
 from django.http import HttpResponseRedirect, HttpResponse
 
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, permission_required
+from django.contrib.admin.views.decorators import staff_member_required
+
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import get_object_or_404
 
@@ -16,6 +18,7 @@ from core.sms import sendSMS
 
 from datetime import datetime, date, timedelta
 import logging
+import json
 
 
 from filetransfers.api import serve_file, prepare_upload
@@ -222,17 +225,17 @@ def contact(request):
    	return render(request, 'core/contact.html', {'viewname':'contact', 'members':members})
 
 
-@login_required
+@staff_member_required
 def send_sms_by_entry(request):
 	entries = Entry.objects.filter(pk__in = request._GET['ids'].split(',') )
 	return send_sms(request,entries)
 
-@login_required
+@staff_member_required
 def send_sms_by_event(request, eid):
 	entries = Entry.objects.filter(event__pk=eid)
 	return send_sms(request,entries)
 
-@login_required
+@staff_member_required
 def send_sms(request, entries):
 	form = None
 	sent = False
@@ -334,8 +337,6 @@ def signout(request):
 	return HttpResponseRedirect('/')
 
 def reset_pw(request):
-
-	
 
 	return HttpResponse(request,"미안.. 아직 안만들었어..")
 
@@ -470,6 +471,7 @@ def feedback_write(request, eid):
 
 	return render(request, "core/feedback_write.html", { 'form':form, 'event':event })
 
+@staff_member_required
 def feedback(request, eid):
 	event = get_object_or_404(Event, id=eid);
 	feedbacks = Feedback.objects.filter(event=event)
@@ -492,6 +494,24 @@ def feedback(request, eid):
 		'spend':spend_sum,
 		'saved':saved_sum,
 		})
+
+@staff_member_required
+def feedback_confirm(request):
+	ids = request.POST['ids']
+	ids = json.loads(ids)
+
+	Feedback.objects.filter(id__in = ids).update(confirm=True)
+
+	return HttpResponse('%s feedback(s) confirmed'%len(ids))
+
+@staff_member_required	
+def feedback_delete(request):
+	ids = request.POST['ids']
+	ids = json.loads(ids)
+
+	Feedback.objects.filter(id__in = ids).delete()
+
+	return HttpResponse('%s feedback(s) deleted'%len(ids))
 
 
 def event_reserved_sms(request, eid):

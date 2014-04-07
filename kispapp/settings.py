@@ -150,6 +150,7 @@ INSTALLED_APPS = (
     'djangoappengine',
 
     # main code
+    'message',
     'core'
 )
 

@@ -504,6 +504,9 @@ class Feedback(models.Model):
 	def __unicode__(self):
 		return "[%s] %s"%(self.event.short_title, self.name)
 
+	def remain(self):
+		return self.event.support - self.spend
+
 	confirm = models.BooleanField(u'승인여부', default=False)
 	
 	event = models.ForeignKey(Event, verbose_name=u'행사')

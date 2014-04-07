@@ -14,7 +14,7 @@ from django.contrib.auth.admin import UserAdmin
 
 class EventImageAdmin(admin.ModelAdmin):
     list_filter=('event',)
-    list_display=('event','title','order',)
+    list_display=('event','featured', 'title','order',)
     ordering=('event','order',)
 
     list_editable=('title','order',)

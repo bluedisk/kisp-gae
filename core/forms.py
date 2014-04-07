@@ -9,7 +9,7 @@ from django.contrib.auth import authenticate, get_user_model
 
 import re
 
-from core.utils import *
+from message.utils import *
 
 MAXIMUM_PASSWORD_LENGTH = 256
 

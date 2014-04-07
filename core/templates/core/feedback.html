@@ -82,7 +82,7 @@
           <td>{{ fb.name }}</td>
           <td>{{ fb.spend|intcomma }} 원</td>
           <td>{{ fb.where }}</td>
-          <td {% if fb.remail < 0 %}class="text-danger"{% endif %}>{{ fb.remain|intcomma }} 원</td>
+          <td class="{% if fb.remain < 0 %}text-danger{% else %}text-success{% endif %}">{{ fb.remain|intcomma }} 원</td>
         </tr>
         {% empty %}
         <tr>

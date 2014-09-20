@@ -154,7 +154,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
-        <button type="button" class="btn btn-success" data-loading-text="승인 중..." id="confirm">승인</button>
+        <button type="button" class="btn btn-success" data-applying-text="승인 중..." id="confirm">승인</button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
@@ -173,7 +173,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
-        <button type="button" class="btn btn-danger" data-loading-text="삭제 중..." id="delete">삭제</button>
+        <button type="button" class="btn btn-danger" data-applying-text="삭제 중..." id="delete">삭제</button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
@@ -188,6 +188,7 @@
 {% block script %}
 
 <script>
+  var cur_id;
 
   $('#check_all').on('change',function(){
     var checked = $(this).prop('checked');
@@ -195,15 +196,46 @@
   });
 
   $('td').on('click', function(e){
-    var id = $(this).parent().attr('id');
-    if ( !id ) return;
+    cur_id = $(this).parent().attr('id');
+    if ( !cur_id ) return;
 
     $('#detail-modal').removeData('bs.modal');
+    
     $('#detail-modal').modal({
       show: true,
-      remote:'/feedback/'+id+"/"
+      remote:'/feedback/'+cur_id+"/"
     });
+
   });
+
+  function applyChange() {
+      $('#detail-modal #apply').button('applying');
+      $('#detail-modal #close').addClass('disabled');
+      $('#detail-modal textarea').addClass('disabled');
+      $('#detail-modal input').addClass('disabled');
+
+      $.post("{% url 'feedback_update'%}", {
+        fid:cur_id,
+        spend: $('#detail_form #spend').val(),
+        where: $('#detail_form #where').val(),
+        patient: $('#detail_form #patient').val(),
+        report: $('#detail_form #report').val(),
+        suggest: $('#detail_form #suggest').val()
+      })
+      .done(function() {
+         $('#detail-modal').modal('hide');
+        window.location.reload(true);
+      })
+      .fail(function() {
+        alert( "변경 실패!" );
+
+        $('#detail-modal #apply').button('reset');
+        $('#detail-modal #close').removeClass('disabled');
+        $('#detail-modal textarea').removeClass('disabled');
+        $('#detail-modal input').removeClass('disabled');
+
+      });
+  };
 
   var checked_ids=[];
 
@@ -230,11 +262,12 @@
   })
 
   $('#confirm').on('click',function(e){
-    $(this).button('loading');
+    $(this).button('applying');
 
     $.ajax('{% url "feedback_confirm" %}', {
       type:'POST',
       data: { 
+        eid: {{ event.id }},
         ids: JSON.stringify(checked_ids), 
         csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val() 
       },
@@ -252,7 +285,7 @@
   });
   
   $('#delete').on('click',function(e){
-    $(this).button('loading');
+    $(this).button('applying');
 
     $.ajax('{% url "feedback_delete" %}',{
       type:'POST',

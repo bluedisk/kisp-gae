@@ -9,18 +9,21 @@ from django.contrib.auth import authenticate, get_user_model
 
 import re
 
-from message.utils import *
+from core.utils import *
 
 MAXIMUM_PASSWORD_LENGTH = 256
 
 class EntryForm(forms.ModelForm):
     class Meta:
         model=Entry
-        fields = [ 'name', 'cell', 'regnum', 'htype', 'hdist', 'tsize', 'mileage', 'etc', 'carpool', 'location','skill']
+        fields = [ 'name', 'cell', 'regnum', 'club', 'htype', 'hdist', 'tsize', 'mileage', 'etc', 'carpool', 'location','skill']
         native_fields = [ 'skill', 'course' ]
 
     captcha = ReCaptchaField()
- 
+
+    def clean_regnum(self):
+        return format_regnum(self.data['regnum'])
+
     def clean_cell(self):
         cell = self.cleaned_data['cell']
         cell = format_cell(cell)
@@ -30,7 +33,7 @@ class EntryForm(forms.ModelForm):
 class AgentEntryForm(forms.ModelForm):
     class Meta:
         model=Entry
-        fields = [ 'name', 'cell', 'regnum', 'htype', 'hdist', 'tsize', 'mileage', 'etc', 'carpool', 'location','skill']
+        fields = [ 'name', 'cell', 'regnum', 'club', 'htype', 'hdist', 'tsize', 'mileage', 'etc', 'carpool', 'location','skill']
         native_fields = ['skill']
 
     def clean_cell(self):
@@ -54,21 +57,21 @@ class UserSignupForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ['username','first_name', 'email',]
-       
+
     username = forms.CharField(
         required=True,
         label=_(u"아이디")
-    ) 
+    )
 
     first_name = forms.CharField(
         required=True,
         label=_(u"이름(실명)")
-    ) 
+    )
 
     email = forms.EmailField(
         required=True,
         label=_(u"이메일 주소")
-    ) 
+    )
 
     password1 = forms.CharField(
         required=True,
@@ -99,7 +102,7 @@ class UserSignupForm(forms.ModelForm):
             raise forms.ValidationError(u"")
 
         return self.data['password1']
-    
+
     def clean_password2(self):
 
         password1 = self.data['password1']
@@ -151,7 +154,7 @@ class UserChangePasswordForm(forms.Form):
 
         if password1 != password2:
             raise forms.ValidationError(u"새 비밀번호와 확인이 일치하지 않습니다.")
-            
+
         return self.cleaned_data
 
 
@@ -223,6 +226,8 @@ class AgentForm(forms.ModelForm):
 
         return cell
 
+    def clean_regnum(self):
+        return format_regnum(self.data['regnum'])
 
 class EventImageForm(forms.ModelForm):
     class Meta:
@@ -233,30 +238,32 @@ class EventImageForm(forms.ModelForm):
 class FeedbackForm(forms.ModelForm):
     class Meta:
         model = Feedback
-        fields = ['name', 'event', 'cell', 'where','spend', 'patient','report','suggest']
+        fields = ['name', 'event', 'regnum', 'where','spend', 'patient','report','suggest']
         widgets = {
             'event': forms.HiddenInput,
         }
-    
+
     spend = forms.CharField(label=u'사용 금액')
 
     def clean_name(self):
         name = self.data['name']
-        cell = format_cell(self.data['cell'])
+        regnum = format_regnum(self.data['regnum'])
         event = self.data['event']
 
         try:
-            Entry.objects.get(event=event, name=name, cell=cell)
+            Entry.objects.get(event=event, name=name, regnum=regnum)
         except:
             raise forms.ValidationError(u'참가자중에 일치하는 대원 정보가 없습니다.')
 
         return name
- 
+
+    def clean_regnum(self):
+        return format_regnum(self.data['regnum'])
 
     def clean_spend(self):
         spend = self.cleaned_data['spend']
         spend = int(re.sub('[^0-9]','',spend))
-     
+
         return spend
 
     def clean_where(self):
@@ -281,4 +288,3 @@ class FeedbackForm(forms.ModelForm):
             raise forms.ValidationError(u'참가자중에 일치하는 대원 정보가 없습니다.')
 
         return cell
-            

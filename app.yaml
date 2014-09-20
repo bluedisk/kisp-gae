@@ -13,8 +13,16 @@ inbound_services:
 libraries:
 - name: PIL
   version: latest
+- name: pycrypto
+  version: latest
+- name: endpoints
+  version: 1.0
 
 handlers:
+# Endpoints handler
+- url: /_ah/spi/.*
+  script: kisp_api.APPLICATION
+
 - url: /_ah/queue/deferred
   script: djangoappengine.deferred.handler.application
   login: admin

@@ -13,7 +13,7 @@
 		<div class="row">
 			<b>받는 사람 목록</b><BR>
 			{% for entry in entries %}
-				<span class="col-sm-4">{{ entry.name }} ({{entry.cell}})</a></span>
+				<span class="col-xs-6 col-sm-3">{{ entry.name }} ({{entry.cell}})</a></span>
 			{% empty %}
 				<code>대상자가 없습니다.</code>
 			{% endfor %}

@@ -131,7 +131,7 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable the admin:
     'django_admin_bootstrapped.bootstrap3',
     'django_admin_bootstrapped',
-    'django.contrib.admin', 
+    'django.contrib.admin',
     'django.contrib.humanize',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
@@ -150,6 +150,7 @@ INSTALLED_APPS = (
     'djangoappengine',
 
     # main code
+    #'dangdong',
     'message',
     'core'
 )

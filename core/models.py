@@ -352,6 +352,8 @@ class Entry(models.Model):
 	event = models.ForeignKey(Event, verbose_name=u'행사')
 	user = models.ForeignKey(User, verbose_name=u'대원', null=True, blank=True)
 
+	club = models.CharField(u'소속 동호회', max_length=128)
+
 	name = models.CharField(u'이름', max_length=32)
 	cell = models.CharField(u'휴대폰', max_length=32)
 	regnum = models.CharField(u'주민번호', max_length=15)
@@ -508,10 +510,12 @@ class Feedback(models.Model):
 		return self.event.support - self.spend
 
 	confirm = models.BooleanField(u'승인여부', default=False)
-	
 	event = models.ForeignKey(Event, verbose_name=u'행사')
+
 	name = models.CharField(u'대원명', max_length=256)
-	cell = models.CharField(u'휴대폰', max_length=30)
+	cell = models.CharField(u'휴대폰', max_length=30, blank=True)
+	regnum = models.CharField(u'주민번호', max_length=15)
+
 
 	where = models.CharField(u'사용 내역', max_length=256, blank=True)
 	spend = models.IntegerField(u'사용 금액')
@@ -520,4 +524,22 @@ class Feedback(models.Model):
 	report = models.TextField(u'전달 할 사항', blank=True)
 	suggest = models.TextField(u'제안 할 사항', blank=True)
 
+class Point(models.Model):
+    class Meta:
+        verbose_name = _('Point')
+        verbose_name_plural = _('Points')
 
+    def __unicode__(self):
+        return "%s - %s : %s"%(self.name, self.reason, self.amount)
+
+    name = models.CharField(u'이름', max_length=128)
+    club = models.CharField(u'동호회',default=u'KISP')
+    regnum = models.CharField(u'주민번호', max_length=15)
+
+    reason = models.CharField(u'사유', max_length=1024)
+    amount = models.IntegerField(u'금액')
+
+    created_at = models.DateTimeField(u'등록일', auto_now_add=True)
+
+
+    

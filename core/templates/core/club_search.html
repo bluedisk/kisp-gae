@@ -1,0 +1,51 @@
+{% extends "base_form.html" %}
+
+{% block form %}
+    
+
+    <form class="form-signin form-wide" method="post">
+        {% csrf_token %}
+        <h2 class="form-signin-heading">소속 동호회를 입력해주세요.</h2>
+        <HR>
+
+        <div class="form-group">
+            <input name="club" id="club" class="form-control" value="{{ club|default_if_none:'' }}" placeholder="동호회명">
+        </div>
+        <div class="form-group text-danger" id="help-text">
+        </div>
+
+        <div class="form-group">
+        <button class="btn btn-large btn-primary" type="submit">
+            계속 <i class="fa fa-caret-right"></i>
+        </button>
+        </div>
+    </form>
+
+<!-- /container -->
+
+{% endblock %}
+
+{% block script %}
+
+<script>
+    function updateInfo(){
+        var club = $('#club').val()
+
+        if ( club.toLowerCase() === 'kisp' ) {
+            $('#help-text').text('* KISP 대원은 경우 가급적 "가입 신청" 후 로그인해서 신청해 주시기 바랍니다.');
+        } else {
+            $('#help-text').text('* 외부 동호회 회원 자격으로 신청 하시는 경우 식대의 잔액은 바로 지급 되는 대신, KISP 회원의 혜택을 모두 포기하게 됩니다.');
+        }
+    }
+
+    $(function() {
+        updateInfo();
+        $('#club').on('keyup change',function() {
+            updateInfo();
+        })
+
+    });
+
+</script>
+
+{% endblock %}

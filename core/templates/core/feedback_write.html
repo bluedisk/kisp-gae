@@ -27,12 +27,12 @@
             {% endfor %}
         </div>
 
-        <div class="form-group {%if form.cell.errors %}has-error{% endif %}">   
+        <div class="form-group {%if form.regnum.errors %}has-error{% endif %}">   
 
-            <label for="{{form.cell.html_name}}" class="sr-only">{{form.cell.label}}</label>
-            <input type="text" class="form-control" placeholder="{{form.cell.label}}" id="{{form.cell.html_name}}" name="{{form.cell.html_name}}" value="{{form.cell.value|default_if_none:""}}">
+            <label for="{{form.regnum.html_name}}" class="sr-only">{{form.regnum.label}}</label>
+            <input type="text" class="form-control" placeholder="{{form.regnum.label}}" id="{{form.regnum.html_name}}" name="{{form.regnum.html_name}}" value="{{form.regnum.value|default_if_none:""}}">
 
-            {% for error in form.cell.errors %}
+            {% for error in form.regnum.errors %}
             <span class="help-block">{{error}}</span>
             {% endfor %}
 

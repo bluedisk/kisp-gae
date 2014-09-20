@@ -214,6 +214,17 @@ indexes:
   - name: __key__
     direction: desc
 
+- kind: core_point
+  properties:
+  - name: __key__
+    direction: desc
+
+- kind: core_point
+  properties:
+  - name: created_at
+  - name: __key__
+    direction: desc
+
 - kind: core_reservedsms
   properties:
   - name: __key__

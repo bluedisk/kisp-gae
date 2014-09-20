@@ -30,12 +30,16 @@ urlpatterns = patterns('',
     url(r'^feedback/(?P<pk>\d+)/$', DetailView.as_view(model=Feedback)),
     url(r'^feedback/confirm/$', 'core.views.feedback_confirm', name='feedback_confirm'),
     url(r'^feedback/delete/$', 'core.views.feedback_delete', name='feedback_delete'),
+    url(r'^feedback/update/$', 'core.views.feedback_update', name='feedback_update'),
 
     url(r'^event/image/add/(?P<eid>\d+)/$', 'core.views.event_image_add', name='event_image_add'),
     url(r'^event/image/del/(?P<eid>\d+)/(?P<iid>\d+)/$', 'core.views.event_image_del', name='event_image_del'),
 
-    url(r'^entry/(?P<entry_id>\d+)/$', 'core.views.entry_view', name='entry_view'),
+    url(r'^entry/(?P<event_id>\d+)/preadd/$', 'core.views.entry_preadd', name='entry_preadd'),
     url(r'^entry/(?P<event_id>\d+)/add/$', 'core.views.entry_edit', name='entry_add'),
+    url(r'^entry/(?P<event_id>\d+)/add/(?P<club>.+)/$', 'core.views.entry_edit', name='entry_add'),
+
+    url(r'^entry/(?P<entry_id>\d+)/$', 'core.views.entry_view', name='entry_view'),
     url(r'^entry/(?P<entry_id>\d+)/edit/$', 'core.views.entry_edit', name='entry_edit'),
 
     url(r'^entry/(?P<event_id>\d+)/agent/add/$', 'core.views.agent_entry_edit', name='agent_entry_add'),
@@ -61,5 +65,5 @@ urlpatterns = patterns('',
     url(r'^agent/image/(?P<agent_id>\d+)/$', 'core.views.agent_image', name='agent_image'),
 
     url(r'^timezone/$','core.timezone.test'),
-    
+    url(r'^temp_sms/$','core.views.temp_sms'),
 )

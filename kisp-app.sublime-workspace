@@ -4,6 +4,42 @@
 		"selected_items":
 		[
 			[
+				"au",
+				"audio_lv"
+			],
+			[
+				"ligh",
+				"light_lv"
+			],
+			[
+				"aud",
+				"audio_lv"
+			],
+			[
+				"li",
+				"light_on"
+			],
+			[
+				"read",
+				"readline"
+			],
+			[
+				"Http",
+				"HttpResponse"
+			],
+			[
+				"create",
+				"created_at"
+			],
+			[
+				"Point",
+				"PointAdmin"
+			],
+			[
+				"send",
+				"send_sms_target"
+			],
+			[
 				"from",
 				"from_uri  (function)"
 			],
@@ -303,21 +339,25 @@
 	},
 	"buffers":
 	[
-		{
-			"file": "message/settings.py",
-			"settings":
-			{
-				"buffer_size": 190,
-				"line_ending": "Unix"
-			}
-		}
 	],
 	"build_system": "Packages/Python/Python.sublime-build",
 	"command_palette":
 	{
-		"height": 67.0,
+		"height": 347.0,
 		"selected_items":
 		[
+			[
+				"pack",
+				"Package Control: Install Package"
+			],
+			[
+				"pytho",
+				"Set Syntax: Python"
+			],
+			[
+				"djan",
+				"Set Syntax: HTML (Django)"
+			],
 			[
 				"django",
 				"Set Syntax: HTML (Django)"
@@ -349,10 +389,6 @@
 			[
 				"blue",
 				"Bluedisk: Extract Reference List"
-			],
-			[
-				"pack",
-				"Preferences: Browse Packages"
 			],
 			[
 				"brow",
@@ -411,7 +447,7 @@
 				"About"
 			]
 		],
-		"width": 602.0
+		"width": 575.0
 	},
 	"console":
 	{
@@ -428,13 +464,73 @@
 	},
 	"file_history":
 	[
+		"/Users/bluedisk/Workspace/kisp-app/core/views.py",
+		"/Users/bluedisk/Workspace/kisp-app/core/templates/user/agent_edit.html",
+		"/Users/bluedisk/Workspace/kisp-app/core/forms.py",
+		"/Users/bluedisk/Desktop/aucean.py",
+		"/Users/bluedisk/Downloads/wxTerminal.py",
+		"/Users/bluedisk/SimpleSPPServer.java",
+		"/Users/bluedisk/Workspace/kisp-app/core/templates/base.html",
+		"/Users/bluedisk/Workspace/kisp-app/core/templates/base_form.html",
+		"/Users/bluedisk/Workspace/kisp-app/ko.js",
+		"/Users/bluedisk/Workspace/kisp-app/core/templates/core/club_search.html",
+		"/Users/bluedisk/Workspace/kisp-app/core/urls.py",
+		"/Users/bluedisk/Workspace/kisp-app/kispapp/settings.py",
+		"/Users/bluedisk/Workspace/kisp-app/core/templates/core/index.html",
+		"/Users/bluedisk/Workspace/Wholook/whome/home/templates/home/signup.html",
+		"/Users/bluedisk/Workspace/Wholook/whome/home/templates/home/signin.html",
+		"/Users/bluedisk/Workspace/Wholook/whome/home/views.py",
+		"/Users/bluedisk/Workspace/Wholook/whome/home/models.py",
+		"/Users/bluedisk/Workspace/Wholook/whome/home/static/css/form.css",
+		"/Users/bluedisk/Workspace/Wholook/whome/home/templates/base/form_base.html",
+		"/Users/bluedisk/Workspace/Wholook/whome/home/urls.py",
+		"/Users/bluedisk/Workspace/Wholook/whome/home/templates/base/form_field.html",
+		"/Users/bluedisk/Workspace/Wholook/wholook-web/core/urls.py",
+		"/Users/bluedisk/Workspace/Wholook/whome/home/admin.py",
+		"/Users/bluedisk/Workspace/Wholook/whome/home/static/css/cover.css",
+		"/Users/bluedisk/Workspace/Wholook/whome/whome/admin.py",
+		"/Users/bluedisk/Workspace/Wholook/whome/whome/models.py",
+		"/Users/bluedisk/Workspace/Wholook/whome/whome/settings.py",
+		"/Users/bluedisk/Workspace/Wholook/whome/whome/urls.py",
+		"/Users/bluedisk/Workspace/Wholook/whome/home/templates/base/base.html",
+		"/Users/bluedisk/Workspace/Wholook/whome/home/templates/home/home.html",
+		"/Users/bluedisk/Workspace/Wholook/whome/home/templates/home/base.html",
+		"/Users/bluedisk/Workspace/Wholook/whome/home/templates/home/form_base.html",
+		"/Users/bluedisk/Workspace/kisp-app/core/templates/core/feedback_detail.html",
+		"/Users/bluedisk/Workspace/kisp-app/core/templates/core/feedback.html",
+		"/Users/bluedisk/Downloads/no_clien_osx",
+		"/Users/bluedisk/Workspace/kisp-app/core/models.py",
+		"/Users/bluedisk/Workspace/kisp-app/core/templates/core/sms.html",
+		"/Users/bluedisk/Workspace/kisp-app/dangdong/utils.py",
+		"/Users/bluedisk/Workspace/dangdong/README.md",
+		"/Users/bluedisk/Workspace/kisp-app/message/peer.py",
+		"/Users/bluedisk/Workspace/kisp-app/message/settings.py",
+		"/Users/bluedisk/Workspace/kisp-app/message/__init__.py",
+		"/Users/bluedisk/Workspace/kisp-app/dangdong/settings.py",
+		"/Users/bluedisk/Workspace/kisp-app/dangdong/__init__.py",
+		"/Users/bluedisk/Workspace/kisp-app/message/sms.py",
+		"/Users/bluedisk/dump_tcp.py",
+		"/Users/bluedisk/cap.txt",
+		"/Users/bluedisk/Workspace/kisp-app/app.yaml",
+		"/Users/bluedisk/Workspace/kisp-app/message/interface/django.py",
+		"/Users/bluedisk/Workspace/kisp-app/message/workers.py",
+		"/Users/bluedisk/Workspace/kisp-app/message/utils.py",
+		"/Users/bluedisk/Workspace/kisp-app/indexes.py",
+		"/Users/bluedisk/Workspace/kisp-app/core/captcha_util.py",
+		"/Users/bluedisk/Workspace/kisp-app/core/fields.py",
+		"/Users/bluedisk/Workspace/kisp-app/core/__init__.py",
+		"/Users/bluedisk/Workspace/kisp-app/core/static/css/auth.css",
+		"/Users/bluedisk/Workspace/kisp-app/core/templates/core/event.html",
+		"/Users/bluedisk/Workspace/kisp-app/core/templates/core/entry_edit.html",
+		"/Users/bluedisk/Workspace/kisp-app/kisp_api.py",
+		"/Users/bluedisk/Workspace/kisp-app/core/admin.py",
+		"/Users/bluedisk/Workspace/kisp-app/core/templates/core/entry_view.html",
+		"/Users/bluedisk/Workspace/kisp-app/core/templates/core/feedback_write.html",
 		"/Users/bluedisk/Workspace/kisp-app/message/interface/base.py",
 		"/Users/bluedisk/Workspace/kisp-app/message/interface/__init__.py",
 		"/Users/bluedisk/Workspace/kisp-app/message/targets.py",
 		"/Users/bluedisk/Workspace/kisp-app/message/django_interface.py",
-		"/Users/bluedisk/Workspace/kisp-app/message/workers.py",
 		"/Users/bluedisk/Workspace/kisp-app/message/interface.py",
-		"/Users/bluedisk/Workspace/kisp-app/kispapp/settings.py",
 		"/Users/bluedisk/Workspace/kisp-app/message/push/pygcm/manage.py",
 		"/Users/bluedisk/Workspace/kisp-app/message/push/__init__.py",
 		"/Users/bluedisk/Workspace/kisp-app/message/models.py",
@@ -442,47 +538,30 @@
 		"/Users/bluedisk/Workspace/kisp-app/message/push/apns.py",
 		"/Users/bluedisk/Workspace/kisp-app/message/certs/settings.py",
 		"/Users/bluedisk/Workspace/kisp-app/message/certs/gcm.py",
-		"/Users/bluedisk/Workspace/kisp-app/message/utils.py",
 		"/Users/bluedisk/Workspace/kisp-app/message/target.py",
 		"/Users/bluedisk/Workspace/kisp-app/message/urls.py",
-		"/Users/bluedisk/Workspace/kisp-app/message/settings.py",
-		"/Users/bluedisk/Workspace/kisp-app/core/views.py",
 		"/Users/bluedisk/Workspace/kisp-app/message/parser.py",
 		"/Users/bluedisk/Workspace/kisp-app/message/uri.py",
-		"/Users/bluedisk/Workspace/kisp-app/core/forms.py",
 		"/Users/bluedisk/Workspace/kisp-app/message/README.md",
 		"/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/urlparse.py",
-		"/Users/bluedisk/Workspace/kisp-app/core/admin.py",
 		"/Users/bluedisk/Workspace/kisp-app/core/templates/core/reserved_sms.html",
-		"/Users/bluedisk/Workspace/kisp-app/core/templates/core/feedback.html",
-		"/Users/bluedisk/Workspace/kisp-app/core/urls.py",
-		"/Users/bluedisk/Workspace/kisp-app/core/templates/core/feedback_detail.html",
-		"/Users/bluedisk/Workspace/kisp-app/core/templates/core/event.html",
-		"/Users/bluedisk/Workspace/kisp-app/core/templates/core/sms.html",
-		"/Users/bluedisk/Workspace/kisp-app/core/templates/base.html",
-		"/Users/bluedisk/Workspace/kisp-app/message/__init__.py",
 		"/Users/bluedisk/Workspace/kisp-app/message/push/settings.py",
 		"/Users/bluedisk/Workspace/kisp-app/message/push/push.py",
 		"/Users/bluedisk/Workspace/kisp-app/message/push.py",
 		"/Users/bluedisk/Workspace/kisp-app/message/apns.py",
 		"/Users/bluedisk/Workspace/kisp-app/kispapp/urls.py",
 		"/Users/bluedisk/Workspace/kisp-app/core/static/js/sms-counter.js",
-		"/Users/bluedisk/Workspace/kisp-app/core/models.py",
-		"/Users/bluedisk/Workspace/kisp-app/core/templates/core/feedback_write.html",
 		"/Users/bluedisk/Workspace/kisp-app/core/timezone.py",
 		"/Users/bluedisk/Workspace/kisp-app/core/static/js/admin-date-autoset.js",
 		"/Users/bluedisk/Workspace/kisp-app/core/tests.py",
 		"/Users/bluedisk/Library/Application Support/Sublime Text 2/Packages/User/Preferences.sublime-settings",
-		"/Users/bluedisk/Workspace/kisp-app/core/templates/core/index.html",
 		"/Users/bluedisk/Workspace/kisp-app/README.md",
 		"/Users/bluedisk/Workspace/kisp-app/core/xlexport.py",
 		"/Users/bluedisk/Workspace/kisp-app/index.yaml",
-		"/Users/bluedisk/Workspace/kisp-app/core/static/css/auth.css",
 		"/Users/bluedisk/Workspace/kisp-app/core/static/css/base.css",
 		"/Users/bluedisk/Workspace/kisp-app/static/css/base.css",
 		"/Users/bluedisk/Workspace/kisp-app/core/utils.py",
 		"/Users/bluedisk/Workspace/kisp-app/core/templates/core/utils.py",
-		"/Users/bluedisk/Workspace/kisp-app/core/fields.py",
 		"/Users/bluedisk/Workspace/kisp-app/static/css/auth.css",
 		"/Users/bluedisk/Workspace/kisp-app/static/js/jquery.number.min.js",
 		"/Users/bluedisk/Workspace/kisp-app/core/static/js/jquery.number.min.js",
@@ -492,7 +571,6 @@
 		"/Users/bluedisk/Workspace/kisp-app/core/templates/core/event_image.html",
 		"/Users/bluedisk/Workspace/kisp-app/core/templates/core/info.html",
 		"/Users/bluedisk/Workspace/kisp-app/core/templates/user/agent.html",
-		"/Users/bluedisk/Workspace/kisp-app/core/templates/user/agent_edit.html",
 		"/Users/bluedisk/Workspace/kisp-app/django/shortcuts/__init__.py",
 		"/Users/bluedisk/Workspace/kisp-app/core/sms.py",
 		"/Users/bluedisk/Workspace/kisp-app/xltest.py",
@@ -504,8 +582,6 @@
 		"/Users/bluedisk/Workspace/kisp-app/core/templates/core/event_list.html",
 		"/Users/bluedisk/Workspace/kisp-app/kisp-app.sublime-workspace",
 		"/Users/bluedisk/Workspace/kisp-app/core/templates/core/carpool_sms_sent.html",
-		"/Users/bluedisk/Workspace/kisp-app/core/templates/core/entry_view.html",
-		"/Users/bluedisk/Workspace/kisp-app/core/templates/core/entry_edit.html",
 		"/Users/bluedisk/Workspace/kisp-app/core/templates/core/contact.html",
 		"/Users/bluedisk/Workspace/kisp-app/core/templates/core/sms_reuslt.html",
 		"/Users/bluedisk/Workspace/kisp-app/core/templates/core/sms_sent.html",
@@ -515,47 +591,7 @@
 		"/Users/bluedisk/Workspace/kisp-app/djangoappengine/storage.py",
 		"/Users/bluedisk/Workspace/kisp-app/djangoappengine/tests/models.py",
 		"/Users/bluedisk/Workspace/kisp-app/filetransfers/api.py",
-		"/Users/bluedisk/Workspace/kisp-app/filetransfers/backends/default.py",
-		"/Users/bluedisk/Workspace/kisp-app/filetransfers/backends/delegate.py",
-		"/Users/bluedisk/Workspace/kisp-app/djangoappengine/settings_base.py",
-		"/Users/bluedisk/Workspace/kisp-app/django/contrib/admin/options.py",
-		"/Users/bluedisk/Workspace/kisp-app/django/contrib/formtools/tests/wizard/namedwizardtests/forms.py",
-		"/Users/bluedisk/Workspace/kisp-app/django/views/generic/base.py",
-		"/Users/bluedisk/Workspace/kisp-app/django/contrib/formtools/wizard/views.py",
-		"/Users/bluedisk/Workspace/kisp-app/django/core/management/validation.py",
-		"/Users/bluedisk/Workspace/kisp-app/django/db/models/__init__.py",
-		"/Users/bluedisk/Workspace/kisp-app/django/db/models/fields/files.py",
-		"/Users/bluedisk/Workspace/kisp-app/djangoappengine/db/base.py",
-		"/Users/bluedisk/Workspace/kisp-app/contact_loader.py",
-		"/Users/bluedisk/Workspace/kisp-app/core/templates/user/login.html",
-		"/Users/bluedisk/Workspace/kisp-app/django/conf/global_settings.py",
-		"/Users/bluedisk/Workspace/kisp-app/django/bin/profiling/gather_profile_stats.py",
-		"/Users/bluedisk/Workspace/kisp-app/core/templates/core/agent_entry_edit.html",
-		"/Users/bluedisk/Workspace/kisp-app/core/admin_form.py",
-		"/Users/bluedisk/Workspace/kisp-app/django/utils/encoding.py",
-		"/Users/bluedisk/Library/Application Support/Sublime Text 2/Packages/Default/Preferences.sublime-settings",
-		"/Users/bluedisk/Workspace/kisp-app/django/db/models/fields/__init__.py",
-		"/Users/bluedisk/Workspace/kisp-app/django/core/validators.py",
-		"/Users/bluedisk/Workspace/kisp-app/django/conf/locale/ko/LC_MESSAGES/django.po",
-		"/Users/bluedisk/Workspace/kisp-app/django/contrib/auth/backends.py",
-		"/Users/bluedisk/Workspace/kisp-app/django/contrib/auth/__init__.py",
-		"/Users/bluedisk/Workspace/kisp-app/core/templates/base_form.html",
-		"/Users/bluedisk/Workspace/kisp-app/core/templates/user/change_pw_done.html",
-		"/Users/bluedisk/Workspace/kisp-app/core/templates/registration/password_reset_email.html",
-		"/Users/bluedisk/Workspace/kisp-app/django/forms/forms.py",
-		"/Users/bluedisk/Workspace/kisp-app/django/contrib/auth/forms.py",
-		"/Users/bluedisk/Workspace/kisp-app/core/templates/user/profile.html",
-		"/Users/bluedisk/Workspace/kisp-app/core/templates/auth/profile.html",
-		"/Users/bluedisk/Workspace/kisp-app/core/templates/signup.html",
-		"/Users/bluedisk/Workspace/kisp-app/core/templates/registration/login.html",
-		"/Users/bluedisk/Workspace/Wholook/wholook-web/core/static/css/popup_base.css",
-		"/Users/bluedisk/Workspace/kisp-app/core/templates/base_outside_form.html",
-		"/Users/bluedisk/Workspace/kisp-app/auth/views.py",
-		"/Users/bluedisk/Workspace/kisp-app/core/templates/thanks.html",
-		"/Users/bluedisk/Workspace/kisp-app/auth/urls.py",
-		"/Users/bluedisk/Workspace/kisp-app/auth/templates/auth/signup.html",
-		"/Users/bluedisk/Workspace/kisp-app/auth/models.py",
-		"/Users/bluedisk/Workspace/kisp-app/auth/forms.py"
+		"/Users/bluedisk/Workspace/kisp-app/filetransfers/backends/default.py"
 	],
 	"find":
 	{
@@ -563,9 +599,18 @@
 	},
 	"find_in_files":
 	{
-		"height": 93.0,
+		"height": 0.0,
 		"where_history":
 		[
+			"/Users/bluedisk/Workspace/kisp-app",
+			"/Users/bluedisk/Workspace/kisp-app/, -*/django/*, -*/djangoapp*, -*min.js",
+			"/Users/bluedisk/Workspace/kisp-app/, -*/django/*, -*/djangoapp*",
+			"/Users/bluedisk/Workspace/kisp-app/, -*/django/*",
+			"/Users/bluedisk/Workspace/kisp-app/, -*d/jango/*",
+			"/Users/bluedisk/Workspace/kisp-app/, -*d/jango/",
+			"/Users/bluedisk/Workspace/kisp-app/, -*django",
+			"/Users/bluedisk/Workspace/kisp-app/, -django",
+			"/Users/bluedisk/Workspace/kisp-app/",
 			"/Users/bluedisk/Workspace/kisp-app/core",
 			"/Users/bluedisk/Workspace/kisp-app/, -*.sublime-workspace",
 			"/Users/bluedisk/Workspace/kisp-app/,-*views.py, -*.sublime-workspace",
@@ -591,6 +636,89 @@
 		"case_sensitive": true,
 		"find_history":
 		[
+			"audio_on",
+			"light_",
+			">>> ",
+			"lib",
+			"jar",
+			" = ",
+			"\\t",
+			"user.agent",
+			"agent_edit",
+			"UserChangePasswordForm",
+			"prepare_upload",
+			"agent_edit",
+			"agent",
+			"ㅁㅎ둣agent",
+			"utils.py",
+			"dangdong",
+			"format_regnum",
+			"format_cell",
+			"dangdong",
+			"agent_entry_edit",
+			"agent_entry_add",
+			"club",
+			"치ㅕㅠ",
+			"signup",
+			"signin",
+			"birth",
+			"date_of_birth",
+			"home",
+			"WhoMeUser",
+			"my",
+			"MyUser",
+			"\n",
+			"MyUser",
+			"partient",
+			"{%",
+			"partient",
+			"patient",
+			"csrf",
+			"loading",
+			"detail_form",
+			"saving",
+			"loading",
+			"|linebreaks",
+			"]",
+			"request.POST[",
+			"= ",
+			"feedback.",
+			"feedback",
+			"permission",
+			"perm",
+			"redirect_to_login",
+			"login_",
+			"login",
+			"message",
+			"entr",
+			"SendUserSmsForm",
+			"sms",
+			"TargetParser",
+			"Redi",
+			"redirect",
+			"entry_add",
+			"entry\\(",
+			"entry",
+			"regnum",
+			"spend_sum",
+			"cell",
+			"trans",
+			"tran",
+			"atomic",
+			"strip_cell",
+			"format_cell",
+			"confirm",
+			"comfirm",
+			"Entry(",
+			"Message",
+			"MessageLog",
+			"DjangoMessageInterface",
+			"featured",
+			"EventIma",
+			"feed",
+			"feedback",
+			"event_",
+			"event_vi",
 			"DjangoMessageInterface",
 			"MessageTarget",
 			"MessageParser",
@@ -635,90 +763,7 @@
 			"결과",
 			"결과 보고",
 			"timezone",
-			"now()",
-			"date",
-			"EST",
-			"kisp-oz",
-			"\\$$",
-			",$",
-			",",
-			"MAXIMUM_PASSWORD_LENGTH",
-			"identify_hasher",
-			"UNUSABLE_PASSWORD",
-			"MAXIMUM_PASSWORD_LENGTH",
-			"horiz",
-			"size_idx",
-			"row",
-			"idx",
-			"now",
-			"today",
-			"today =",
-			"today()",
-			"now()",
-			"today",
-			"now()",
-			"today",
-			"today.date()",
-			"today = ",
-			"datetime.toda",
-			"		today = today.date()\n",
-			"+ timedelta(hours=9) + timedelta(hours=9)",
-			"date.today",
-			"today()",
-			"toda()",
-			"supported_cost",
-			"/a",
-			"a",
-			"spend.",
-			"feedback_add",
-			" pull-right",
-			"data-placement=\"top\" ",
-			"number",
-			"patient.",
-			"spend.",
-			"field",
-			"INSTALL_",
-			"INSTALL",
-			"django.contrib.humanize",
-			"name.",
-			".name.",
-			".form-agent",
-			" form-agent",
-			"objects.get(",
-			".get(",
-			"feedback_add",
-			"get_status_detail",
-			"soon",
-			"recruit_end",
-			"recruit_ending",
-			"recruit_end_soon",
-			"recruit_end",
-			"event",
-			"Event",
-			"event",
-			"short_title",
-			"HttpResponse",
-			"0x1d",
-			"PROJECT_PATH",
-			"core_eventimage",
-			"featured",
-			"core_eventimag",
-			"log",
-			"today",
-			"EventAdmin",
-			"EventForm",
-			"ㄸㅍ둣래그",
-			"PROJECT_PATH",
-			"DEBUG=",
-			"django.contrib.staticfiles",
-			"today",
-			"logging",
-			"desciption",
-			"description",
-			"STATIC",
-			"feedback_end",
-			"regist_end",
-			"regist_start"
+			"now()"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -726,6 +771,8 @@
 		"regex": true,
 		"replace_history":
 		[
+			"=",
+			"    ",
 			"(_('$1')",
 			"_('$1')",
 			"_('%1')",
@@ -813,140 +860,6 @@
 		{
 			"sheets":
 			[
-				{
-					"buffer": 0,
-					"file": "message/settings.py",
-					"settings":
-					{
-						"buffer_size": 190,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								190,
-								190
-							]
-						],
-						"settings":
-						{
-							"codeintel": true,
-							"codeintel_config":
-							{
-								"JavaScript":
-								{
-									"codeintel_max_recursive_dir_depth": 2.0,
-									"codeintel_scan_files_in_project": false,
-									"javascriptExtraPaths":
-									[
-									]
-								},
-								"PHP":
-								{
-									"codeintel_max_recursive_dir_depth": 5.0,
-									"codeintel_scan_files_in_project": false,
-									"phpExtraPaths":
-									[
-									]
-								},
-								"Python":
-								{
-									"env":
-									{
-									}
-								}
-							},
-							"codeintel_enabled_languages":
-							[
-								"JavaScript",
-								"Mason",
-								"XBL",
-								"XUL",
-								"RHTML",
-								"SCSS",
-								"Python",
-								"HTML",
-								"Ruby",
-								"Python3",
-								"XML",
-								"Sass",
-								"XSLT",
-								"Django",
-								"HTML5",
-								"Perl",
-								"CSS",
-								"Twig",
-								"Less",
-								"Smarty",
-								"Node.js",
-								"Tcl",
-								"TemplateToolkit",
-								"PHP"
-							],
-							"codeintel_live": true,
-							"codeintel_live_enabled_languages":
-							[
-								"JavaScript",
-								"Mason",
-								"XBL",
-								"XUL",
-								"RHTML",
-								"SCSS",
-								"Python",
-								"HTML",
-								"Ruby",
-								"Python3",
-								"XML",
-								"Sass",
-								"XSLT",
-								"Django",
-								"HTML5",
-								"Perl",
-								"CSS",
-								"Twig",
-								"Less",
-								"Smarty",
-								"Node.js",
-								"Tcl",
-								"TemplateToolkit",
-								"PHP"
-							],
-							"codeintel_max_recursive_dir_depth": 10.0,
-							"codeintel_scan_exclude_dir":
-							{
-								"JavaScript":
-								[
-									"/build/",
-									"/min/"
-								]
-							},
-							"codeintel_scan_files_in_project": true,
-							"codeintel_selected_catalogs":
-							[
-								"PyWin32",
-								"jQuery",
-								"Rails"
-							],
-							"codeintel_snippets": true,
-							"codeintel_syntax_map":
-							{
-								"Python Django": "Python"
-							},
-							"codeintel_tooltips": "popup",
-							"incomplete_sync": null,
-							"origin_encoding": "ASCII",
-							"remote_loading": false,
-							"sublime_auto_complete": true,
-							"synced": false,
-							"syntax": "Packages/Python/Python.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				}
 			]
 		}
 	],
@@ -1021,7 +934,7 @@
 		[
 			[
 				"",
-				"/Users/bluedisk/Workspace/HOBBY/bunker1/bunker1.sublime-project"
+				"/Users/bluedisk/Workspace/Wholook/wholook.sublime-project"
 			]
 		],
 		"width": 380.0

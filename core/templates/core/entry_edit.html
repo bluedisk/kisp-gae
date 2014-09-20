@@ -38,9 +38,17 @@
 						<input type="text" class="form-control" name="regnum" value="{{ form.regnum.value|default_if_none:'' }}" placeholder="주민번호">
 						<span class="help-block">{{ form.regnum.errors }}</span>
 					</div>
+
+					
 				</div>
 				<div class="row">
-
+					<div class="col-sm-4 form-group{% if form.club.errors %} has-error{% endif %}">
+						<label for="club">
+							소속 동호회
+						</label>
+						<input type="text" class="form-control" name="club" value="{{ form.club.value|default_if_none:'' }}" placeholder="소속 동호회">
+						<span class="help-block">{{ form.club.errors }}</span>
+					</div>
 					<div class="col-sm-4 form-group{% if form.mileage.errors %} has-error{% endif %}">
 						<label for="mileage">
 							마일리지

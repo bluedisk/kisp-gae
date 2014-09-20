@@ -5,7 +5,8 @@ from django.core.urlresolvers import reverse
 from django.forms import ModelForm
 from django.http import HttpResponseRedirect
 
-from core.models import Event, EventImage, EventCompany, Series, Course, Entry, Agent, Page, SMSLog, ReservedSMS, Skill
+from core.models import Event, EventImage, EventCompany, Series, Course, Entry, \
+                        Agent, Page, SMSLog, ReservedSMS, Skill, Point
 from core.models import ContactGroup, ContactItem, Feedback
 
 from django.contrib.auth.models import User
@@ -93,6 +94,10 @@ class SMSLogAdmin(admin.ModelAdmin):
     list_display=('timestamp', 'caller','callee','count')
 
 
+class PointAdmin(admin.ModelAdmin):
+    list_display=('name','regnum', 'reason','amount','created_at')
+    ordering=('created_at',)
+
 
 admin.site.register(Event, EventAdmin)
 admin.site.register(EventImage, EventImageAdmin)
@@ -111,3 +116,4 @@ admin.site.register(Skill)
 admin.site.register(ContactGroup)
 admin.site.register(ContactItem)
 admin.site.register(Feedback)
+admin.site.register(Point, PointAdmin)

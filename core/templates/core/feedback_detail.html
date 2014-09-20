@@ -1,48 +1,58 @@
-{% if perms.view_feedback %}
+{% if perms.core.view_feedback %}
 
 <div class="modal-dialog">
   <div class="modal-content">
 
     <div class="modal-header">
       <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-      <h4 class="modal-title">{{ feedback.name }} ({{ feedback.cell }})</h4>
+      <h4 class="modal-title">{{ feedback.name }} ({{ feedback.regnum }})</h4>
     </div>
+    <form id="detail_form">
     <div class="modal-body">
+      
       <dl class="dl-horizontal">
         <dt>사용 내역</dt>
-        <dd>{{ feedback.where }}</dd>
+        <dd class="form-group"><input type="text" id="where" class="form-control" value="{{ feedback.where }}"></dd>
         <dt>사용 금액</dt>
-        <dd>{{ feedback.spend }}</dd>
+        <dd class="form-group"><input type="text" id="spend" class="form-control" value="{{ feedback.spend }}"></dd>
       </dl>
 
       <dl>
         <dt>발생 환자</dt>
-        <dd class="well">{{ feedback.patient|linebreaks }}</dd>
+        <dd><textarea class="well" id="patient" style="width:100%; max-width:100%">{{ feedback.patient }}</textarea></dd>
         <dt>진행 보고</dt>
-        <dd class="well">{{ feedback.report|linebreaks }}</dd>
+        <dd><textarea class="well" id="report" style="width:100%; max-width:100%">{{ feedback.report }}</textarea></dd>
         <dt>제안 사항</dt>
-        <dd class="well">{{ feedback.suggest|linebreaks }}</dd>
+        <dd><textarea class="well" id="suggest" style="width:100%; max-width:100%">{{ feedback.suggest }}</textarea></dd>
       </dl>
+      
     </div>
 
     <div class="modal-footer">
-      <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+      <button type="button" class="btn btn-warning" id="apply" onClick="applyChange()" data-applying-text="저장 중..">변경 저장</button>
+      <button type="button" class="btn btn-default" id="close" data-dismiss="modal">닫기</button>
     </div>
+    </form>
   </div>
 </div><!-- /.modal-dialog -->
 {% else %}
 
 <div class="modal-dialog">
- <div class="modal-header">
-  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-  <h4 class="modal-title">권한 없음!</h4>
-</div>
-<div class="modal-content">
-  권한이 없습니다.
 
-</div>
-<div class="modal-footer">
-  <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
-</div>
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      <h4 class="modal-title">권한 없음!</h4>
+    </div>
+
+    <div class="modal-body">
+      권한이 없습니다.
+    </div>
+
+    <div class="modal-footer">
+      <button type="button" class="btn btn-default" id="close" data-dismiss="modal">닫기</button>
+    </div>
+
+  </div>
 </div><!-- /.modal-dialog -->
 {% endif %}

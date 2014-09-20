@@ -144,7 +144,7 @@
 							</div>
 						</div>
 					{% else %}
-						<a href="{% url 'agent_entry_add' event.pk %}" class="btn btn-primary btn-lg btn-block">신청하기</a>
+						<a href="{% url 'entry_preadd' event.pk %}" class="btn btn-primary btn-lg btn-block">신청하기</a>
 					{% endif %}
 				{% elif event.get_status == 'feedback' or event.get_status == 'progress' %}
 					<a href="{% url 'feedback_write' event.pk %}" class="btn btn-info btn-lg btn-block">후기 작성</a>
@@ -160,7 +160,7 @@
 					{% if entry %}
 						<a href="{% url 'entry_edit' entry.pk %}" class="btn btn-warning btn-lg btn-block">수정하기</a> 
 					{% else %}
-						<a href="{% url 'entry_add' event.pk %}" class="btn btn-primary btn-lg btn-block">신청하기</a> 
+						<a href="{% url 'entry_preadd' event.pk %}" class="btn btn-primary btn-lg btn-block">신청하기</a> 
 					{% endif %}
 				{% elif event.get_status == 'feedback' or event.get_status == 'progress' %}
 					<a href="{% url 'feedback_write' event.pk %}" class="btn btn-primary btn-lg btn-block">후기 작성</a>

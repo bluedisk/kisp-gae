@@ -6,3 +6,5 @@ APNS_SANDBOX=False
 APNS_CERT='certs/bunker1cc_apns_dist.pem'
 
 INTERFACE_CLASS = django.DjangoInterface
+
+DEFAULT_SMS_SENDER = '010-000-0000'

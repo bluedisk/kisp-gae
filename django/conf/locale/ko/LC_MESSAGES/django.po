@@ -336,7 +336,7 @@ msgstr "올바른 값을 입력하세요."
 
 #: core/validators.py:104 forms/fields.py:464
 msgid "Enter a valid email address."
-msgstr "유효한 이메일 주소를 입력하세요."
+msgstr ""
 
 #: core/validators.py:107 forms/fields.py:1013
 msgid ""

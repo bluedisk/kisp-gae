@@ -15,27 +15,33 @@
     <hr>
   {% for event in events %}
 
-  <div class="container">        
+  <div class="container">
     <h4>{{event.year_title|safe}} <a class="btn btn-primary btn-sm" href="{% url 'event' event.pk %}">자세히보기 <span class="glyphicon glyphicon-chevron-right"></span></a></h4>
-
-    <div class="panel panel-default">
-        <div class="panel-heading"><p>{{event.title}}</p></div>
-        <div class="panel-body">
+    <div class="row">
+      <div class="col-sm-3 col-xs-12">
+        <img src="{{event.featured_image}}" class="img-responsive img-thumbnail">
+      </div>
+      <div class="col-sm-9 col-xs-12">
+        <div class="panel panel-default">
+          <div class="panel-heading"><p>{{event.title}}</p></div>
+          <div class="panel-body">
             <p class="col-sm-6">
-                <label>코스:</label> {{ event.course_list }}<br/>
-                <label>참가자수:</label> {{event.participants}}<br/>
-                <label>대회일자:</label> {{event.event_day_display}}<br/>
-                <label>요청인원:</label> {{event.requested}} 명(신청 {{event.entry_count}} 명)
+              <label>코스:</label> {{ event.course_list }}<br/>
+              <label>참가자수:</label> {{event.participants}}<br/>
+              <label>대회일자:</label> {{event.event_day_display}}<br/>
+              <label>요청인원:</label> {{event.requested}} 명(신청 {{event.entry_count}} 명)
             </p>
             <p class="col-sm-6">
-                <label>장소:</label> {{event.location_tag|safe}}<br/>
-                <label>집합시간:</label> {{event.assemble_time}}<br/>
-                <label>출발시간:</label> {{event.race_time}}<br/>
-                <label>모집마감:</label> {{event.recruit_deadline}}<br/>
+              <label>장소:</label> {{event.location_tag|safe}}<br/>
+              <label>집합시간:</label> {{event.assemble_time}}<br/>
+              <label>출발시간:</label> {{event.race_time}}<br/>
+              <label>모집마감:</label> {{event.recruit_deadline}}<br/>
             </p>
+          </div>
         </div>
+      </div>
     </div>
-</div>
+  </div>
 <hr>
 {% endfor %}
 

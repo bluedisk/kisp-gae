@@ -16,9 +16,9 @@
         <h2 class="form-signin-heading">"{{ event.short_title }}" 후기/정산 작성</h2>
         </div>
 
-        <h4>대원 정보</h4>     
+        <h4>대원 정보</h4>
 
-        <div class="form-group {%if form.name.errors %}has-error{% endif %}">   
+        <div class="form-group {%if form.name.errors %}has-error{% endif %}">
             <label for="{{form.name.html_name}}" class="sr-only">{{form.name.label}}</label>
             <input type="text" class="form-control" placeholder="{{form.name.label}}" id="{{form.name.html_name}}" name="{{form.name.html_name}}" value="{{form.name.value|default_if_none:""}}">
 
@@ -26,8 +26,7 @@
             <span class="help-block">{{error}}</span>
             {% endfor %}
         </div>
-
-        <div class="form-group {%if form.regnum.errors %}has-error{% endif %}">   
+        <div class="form-group {%if form.regnum.errors %}has-error{% endif %}">
 
             <label for="{{form.regnum.html_name}}" class="sr-only">{{form.regnum.label}}</label>
             <input type="text" class="form-control" placeholder="{{form.regnum.label}}" id="{{form.regnum.html_name}}" name="{{form.regnum.html_name}}" value="{{form.regnum.value|default_if_none:""}}">
@@ -38,16 +37,20 @@
 
         </div>
 
-        <h4>비용 정산</h4>     
-        지급 금액 총 {{ event.support|intcomma }}원 중 
-        <div class="form-group {%if form.where.errors %}has-error{% endif %}">   
+<HR>
+
+        <h4>비용 정산</h4>
+        지급 금액 총 {{ event.support|intcomma }}원<BR>
+        <h5>용도</h5>
+        <div class="form-group {%if form.where.errors %}has-error{% endif %}">
             <label for="{{form.where.html_name}}" class="sr-only">{{form.where.label}}</label>
             <input type="text" class="form-control" placeholder="{{form.where.label}}" id="{{form.where.html_name}}" name="{{form.where.html_name}}" value="{{form.where.value|default_if_none:""}}">
             {% for error in form.where.errors %}
             <span class="help-block">{{error}}</span>
             {% endfor %}
         </div>
-        <div class="form-group {%if form.spend.errors %}has-error{% endif %}">   
+        <h5>사용 금액</h5>
+        <div class="form-group {%if form.spend.errors %}has-error{% endif %}">
             <label for="{{form.spend.html_name}}" class="sr-only">{{form.spend.label}}</label>
             <div class="input-group">
                 <span class="input-group-addon">&#8361;</span>
@@ -59,23 +62,23 @@
             {% endfor %}
         </div>
         잔액: <span id="left_cost">{{ event.support|intcomma }}</span>원
-
-        <h4>진행 후기 및 의견</h4>     
-        <div class="form-group {%if form.patient.errors %}has-error{% endif %}">   
+<HR>
+        <h4>진행 후기 및 의견</h4>
+        <div class="form-group {%if form.patient.errors %}has-error{% endif %}">
             <label for="{{form.patient.html_name}}" class="sr-only">{{form.patient.label}}</label>
             <textarea class="form-control" placeholder="패트롤 중 환자가 발생했던 경우 발생 상황, 내용, 처리 방법과 결과를 적어주세요." id="{{form.patient.html_name}}" name="{{form.patient.html_name}}"rows=4>{{form.patient.value|default_if_none:""}}</textarea>
             {% for error in form.patient.errors %}
             <span class="help-block">{{error}}</span>
             {% endfor %}
         </div>
-        <div class="form-group {%if form.report.errors %}has-error{% endif %}">   
+        <div class="form-group {%if form.report.errors %}has-error{% endif %}">
             <label for="{{form.report.html_name}}" class="sr-only">{{form.report.label}}</label>
             <textarea class="form-control" placeholder="사무국 측에 전달하고 싶은 사항이나. 의견이 있으면 여기에 적어주세요." id="{{form.report.html_name}}" name="{{form.report.html_name}}"rows=4>{{form.report.value|default_if_none:""}}</textarea>
             {% for error in form.report.errors %}
             <span class="help-block">{{error}}</span>
             {% endfor %}
         </div>
-        <div class="form-group {%if form.suggest.errors %}has-error{% endif %}">   
+        <div class="form-group {%if form.suggest.errors %}has-error{% endif %}">
             <label for="{{form.suggest.html_name}}" class="sr-only">{{form.suggest.label}}</label>
             <textarea class="form-control" placeholder="제안할 사항이나 추가적으로 언급할 내용이 있으면 여기에 적어주세요." id="{{form.suggest.html_name}}" name="{{form.suggest.html_name}}" rows=4>{{form.suggest.value|default_if_none:""}}</textarea>
             {% for error in form.suggest.errors %}
@@ -105,7 +108,7 @@ $(function() {
         var spend = $(this).val();
         var left = supported-spend;
 
-        if ( left < 0 ) 
+        if ( left < 0 )
             $('#left_cost').addClass('text-danger');
         else
             $('#left_cost').removeClass('text-danger');

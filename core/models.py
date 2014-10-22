@@ -1,4 +1,4 @@
-#!/usr/bin/env 
+#!/usr/bin/env
 # -*- coding:utf-8 -*-
 
 from django.db import models
@@ -84,7 +84,7 @@ EVENT_STATUS_INFO = {
 	'title':u'모집 중',
 	'description':u'곧 모집이 마감됩니다.',
 	'class':'warning'
-	},	
+	},
 	'recruit':{
 	'title':u'모집 중',
 	'description':u'모집을 진행중입니다.',
@@ -105,10 +105,10 @@ EVENT_STATUS_INFO = {
 	'description':u'',
 	'class':'muted'
 	}
-} 
+}
 
 class Event(models.Model):
-	
+
 	class Meta:
 		verbose_name = u"행사"
 		verbose_name_plural = u"행사들"
@@ -146,7 +146,7 @@ class Event(models.Model):
 			return '<a href="%s">%s</a>'%(self.location_url, self.location)
 
 		return self.location
-	
+
 	def event_day_display(self):
 		WEEKDAY_KOR = u"월화수목금토일-------"
 		return u"%s년 %s월 %s일 (%s)"%(self.event_day.year, self.event_day.month, self.event_day.day, WEEKDAY_KOR[self.event_day.weekday()])
@@ -173,7 +173,7 @@ class Event(models.Model):
 
 		if self.feedback_deadline < today:
 			status = 'ended'
-		
+
 		elif self.event_day < today and self.feedback_deadline >= today:
 			status = 'feedback'
 
@@ -201,7 +201,7 @@ class Event(models.Model):
 
 		if self.feedback_deadline < today:
 			status = 'ended'
-		
+
 		elif self.event_day < today and self.feedback_deadline >= today:
 			status = 'feedback'
 
@@ -214,7 +214,7 @@ class Event(models.Model):
 		elif self.recruit_open <= today:
 			if self.recruit_deadline == tomorrow:
 				status = 'recruit_ending'
-			
+
 			elif self.recruit_deadline >= today:
 				status = 'recruit'
 
@@ -314,7 +314,7 @@ class Skill(models.Model):
 
     name = models.CharField(u'스킬명', max_length=32)
     desc = models.TextField(u'부가설명', blank=True)
-    
+
 
 class Entry(models.Model):
 
@@ -335,7 +335,7 @@ class Entry(models.Model):
 
 	def short_etc(self):
 		return truncatechars(self.etc, 20)
-	
+
 	def carpool_digest(self):
 		digest = {
 			'display': "%s (%s)"%(self.name,self.location),
@@ -383,7 +383,7 @@ class Agent(models.Model):
 
 	def regnum_masked(self):
 		return self.regnum[:6]+"-*******"
-	
+
 	def skill_display(self):
 		skill = [ sk.name for sk in Skill.objects.filter(pk__in=self.skill)]
 		return ", ".join(skill)
@@ -407,12 +407,12 @@ class Agent(models.Model):
 
 	location = models.CharField(u'지역', max_length=32, blank=True)
 
-	# def save(self, size=(140, 140)): 
-	# 	super(Agent, self).save() 
-	# 	if self.image: 
-	# 		image = Image.open(self.image) 
+	# def save(self, size=(140, 140)):
+	# 	super(Agent, self).save()
+	# 	if self.image:
+	# 		image = Image.open(self.image)
 
-	# 		image.thumbnail(size, Image.ANTIALIAS) 
+	# 		image.thumbnail(size, Image.ANTIALIAS)
 	# 		self.image = image
 
 class Page(models.Model):
@@ -430,22 +430,22 @@ class Page(models.Model):
 	content = HTMLField(u'')
 
 class SMSLog(models.Model):
-    
+
     class Meta:
         verbose_name = u"SMS 전송 로그"
         verbose_name_plural = u"SMS 전송 로그"
- 
+
     def __unicode__(self):
         return u"[%s] 폰번호 %s 에서 %d개 발송"%(self.timestamp.isoformat(), self.caller, self.count)
-    
+
     caller = models.CharField(u'발신자', max_length=30)
-    callee = models.CharField(u'수신자', max_length=4096)
+    callee = models.TextField(u'수신자')
 
     msg = models.CharField(u'메시지',max_length=4096)
 
     #user = models.ForeignKey(User, verbose_name=u'발송자', blank=True)
     count = models.IntegerField(u'발송된 갯수')
-    
+
     timestamp = models.DateTimeField(u'전송시간', auto_now_add=True, blank=True)
 
 
@@ -462,11 +462,11 @@ class ReservedSMS(models.Model):
 			target = target[0]
 		else:
 			target = u"%s외 (%s명)"%(target[0],len(target)-1)
-		
+
 		return u"[%s] %s=>%s"%(self.timestamp.isoformat(), self.caller, target )
 
 	caller = models.CharField(u'발신자', max_length=30)
-	callee = models.CharField(u'수신자', max_length=4096)
+	callee = models.TextField(u'수신자')
 
 	msg = models.CharField(u'메시지',max_length=4096)
 
@@ -478,11 +478,11 @@ class ContactGroup(models.Model):
         verbose_name_plural = _(u'연락처 그룹들')
 
     def __unicode__(self):
-        return self.name
+        return u"[%s 그룹]" % self.name
 
     name = models.CharField(u'그룹명', max_length=255)
 
-    
+
 class ContactItem(models.Model):
     class Meta:
         verbose_name = _(u'연락처')
@@ -490,7 +490,7 @@ class ContactItem(models.Model):
 
     def __unicode__(self):
         return self.name
-    
+
     group = models.ForeignKey(ContactGroup, verbose_name=u'그룹')
     name = models.CharField(u'이름', max_length=255)
     cell = models.CharField(u'휴대폰', max_length=255)
@@ -542,4 +542,4 @@ class Point(models.Model):
     created_at = models.DateTimeField(u'등록일', auto_now_add=True)
 
 
-    
+

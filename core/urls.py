@@ -17,7 +17,7 @@ urlpatterns = patterns('',
     url(r'^aboutoz/$', KISPPageView.as_view(), {'viewname':'aboutoz'}, name="aboutoz"),
     url(r'^request/$', KISPPageView.as_view(), {'viewname':'request'}, name="request"),
     url(r'^team/$', KISPPageView.as_view(), {'viewname':'team_table'}, name="team"),
-    
+
     url(r'^event/$', 'core.views.event_list', name='event_list'),
     url(r'^event/(?P<eid>\d+)/$', 'core.views.event', name='event'),
 
@@ -45,14 +45,17 @@ urlpatterns = patterns('',
     url(r'^entry/(?P<event_id>\d+)/agent/add/$', 'core.views.agent_entry_edit', name='agent_entry_add'),
     url(r'^entry/(?P<event_id>\d+)/agent/edit/$', 'core.views.agent_entry_edit', name='agent_entry_edit'),
     url(r'^entry/(?P<event_id>\d+)/agent/del/$', 'core.views.agent_entry_del', name='agent_entry_del'),
-    
+
     url(r'^contact/$', 'core.views.contact', name='contact'),
 
     url(r'^sms/entry/$', 'core.views.send_sms_by_entry', name='send_sms_by_entry'),
     url(r'^sms/event/(?P<eid>\d+)/$', 'core.views.send_sms_by_event', name='send_sms_by_event'),
 
+    url(r'^sms/group/$', 'core.views.groups', name='group_select'),
+    url(r'^sms/group/(?P<gid>\d+)/$', 'core.views.send_sms_by_group', name='send_sms_by_group'),
+
     url(r'^sms_sender/$', "core.views.sms_sender", name="sms_sender"),
-  
+
 
     url(r'^signin/$', 'core.views.signin', name='signin'),
     url(r'^signout/$', 'core.views.signout', name='signout'),
@@ -66,4 +69,5 @@ urlpatterns = patterns('',
 
     url(r'^timezone/$','core.timezone.test'),
     url(r'^temp_sms/$','core.views.temp_sms'),
+    url(r'^temp_sms2/$','core.views.temp_sms2'),
 )

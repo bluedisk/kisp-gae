@@ -25,7 +25,7 @@
 	</head>
 
 <body>
-    
+
     <div class="navbar navbar-inverse navbar-fixed-top" role="navigation" id="navigation">
         <div class="container">
             <div class="navbar-header">
@@ -55,6 +55,10 @@
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><strong>환영합니다. {{ user.first_name }}님 </strong><b class="caret"></b></a>
                                 <ul class="dropdown-menu">
                                     <li><a href="{% url 'agent_view' %}">대원 정보</a></li>
+                                    {% if user.is_staff %}
+                                    <li class="divider"></li>
+                                    <li><a href="/sms/group/">그룹 문자 보내기</a></li>
+                                    {% endif %}
                                     <li class="divider"></li>
                                     <li><a href="{% url 'change_pw' %}">비밀번호 변경</a></li>
                                     <li><a href="{% url 'signout' %}">로그 아웃</a></li>
@@ -77,7 +81,7 @@
                   </form>
                   {% endif %}
                 </div><!--/.nav-collapse -->
-    
+
             </div><!-- /.nav-collapse -->
         </div><!-- /.container -->
     </div><!-- /.navbar -->
@@ -131,7 +135,7 @@
     var ver= getInternetExplorerVersion();
     if ( ver >= 0 && ver <= 8 ) {
         $('#ie-warn').show();
-    } 
+    }
 
     </script>
 

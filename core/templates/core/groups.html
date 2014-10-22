@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+    <div class="row">
+
+    <div class="page-header">
+        <h3>그룹 선택<small></small></h3>
+    </div>
+
+    <ul>
+        {% for group in groups %}
+        <li class="col-xs-3"><a href="{% url 'send_sms_by_group' group.pk %}">{{ group.name }}</a></li>
+        {% endfor %}
+    </ul>
+    </div>
+
+    <div class="row">
+    <div class="page-header">
+        <h3>대회 선택<small></small></h3>
+    </div>
+
+    <ul>
+        {% for event in events %}
+        <li class="col-xs-6"><a href="{% url 'send_sms_by_event' event.pk %}">{{ event.title }}</a></li>
+        {% endfor %}
+    </ul>
+    {#  #}
+</div>
+
+{% endblock %}

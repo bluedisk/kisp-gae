@@ -13,11 +13,12 @@ from core.utils import *
 
 MAXIMUM_PASSWORD_LENGTH = 256
 
+
 class EntryForm(forms.ModelForm):
     class Meta:
-        model=Entry
-        fields = [ 'name', 'cell', 'regnum', 'club', 'htype', 'hdist', 'tsize', 'mileage', 'etc', 'carpool', 'location','skill']
-        native_fields = [ 'skill', 'course' ]
+        model = Entry
+        fields = ['name', 'cell', 'regnum', 'club', 'htype', 'hdist', 'tsize', 'mileage', 'etc', 'carpool', 'location', 'skill']
+        native_fields = ['skill', 'course']
 
     captcha = ReCaptchaField()
 
@@ -30,10 +31,11 @@ class EntryForm(forms.ModelForm):
 
         return cell
 
+
 class AgentEntryForm(forms.ModelForm):
     class Meta:
-        model=Entry
-        fields = [ 'name', 'cell', 'regnum', 'club', 'htype', 'hdist', 'tsize', 'mileage', 'etc', 'carpool', 'location','skill']
+        model = Entry
+        fields = ['name', 'cell', 'regnum', 'club', 'htype', 'hdist', 'tsize', 'mileage', 'etc', 'carpool', 'location', 'skill']
         native_fields = ['skill']
 
     def clean_cell(self):
@@ -42,11 +44,15 @@ class AgentEntryForm(forms.ModelForm):
 
         return cell
 
+    def clean_regnum(self):
+        return format_regnum(self.data['regnum'])
+
 
 class SendSmsForm(forms.Form):
     caller = forms.CharField(max_length=14, required=True)
     msg = forms.CharField(max_length=80, required=True)
     captcha = ReCaptchaField()
+
 
 class SendUserSmsForm(forms.Form):
     caller = forms.CharField(max_length=14, required=True)
@@ -56,7 +62,7 @@ class SendUserSmsForm(forms.Form):
 class UserSignupForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = ['username','first_name', 'email',]
+        fields = ['username', 'first_name', 'email']
 
     username = forms.CharField(
         required=True,
@@ -186,7 +192,7 @@ class UserSigninForm(forms.Form):
         UserModel = get_user_model()
         self.username_field = UserModel._meta.get_field(UserModel.USERNAME_FIELD)
         if not self.fields['username'].label:
-            self.fields['username'].label = u"아이디";
+            self.fields['username'].label = u"아이디"
 
     def clean(self):
         username = self.cleaned_data.get('username')
@@ -213,12 +219,11 @@ class UserSigninForm(forms.Form):
         return self.user_cache
 
 
-
 class AgentForm(forms.ModelForm):
     class Meta:
         model = Agent
-        fields = ['cell','regnum','mileage','tsize','image','skill','location']
-        native_fields = ['image','skill']
+        fields = ['cell', 'regnum', 'mileage', 'tsize', 'image', 'skill', 'location']
+        native_fields = ['image', 'skill']
 
     def clean_cell(self):
         cell = self.cleaned_data['cell']
@@ -229,21 +234,24 @@ class AgentForm(forms.ModelForm):
     def clean_regnum(self):
         return format_regnum(self.data['regnum'])
 
+
 class EventImageForm(forms.ModelForm):
     class Meta:
         model = EventImage
-        fields = ['title','image','featured',]
-        native_fields = ['image','featured',]
+        fields = ['title', 'image', 'featured']
+        native_fields = ['image', 'featured']
+
 
 class FeedbackForm(forms.ModelForm):
     class Meta:
         model = Feedback
-        fields = ['name', 'event', 'regnum', 'where','spend', 'patient','report','suggest']
+        fields = ['name', 'event', 'regnum', 'where', 'spend', 'patient', 'report', 'suggest']
         widgets = {
             'event': forms.HiddenInput,
         }
 
     spend = forms.CharField(label=u'사용 금액')
+    uid = forms.IntegerField(label=u'User ID')
 
     def clean_name(self):
         name = self.data['name']
@@ -262,29 +270,17 @@ class FeedbackForm(forms.ModelForm):
 
     def clean_spend(self):
         spend = self.cleaned_data['spend']
-        spend = int(re.sub('[^0-9]','',spend))
+        spend = int(re.sub('[^0-9]', '', spend))
 
         return spend
 
     def clean_where(self):
         where = self.cleaned_data['where']
         spend = self.data['spend']
-        spend = re.sub('[^0-9]','',spend) or '0'
+        spend = re.sub('[^0-9]', '', spend) or '0'
         spend = int(spend)
 
         if spend != 0 and not where:
             raise forms.ValidationError(u'해당 금액을 사용한 내역 입력이 필요합니다.')
 
         return where
-
-    def clean_cell(self):
-        name = self.data['name']
-        cell = format_cell(self.data['cell'])
-        event = self.data['event']
-
-        try:
-            Entry.objects.get(event=event, name=name, cell=cell)
-        except:
-            raise forms.ValidationError(u'참가자중에 일치하는 대원 정보가 없습니다.')
-
-        return cell

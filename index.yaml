@@ -42,6 +42,12 @@ indexes:
   - name: __key__
     direction: desc
 
+- kind: core_contactitem
+  properties:
+  - name: group_id
+  - name: __key__
+    direction: desc
+
 - kind: core_course
   properties:
   - name: distance

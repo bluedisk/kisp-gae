@@ -5,7 +5,7 @@
 {% if saved %}
 <div class="alert alert-success alert-dismissable">
   <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-  <strong>저장 완료!</strong> 정상적으로 저장되었습니다. 
+  <strong>저장 완료!</strong> 정상적으로 저장되었습니다.
 </div>
 {% endif %}
 
@@ -39,6 +39,33 @@
 		수정하기
 	</a>
 
+</div>
+<div class="form-signin form-wide">
+	<h2 class="form-signin-heading">포인트 : {{ total_point }}</h2>
+
+	<table class="table table-striped">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>날자</th>
+          <th>사유</th>
+          <th>포인트</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+    	{% for point in points %}
+    	<td>{{ forloop.counter }}</td>
+    	<td>{{ point.when }}</td>
+		<td>{{ point.reason }}</td>
+		<td>{{ point.amount }}</td>
+		{% endfor %}
+
+        </tr>
+      </tbody>
+    </table>
+
+	</ul>
 </div>
 
 <!-- /container -->

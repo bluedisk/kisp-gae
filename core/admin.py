@@ -33,7 +33,7 @@ class EventAdmin(admin.ModelAdmin):
             }),
         (u'행사 정보', {
             'fields':(("location",'location_url'),'support','course','requested','desc','participants'),
-            }),        
+            }),
         (u'행사 일정', {
             'fields':('event_day','assemble_time','race_time'),
             }),
@@ -49,7 +49,7 @@ class EventAdmin(admin.ModelAdmin):
     # send_sms.short_description = u"[SMS] 선택된 행사 참가 대원들에게 문자 메시지를 전송합니다."
 
     # actions = [send_sms]
-    
+
 
 class EventCompanyAdmin(admin.ModelAdmin):
     pass
@@ -71,7 +71,7 @@ class EntryAdmin(admin.ModelAdmin):
     #     ('detail', {
     #         'classes':('wide',),
     #         'fields': ('subtitle', 'content')
-    #         }   
+    #         }
     #     )
     # )
 
@@ -99,6 +99,11 @@ class PointAdmin(admin.ModelAdmin):
     ordering=('created_at',)
 
 
+class ContactItemAdmin(admin.ModelAdmin):
+    list_display=('name','cell','etc1','etc2')
+    list_filter=('group',)
+
+
 admin.site.register(Event, EventAdmin)
 admin.site.register(EventImage, EventImageAdmin)
 admin.site.register(EventCompany, EventCompanyAdmin)
@@ -114,6 +119,6 @@ admin.site.register(ReservedSMS)
 admin.site.register(Skill)
 
 admin.site.register(ContactGroup)
-admin.site.register(ContactItem)
+admin.site.register(ContactItem, ContactItemAdmin)
 admin.site.register(Feedback)
 admin.site.register(Point, PointAdmin)

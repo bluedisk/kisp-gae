@@ -8,6 +8,7 @@ from tinymce.models import HTMLField
 
 from django.template.defaultfilters import truncatechars  # or truncatewords
 from django.contrib.auth.models import User
+from django.core.exceptions import ObjectDoesNotExist
 
 from datetime import date, datetime, timedelta
 from core import timezone
@@ -282,6 +283,7 @@ ENTRY_TYPE_CHOICES = (
 	)
 
 DISTANCE_TYPE_CHOICES = (
+		(u'0',u'본부'),
 		(u'5',u'0~5Km'),
 		(u'10',u'5~10Km'),
 		(u'20',u'10~20Km'),
@@ -324,6 +326,31 @@ class Entry(models.Model):
 
 	def __unicode__(self):
 		return self.name
+
+	def save(self):
+
+		try:
+			group = ContactGroup.objects.get(name=u'최종(자동업데이트)')
+
+			try:
+				group.items.get(cell=self.cell)
+
+			except ObjectDoesNotExist:
+				nitem = ContactItem()
+				nitem.group = group
+				nitem.name = self.name
+				nitem.cell = self.cell
+				nitem.etc1 = u'자동추가 @%s' % self.event.title
+				nitem.save()
+
+		except ObjectDoesNotExist:
+			logger.error('Auto Update ContactGroup Not Found')
+		except:
+			logger.error('Unknown Exception')
+			pass
+
+		super(Entry,self).save()
+
 
 	def digest(self):
 		digest = {
@@ -473,6 +500,7 @@ class ReservedSMS(models.Model):
 	timestamp = models.DateTimeField(u'예약시간')
 
 class ContactGroup(models.Model):
+
     class Meta:
         verbose_name = _(u'연락처 그룹')
         verbose_name_plural = _(u'연락처 그룹들')
@@ -491,11 +519,11 @@ class ContactItem(models.Model):
     def __unicode__(self):
         return self.name
 
-    group = models.ForeignKey(ContactGroup, verbose_name=u'그룹')
+    group = models.ForeignKey(ContactGroup, verbose_name=u'그룹', related_name='items')
     name = models.CharField(u'이름', max_length=255)
     cell = models.CharField(u'휴대폰', max_length=255)
     etc1 = models.CharField(u'기타1', max_length=255)
-    etc2 = models.CharField(u'기타1=2', max_length=255)
+    etc2 = models.CharField(u'기타2', max_length=255)
 
 
 class Feedback(models.Model):
@@ -532,8 +560,11 @@ class Point(models.Model):
     def __unicode__(self):
         return "%s - %s : %s"%(self.name, self.reason, self.amount)
 
+    def when(self):
+    	return self.created_at.strftime('%Y-%m-%d')
+
     name = models.CharField(u'이름', max_length=128)
-    club = models.CharField(u'동호회',default=u'KISP')
+    club = models.CharField(u'동호회', max_length=128, default=u'KISP')
     regnum = models.CharField(u'주민번호', max_length=15)
 
     reason = models.CharField(u'사유', max_length=1024)

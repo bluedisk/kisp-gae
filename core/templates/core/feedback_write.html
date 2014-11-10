@@ -7,7 +7,6 @@
 
 
 {% block form %}
-
     <form class="form-signin form-wide" method="post" action="">
         {% csrf_token %}
         <input type="hidden" name="event" value="{{ event.pk }}" />

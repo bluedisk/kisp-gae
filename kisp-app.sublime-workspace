@@ -340,26 +340,10 @@
 	"buffers":
 	[
 		{
-			"file": "core/xlexport.py",
-			"settings":
-			{
-				"buffer_size": 4356,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "/Users/bluedisk/Workspace/Cytree/DataLogger/gen_data.py",
-			"settings":
-			{
-				"buffer_size": 2886,
-				"line_ending": "Unix"
-			}
-		},
-		{
 			"file": "core/models.py",
 			"settings":
 			{
-				"buffer_size": 13554,
+				"buffer_size": 13570,
 				"line_ending": "Unix"
 			}
 		}
@@ -488,18 +472,41 @@
 	},
 	"file_history":
 	[
+		"/Users/bluedisk/Workspace/kisp-app/core/forms.py",
+		"/Users/bluedisk/Workspace/kisp-app/core/models.py",
 		"/Users/bluedisk/Workspace/kisp-app/core/views.py",
+		"/Users/bluedisk/Workspace/Cytree/DataLogger/SwingCaddie/.idea/.name",
+		"/Users/bluedisk/Workspace/Cytree/DataLogger/SwingCaddie/.idea/workspace.xml",
+		"/Users/bluedisk/Workspace/Cytree/DataLogger/SwingCaddie/app/app.iml",
+		"/Users/bluedisk/Workspace/Cytree/DataLogger/SwingCaddie/app/build/intermediates/incremental/mergeAssets/debug/merger.xml",
+		"/Users/bluedisk/Workspace/Cytree/DataLogger/SwingCaddie/app/build/intermediates/incremental/mergeResources/debug/merger.xml",
+		"/Users/bluedisk/Workspace/Cytree/DataLogger/SwingCaddie/app/build/intermediates/res/debug/layout/activity_main.xml",
+		"/Users/bluedisk/Workspace/Cytree/DataLogger/SwingCaddie/app/build/intermediates/res/debug/layout/fragment_graph.xml",
+		"/Users/bluedisk/Workspace/Cytree/DataLogger/SwingCaddie/app/build/intermediates/res/debug/layout/fragment_import.xml",
+		"/Users/bluedisk/Workspace/Cytree/DataLogger/SwingCaddie/app/build/intermediates/res/debug/layout/fragment_main.xml",
+		"/Users/bluedisk/Workspace/Cytree/DataLogger/SwingCaddie/app/build/intermediates/res/debug/layout/fragment_period.xml",
+		"/Users/bluedisk/Workspace/Cytree/DataLogger/SwingCaddie/app/build/intermediates/res/debug/layout/fragment_total.xml",
+		"/Users/bluedisk/Workspace/Cytree/DataLogger/SwingCaddie/app/build/intermediates/res/debug/layout/period_item.xml",
+		"/Users/bluedisk/Workspace/Cytree/DataLogger/SwingCaddie/app/build/intermediates/res/debug/menu/main.xml",
+		"/Users/bluedisk/Workspace/Cytree/DataLogger/SwingCaddie/app/build/intermediates/res/debug/menu/menu_date_picker.xml",
+		"/Users/bluedisk/Workspace/Cytree/DataLogger/SwingCaddie/app/build/intermediates/res/debug/values-w820dp-v13/values.xml",
+		"/Users/bluedisk/Workspace/Cytree/DataLogger/SwingCaddie/app/build/intermediates/res/debug/values/values.xml",
+		"/Users/bluedisk/Workspace/Cytree/DataLogger/SwingCaddie/build/intermediates/dex-cache/cache.xml",
+		"/Users/bluedisk/Workspace/kisp-app/core/templates/core/feedback_write.html",
+		"/Users/bluedisk/Workspace/babybjorn/wp-content/themes/enfold/css/base.css",
+		"/Users/bluedisk/Workspace/babybjorn/wp-content/themes/enfold/style.css",
+		"/Users/bluedisk/Workspace/kisp-app/core/utils.py",
+		"/Users/bluedisk/Workspace/kisp-app/core/xlexport.py",
+		"/Users/bluedisk/Workspace/Cytree/DataLogger/gen_data.py",
 		"/Users/bluedisk/Workspace/kisp-app/core/templates/core/groups.html",
 		"/Users/bluedisk/Workspace/kisp-app/core/urls.py",
 		"/Users/bluedisk/Workspace/kisp-app/core/templates/base.html",
 		"/Users/bluedisk/Workspace/kisp-app/core/templates/core/event_list.html",
-		"/Users/bluedisk/Workspace/kisp-app/core/models.py",
 		"/Users/bluedisk/Workspace/kisp-app/kispapp/settings.py",
 		"/Users/bluedisk/Workspace/kisp-app/core/templates/core/sms.html",
 		"/Users/bluedisk/Workspace/kisp-app/core/templates/core/index.html",
 		"/Users/bluedisk/Workspace/kisp-app/cron.yaml",
 		"/Users/bluedisk/Workspace/kisp-app/core/templates/user/agent_edit.html",
-		"/Users/bluedisk/Workspace/kisp-app/core/forms.py",
 		"/Users/bluedisk/Desktop/aucean.py",
 		"/Users/bluedisk/Downloads/wxTerminal.py",
 		"/Users/bluedisk/SimpleSPPServer.java",
@@ -552,7 +559,6 @@
 		"/Users/bluedisk/Workspace/kisp-app/kisp_api.py",
 		"/Users/bluedisk/Workspace/kisp-app/core/admin.py",
 		"/Users/bluedisk/Workspace/kisp-app/core/templates/core/entry_view.html",
-		"/Users/bluedisk/Workspace/kisp-app/core/templates/core/feedback_write.html",
 		"/Users/bluedisk/Workspace/kisp-app/message/interface/base.py",
 		"/Users/bluedisk/Workspace/kisp-app/message/interface/__init__.py",
 		"/Users/bluedisk/Workspace/kisp-app/message/targets.py",
@@ -583,11 +589,9 @@
 		"/Users/bluedisk/Workspace/kisp-app/core/tests.py",
 		"/Users/bluedisk/Library/Application Support/Sublime Text 2/Packages/User/Preferences.sublime-settings",
 		"/Users/bluedisk/Workspace/kisp-app/README.md",
-		"/Users/bluedisk/Workspace/kisp-app/core/xlexport.py",
 		"/Users/bluedisk/Workspace/kisp-app/index.yaml",
 		"/Users/bluedisk/Workspace/kisp-app/core/static/css/base.css",
 		"/Users/bluedisk/Workspace/kisp-app/static/css/base.css",
-		"/Users/bluedisk/Workspace/kisp-app/core/utils.py",
 		"/Users/bluedisk/Workspace/kisp-app/core/templates/core/utils.py",
 		"/Users/bluedisk/Workspace/kisp-app/static/css/auth.css",
 		"/Users/bluedisk/Workspace/kisp-app/static/js/jquery.number.min.js",
@@ -595,27 +599,7 @@
 		"/Users/bluedisk/Workspace/kisp-app/core/static/js/jquery-1.9.1.min.js",
 		"/Users/bluedisk/Workspace/kisp-app/core/templates/form_fields.html",
 		"/Users/bluedisk/Workspace/kisp-app/core/templatetags/kisppage.py",
-		"/Users/bluedisk/Workspace/kisp-app/core/templates/core/event_image.html",
-		"/Users/bluedisk/Workspace/kisp-app/core/templates/core/info.html",
-		"/Users/bluedisk/Workspace/kisp-app/core/templates/user/agent.html",
-		"/Users/bluedisk/Workspace/kisp-app/django/shortcuts/__init__.py",
-		"/Users/bluedisk/Workspace/kisp-app/core/sms.py",
-		"/Users/bluedisk/Workspace/kisp-app/xltest.py",
-		"/Users/bluedisk/Workspace/kisp-app/xlcolor.py",
-		"/Users/bluedisk/Workspace/kisp-app/core/templates/xltest.py",
-		"/Users/bluedisk/Workspace/kisp-app/core/templates/user/signup.html",
-		"/Users/bluedisk/Workspace/kisp-app/core/templates/user/thanks.html",
-		"/Users/bluedisk/Workspace/kisp-app/static/js/admin-date-autoset.js",
-		"/Users/bluedisk/Workspace/kisp-app/kisp-app.sublime-workspace",
-		"/Users/bluedisk/Workspace/kisp-app/core/templates/core/carpool_sms_sent.html",
-		"/Users/bluedisk/Workspace/kisp-app/core/templates/core/contact.html",
-		"/Users/bluedisk/Workspace/kisp-app/core/templates/core/sms_reuslt.html",
-		"/Users/bluedisk/Workspace/kisp-app/core/templates/core/sms_sent.html",
-		"/Users/bluedisk/Workspace/kisp-app/django/forms/widgets.py",
-		"/Users/bluedisk/Workspace/kisp-app/django/forms/fields.py",
-		"/Users/bluedisk/Workspace/kisp-app/djangotoolbox/fields.py",
-		"/Users/bluedisk/Workspace/kisp-app/djangoappengine/storage.py",
-		"/Users/bluedisk/Workspace/kisp-app/djangoappengine/tests/models.py"
+		"/Users/bluedisk/Workspace/kisp-app/core/templates/core/event_image.html"
 	],
 	"find":
 	{
@@ -626,6 +610,7 @@
 		"height": 0.0,
 		"where_history":
 		[
+			"/Users/bluedisk/Workspace/Cytree/DataLogger/SwingCaddie",
 			"/Users/bluedisk/Workspace/kisp-app",
 			"/Users/bluedisk/Workspace/kisp-app/, -*/django/*, -*/djangoapp*, -*min.js",
 			"/Users/bluedisk/Workspace/kisp-app/, -*/django/*, -*/djangoapp*",
@@ -660,6 +645,25 @@
 		"case_sensitive": true,
 		"find_history":
 		[
+			"DataLogger",
+			"datalogger",
+			"feedback_",
+			"print",
+			"agent_",
+			"ㅁㅎ둣_",
+			"form.id",
+			"form.name.",
+			"form.name",
+			"name",
+			"feedback_w",
+			"','",
+			"':u",
+			"','",
+			"text",
+			"Feed",
+			"User",
+			"FeedbackForm",
+			"feedback",
 			"row,",
 			"Entry",
 			"callee",
@@ -768,26 +772,7 @@
 			"default_parser",
 			"uri_parser",
 			"uri_converter",
-			"parser",
-			"format_cell",
-			"urlunparse",
-			"target_uri",
-			"FeedbackConnection",
-			"POST('ids')",
-			"feedback_confirm",
-			"delete",
-			"getChecked",
-			"id=\"id-list\"",
-			"#id-list",
-			"delete-modal",
-			"send_sms",
-			"send_sms_by_entry",
-			"@login_required\n",
-			"agent_entry_del",
-			"@login",
-			"dd ",
-			"id=\".*?\"",
-			"id=\"where\""
+			"parser"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -795,6 +780,8 @@
 		"regex": true,
 		"replace_history":
 		[
+			"SwingCaddie",
+			"swingcaddie",
 			"=",
 			"    ",
 			"(_('$1')",
@@ -882,85 +869,23 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 0,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "core/xlexport.py",
-					"settings":
-					{
-						"buffer_size": 4356,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								4051,
-								4051
-							]
-						],
-						"settings":
-						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/Djaneiro/Syntaxes/Python Django.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 1354.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "/Users/bluedisk/Workspace/Cytree/DataLogger/gen_data.py",
-					"settings":
-					{
-						"buffer_size": 2886,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/Djaneiro/Syntaxes/Python Django.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 208.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 2,
 					"file": "core/models.py",
 					"settings":
 					{
-						"buffer_size": 13554,
+						"buffer_size": 13570,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								7649,
-								7652
+								6707,
+								6707
 							]
 						],
 						"settings":
@@ -972,7 +897,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 4598.0,
+						"translation.y": 3710.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -1051,7 +976,7 @@
 		[
 			[
 				"",
-				"/Users/bluedisk/Workspace/babybjorn/babybjorn.sublime-project"
+				"/Users/bluedisk/Workspace/orum/orum.sublime-project"
 			]
 		],
 		"width": 380.0

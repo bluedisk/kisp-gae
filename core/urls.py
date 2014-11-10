@@ -25,7 +25,6 @@ urlpatterns = patterns('',
     url(r'^event/(?P<eid>\d+)/feedback/write/$', 'core.views.feedback_write', name='feedback_write'),
     url(r'^event/(?P<eid>\d+)/feedback/$', 'core.views.feedback', name='feedback'),
     url(r'^event/(?P<eid>\d+)/sms/$', 'core.views.send_sms_by_event'),
-    url(r'^event/(?P<eid>\d+)/sms/reserved/$', 'core.views.event_reserved_sms', name='event_reserved_sms'),
 
     url(r'^feedback/(?P<pk>\d+)/$', DetailView.as_view(model=Feedback)),
     url(r'^feedback/confirm/$', 'core.views.feedback_confirm', name='feedback_confirm'),
@@ -54,7 +53,14 @@ urlpatterns = patterns('',
     url(r'^sms/group/$', 'core.views.groups', name='group_select'),
     url(r'^sms/group/(?P<gid>\d+)/$', 'core.views.send_sms_by_group', name='send_sms_by_group'),
 
-    url(r'^sms_sender/$', "core.views.sms_sender", name="sms_sender"),
+
+    url(r'^sms/reserve/entry/$', 'core.views.reserve_sms_by_entry', name='reserve_sms_by_entry'),
+    url(r'^sms/reserve/event/(?P<eid>\d+)/$', 'core.views.reserve_sms_by_event', name='reserve_sms_by_event'),
+
+    url(r'^sms/reserve/group/$', 'core.views.groups', name='group_select'),
+    url(r'^sms/reserve/group/(?P<gid>\d+)/$', 'core.views.reserve_sms_by_group', name='reserve_sms_by_group'),
+
+    url(r'^sms/reserve/worker/$', "core.views.reserved_sms_worker", name="reserved_sms_worker"),
 
 
     url(r'^signin/$', 'core.views.signin', name='signin'),

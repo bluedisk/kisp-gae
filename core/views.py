@@ -17,13 +17,15 @@ from django.contrib.auth.views import redirect_to_login
 from django.shortcuts import get_object_or_404
 
 from core.models import Event, EventImage, Entry, Agent, Page, ReservedSMS, Feedback, Point
-from core.models import ContactGroup, ContactItem
-from core.forms import EntryForm, AgentEntryForm, SendSmsForm, SendUserSmsForm, UserSignupForm, UserSigninForm, UserChangePasswordForm, AgentForm, EventImageForm, FeedbackForm
+from core.models import ContactGroup, ContactItem, ReservedSMS
+from core.forms import EntryForm, AgentEntryForm, SendSmsForm, SendUserSmsForm, UserSignupForm, UserSigninForm, UserChangePasswordForm, AgentForm, EventImageForm, FeedbackForm, ReserveSmsForm
 from core.sms import sendSMS
 
 from datetime import datetime, date, timedelta
 import logging
 import json
+
+import pytz
 
 from filetransfers.api import serve_file, prepare_upload
 
@@ -267,15 +269,15 @@ def send_sms_by_entry(request):
 
 @staff_member_required
 def send_sms_by_event(request, eid):
-    event = Event.objects.get(pk=eid)
+    event = get_object_or_404(Event, id=eid)
     entries = Entry.objects.filter(event__pk=eid)
     return send_sms(request, entries, str(event))
 
 
 @staff_member_required
 def send_sms_by_group(request, gid):
-    group = ContactGroup.objects.get(pk=gid)
-    entries = ContactItem.objects.filter(group__pk=gid)
+    group = get_object_or_404(ContactGroup, id=gid)
+    entries = group.items.all()
     return send_sms(request, entries, str(group))
 
 
@@ -304,6 +306,80 @@ def send_sms(request, entries, title):
     return render(request, 'core/sms.html', {'viewname': 'event', 'title': title, 'entries': entries, 'form': form, 'sent': sent})
 
 
+@staff_member_required
+def reserve_sms_by_entry(request):
+    entries = Entry.objects.filter(pk__in=request._GET['ids'].split(','))
+    return reserve_sms(request, entries)
+
+
+@staff_member_required
+def reserve_sms_by_event(request, eid):
+    event = get_object_or_404(Event, id=eid)
+    entries = Entry.objects.filter(event__pk=eid)
+    return reserve_sms(request, entries, str(event))
+
+
+@staff_member_required
+def reserve_sms_by_group(request, gid):
+    group = get_object_or_404(ContactGroup, id=gid)
+    entries = group.items.all()
+    return reserve_sms(request, entries, str(group))
+
+
+@staff_member_required
+def reserve_sms(request, entries, title):
+    form = None
+    sent = False
+
+    seoul = pytz.timezone('Asia/Seoul')
+
+    if request.method == 'POST':
+        form = ReserveSmsForm(request.POST)
+
+        if form.is_valid():
+
+            timestamp = seoul.localize(form.cleaned_data['timestamp'])
+            timestamp = timestamp.astimezone(pytz.utc)
+
+            for entry in entries:
+                sms = ReservedSMS()
+                sms.caller = form.cleaned_data['caller']
+                sms.callee = entry.cell
+                sms.msg= form.cleaned_data['msg']
+                sms.timestamp = timestamp
+                sms.save()
+
+            sent = True
+            form = None
+
+    if not form:
+        caller = ''
+        if request.user.agent:
+            caller = request.user.agent.cell
+
+        utcnow = datetime.now(pytz.utc)
+
+        form = ReserveSmsForm(initial={'caller': caller, 'timestamp':utcnow.astimezone(seoul), 'msg': '[KISP] '})
+
+
+    return render(request, "core/reserved_sms.html", {'viewname': 'event', 'title': title, 'entries': entries, 'form': form, 'sent': sent})
+
+
+def reserved_sms_worker(request):
+
+    check_point = datetime.now(pytz.utc)
+
+    sms = ReservedSMS.objects.filter(timestamp__lt=check_point)
+
+    for item in sms:
+        sendSMS(item.msg, item.caller, item.callee)
+
+    ReservedSMS.objects.filter(timestamp__lt=check_point).delete()
+
+    return HttpResponse("%s" % check_point)
+
+
+
 class KISPPageView(DetailView):
     template_name = "core/kisppage.html"
 
@@ -325,20 +401,6 @@ class KISPPageView(DetailView):
 
 #logger=logging.getLogger('sms')
 #logger.setLevel(logging.DEBUG)
-
-
-def sms_sender(request):
-    check_point = datetime.now() + timedelta(hours=9)
-
-    sms = ReservedSMS.objects.filter(timestamp__lt=check_point)
-
-    for item in sms:
-        sendSMS(item.msg, item.caller, item.callee)
-
-    ReservedSMS.objects.filter(timestamp__lt=check_point).delete()
-
-    return HttpResponse("%s" % check_point)
-
 
 def signup(request):
 
@@ -415,6 +477,10 @@ def change_pw(request):
 def agent_view(request):
     try:
         agent = request.user.agent
+        points = Point.objects.filter(name=agent.user.first_name, regnum=agent.regnum)
+
+        total = sum(point.amount for point in points)
+
     except:
         agent = {
             'cell': u'등록안됨',
@@ -425,7 +491,11 @@ def agent_view(request):
             'location': u'등록안됨',
             'image_url': u'/static/image/noface.png'
         }
-    return render(request, "user/agent.html", {'agent': agent})
+
+        points = []
+        total = 0
+
+    return render(request, "user/agent.html", {'agent': agent, 'points':points, 'total_point':total})
 
 
 @login_required
@@ -612,12 +682,6 @@ def feedback_delete(request):
     Feedback.objects.filter(id__in=ids).delete()
 
     return HttpResponse('%s feedback(s) deleted' % len(ids))
-
-
-def event_reserved_sms(request, eid):
-    event = get_object_or_404(Event, id=eid)
-
-    return render(request, "core/reserved_sms.html", {'event': event})
 
 
 TEMP_ENTRIES = [

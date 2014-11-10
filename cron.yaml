@@ -1,4 +1,4 @@
 cron:
 - description: Send reserved SMS
-  url: /sms_sender/
+  url: /sms/reserve/worker/
   schedule: every 1 minutes

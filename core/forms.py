@@ -2,11 +2,13 @@
 from django import forms
 from core.models import Entry, Agent, EventImage, Feedback
 from captcha.fields import ReCaptchaField
-from django.contrib.auth.models import User
+from bootstrap3_datetime.widgets import DateTimePicker
 
+from django.contrib.auth.models import User
 from django.utils.translation import ugettext, ugettext_lazy as _
 from django.contrib.auth import authenticate, get_user_model
 
+import logging
 import re
 
 from core.utils import *
@@ -56,6 +58,14 @@ class SendSmsForm(forms.Form):
 
 class SendUserSmsForm(forms.Form):
     caller = forms.CharField(max_length=14, required=True)
+    msg = forms.CharField(max_length=80, required=True)
+
+
+logger = logging.getLogger(__name__)
+
+class ReserveSmsForm(forms.Form):
+    caller = forms.CharField(max_length=14, required=True)
+    timestamp = forms.DateTimeField(widget=DateTimePicker(options={"format": "YYYY-MM-DD HH:mm","pickSeconds": False}))
     msg = forms.CharField(max_length=80, required=True)
 
 
@@ -251,7 +261,6 @@ class FeedbackForm(forms.ModelForm):
         }
 
     spend = forms.CharField(label=u'사용 금액')
-    uid = forms.IntegerField(label=u'User ID')
 
     def clean_name(self):
         name = self.data['name']

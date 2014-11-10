@@ -14,24 +14,24 @@
 			</a>
 			{% endif %}
 
-			
+
 			<a href="{% url 'send_sms_by_event' event.pk %}" class="btn btn-sm btn-default" style="margin-right:5px">
 				<i class="fa fa-comment"></i> 문자 발송
 			</a>
 
 			<a href="{% url 'admin:core_entry_changelist' %}?event__id__exact={{ event.pk}}" class="btn btn-sm btn-default" style="margin-right:5px">
 				<span class="glyphicon glyphicon-list"></span> 참가자 세부보기
-			</a>  
+			</a>
 			<a href="{% url 'export_agent' event.pk %}" class="btn btn-sm btn-info" style="margin-right:5px">
 				<i class="fa fa-save"></i> xls로 목록 받기
 			</a>
 			<a href="{% url 'admin:core_event_change' event.pk %}" class="btn btn-sm btn-warning">
 				<span class="glyphicon glyphicon-pencil"></span> 수정하기
-			</a> 
-			<a href="{% url 'event_reserved_sms' event.pk %}" class="btn btn-sm btn-warning" style="margin-right:5px">
+			</a>
+			<a href="{% url 'reserve_sms_by_event' event.pk %}" class="btn btn-sm btn-warning" style="margin-right:5px">
 				<i class="fa fa-gear"></i> 예약 문자 설정
 			</a>
-			
+
 		</div>
 		{% endif %}
 
@@ -55,7 +55,7 @@
 				</dl>
 				<dl class="dl-horizontal">
 					<dt>장소</dt> <dd>{{event.location_tag|safe}}</dd>
-					
+
 				</dl>
 				<dl class="dl-horizontal">
 					<dt>대회일자</dt> <dd class="text-success"><strong>{{event.event_day_display}}</strong></dd>
@@ -68,9 +68,9 @@
 					<dt></dt> <dd class="{{status_class}}"><small>{{status_text}}</small></dd>
 				</dl>
 			</div>
-			<div class="col-sm-6">			
+			<div class="col-sm-6">
 				{% for image in images %}
-				
+
 				<div class="image-frame img-thumbnail" href="{{ image.image.url }}" style="background-image: url({{ image.image.url }}=s280-c); ">
 					<div class="image-name">
 						{% if user.is_staff %}
@@ -84,7 +84,7 @@
 				<div class="image-frame">
 					<a href="{% url 'event_image_add' event.id %}" target="_top"><h2 class="image-text"><i class="fa fa-plus"></i></h2></a>
 				</div>
-				{% endif %}						
+				{% endif %}
 
 			</div>
 		</div>
@@ -92,12 +92,12 @@
 			<dt>패트롤 참가자</dt>
 			<dd>
 				{% for entry in entries %}
-				<span class="col-sm-4"><a href="{% url 'entry_view' entry.entry %}" data-toggle="tooltip" title="신청내역보기">{{ entry.display }}</a> 
+				<span class="col-sm-4"><a href="{% url 'entry_view' entry.entry %}" data-toggle="tooltip" title="신청내역보기">{{ entry.display }}</a>
 				{% if entry.name in confirmed %}
-					<i class="fa fa-check-square-o text-success" data-toggle="tooltip" title="후기 작성 승인 됨"></i> 
+					<i class="fa fa-check-square-o text-success" data-toggle="tooltip" title="후기 작성 승인 됨"></i>
 				{% endif %}
 				{% if entry.name in feedbacks %}
-					<i class="fa fa-pencil-square-o text-warning" data-toggle="tooltip" title="후기 작성를 작성한 대원"></i> 
+					<i class="fa fa-pencil-square-o text-warning" data-toggle="tooltip" title="후기 작성를 작성한 대원"></i>
 				{% endif %}
 				</span>
 				{% empty %}
@@ -137,10 +137,10 @@
 					{% if entry %}
 						<div class="row">
 							<div class="col-md-10 col-xs-8">
-								<a href="{% url 'agent_entry_edit' event.pk %}" class="btn btn-warning btn-lg btn-block">수정하기</a> 
+								<a href="{% url 'agent_entry_edit' event.pk %}" class="btn btn-warning btn-lg btn-block">수정하기</a>
 							</div>
 							<div class="col-md-2 col-xs-4">
-								<a href="{% url 'agent_entry_del' event.pk %}" class="btn btn-danger btn-lg btn-block">삭제하기</a> 
+								<a href="{% url 'agent_entry_del' event.pk %}" class="btn btn-danger btn-lg btn-block">삭제하기</a>
 							</div>
 						</div>
 					{% else %}
@@ -151,29 +151,29 @@
 
 				{% elif event.get_status == 'ready' %}
 					<a href="#" class="btn btn-primary btn-lg btn-block disabled">아직 모집 기간이 아닙니다.</a>
-				
+
 				{% else %}
 					<a href="#" class="btn btn-default btn-lg btn-block disabled">진행이 종료되었습니다.</a>
 				{% endif %}
 			{% else %}
 				{% if event.get_status == 'recruit' %}
 					{% if entry %}
-						<a href="{% url 'entry_edit' entry.pk %}" class="btn btn-warning btn-lg btn-block">수정하기</a> 
+						<a href="{% url 'entry_edit' entry.pk %}" class="btn btn-warning btn-lg btn-block">수정하기</a>
 					{% else %}
-						<a href="{% url 'entry_preadd' event.pk %}" class="btn btn-primary btn-lg btn-block">신청하기</a> 
+						<a href="{% url 'entry_preadd' event.pk %}" class="btn btn-primary btn-lg btn-block">신청하기</a>
 					{% endif %}
 				{% elif event.get_status == 'feedback' or event.get_status == 'progress' %}
 					<a href="{% url 'feedback_write' event.pk %}" class="btn btn-primary btn-lg btn-block">후기 작성</a>
 
 				{% elif event.get_status == 'ready' %}
 					<a href="#" class="btn btn-primary btn-lg btn-block disabled">아직 모집 기간이 아닙니다.</a>
-				
+
 				{% else %}
 					<a href="#" class="btn btn-default btn-lg btn-block disabled">진행이 종료되었습니다.</a>
 				{% endif %}
 
 			{% endif %}
-		</div>			
+		</div>
 	</div>
 </div>
 {% endblock %}
@@ -186,20 +186,20 @@
 		margin:0px;
 		margin-left:-350px;
 		width:700px;
-		padding:5px;		
+		padding:5px;
 		cursor:pointer;
 	}
-	.image-frame {		
+	.image-frame {
 		position:relative;
 		width:140px;
 		height:140px;
 		padding:0px;
 		margin:0px;
 		overflow:hidden;
-		float:left;	
+		float:left;
 
 		background-color: #D0D0D0;
-		background-repeat: no-repeat; 
+		background-repeat: no-repeat;
 		background-size: cover;
 		background-position: center
 	}

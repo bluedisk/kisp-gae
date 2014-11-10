@@ -145,6 +145,7 @@ INSTALLED_APPS = (
     'permission_backend_nonrel',
     'tinymce',
     'captcha',
+    'bootstrap3_datetime',
 
     # djangoappengine should come last, so it can override a few manage.py commands
     'djangoappengine',

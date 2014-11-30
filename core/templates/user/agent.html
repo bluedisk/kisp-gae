@@ -53,15 +53,17 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
+
     	{% for point in points %}
+    	<tr>
     	<td>{{ forloop.counter }}</td>
     	<td>{{ point.when }}</td>
 		<td>{{ point.reason }}</td>
 		<td>{{ point.amount }}</td>
+		</tr>
 		{% endfor %}
 
-        </tr>
+
       </tbody>
     </table>
 
